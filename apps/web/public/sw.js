@@ -22,6 +22,17 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// Tapping a timer notification brings the app forward (or opens it).
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((windows) => {
+      const open = windows[0];
+      return open ? open.focus() : self.clients.openWindow("./#/timer");
+    }),
+  );
+});
+
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;

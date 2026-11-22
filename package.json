@@ -16,7 +16,8 @@
     "sounds:test": "bun test packages/sounds",
     "web:test": "bun test apps/web",
     "recipes:bundle": "bun scripts/recipe-data.ts",
-    "recipes:check": "bun scripts/check-translations.ts"
+    "recipes:check": "bun scripts/check-translations.ts",
+    "recipes:export": "bun scripts/export-recipes.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

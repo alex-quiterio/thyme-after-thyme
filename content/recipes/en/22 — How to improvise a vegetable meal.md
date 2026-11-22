@@ -72,13 +72,13 @@ They aren't decoration. They are part of the architecture.
 
 ## A final table
 
-Vegetarian cooking is sometimes described as a problem of substitution: what replaces the meat? That is the wrong question.
+Vegetable cooking is sometimes described as a problem of imitation: what can it stand in for? That is the wrong question.
 
 The more interesting question is: what happens when the vegetable becomes the protagonist?
 
-A mushroom doesn't need to pretend to be a steak. A leek doesn't need to become something else. A potato can be the whole emotional centre of dinner, if it's well roasted.
+A mushroom doesn't need to pretend to be anything else. A leek doesn't need to become something else either. A potato can be the whole emotional centre of dinner, if it's well roasted.
 
-The trick isn't to make vegetables behave like meat. The trick is to understand what vegetables can do that meat can't: their bitterness, sweetness, water, perfume, colour, tenderness, crunch, fermentation and freshness.
+The trick isn't to make vegetables behave like something they aren't. The trick is to understand what vegetables can do that nothing else can: their bitterness, sweetness, water, perfume, colour, tenderness, crunch, fermentation and freshness.
 
 Cook them over high heat. Cook them slowly. Leave some raw. Burn some. Purée some. Pickle some. Put them side by side and let them argue.
 

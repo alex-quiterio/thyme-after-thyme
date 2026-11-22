@@ -59,4 +59,32 @@ export function tick(timer: Timer, now: number): Timer {
   return timer;
 }
 
+/**
+ * Rebuilds timers from whatever was saved. Bad entries are dropped, odd values repaired.
+ * A running timer keeps its absolute end time, so time spent away still counts.
+ */
+export function restoreTimers(data: unknown): Timer[] {
+  if (!Array.isArray(data)) return [];
+  const statuses: TimerStatus[] = ["idle", "running", "paused", "finished"];
+  const timers: Timer[] = [];
+  for (const raw of data) {
+    if (typeof raw !== "object" || raw === null) continue;
+    const t = raw as Record<string, unknown>;
+    if (typeof t.id !== "string" || typeof t.label !== "string") continue;
+    if (!(typeof t.durationMs === "number" && t.durationMs > 0)) continue;
+    const status = statuses.find((x) => x === t.status);
+    if (!status) continue;
+    const sound = alarmSounds.find((x) => x === t.sound) ?? "ring";
+    const remaining = typeof t.remainingMs === "number" && t.remainingMs >= 0 ? Math.min(t.remainingMs, t.durationMs) : t.durationMs;
+
+    if (status === "running") {
+      if (typeof t.endsAt === "number") timers.push({ id: t.id, label: t.label, durationMs: t.durationMs, sound, status, remainingMs: remaining, endsAt: t.endsAt });
+      else timers.push({ id: t.id, label: t.label, durationMs: t.durationMs, sound, status: "paused", remainingMs: remaining, endsAt: null });
+    } else {
+      timers.push({ id: t.id, label: t.label, durationMs: t.durationMs, sound, status, remainingMs: status === "finished" ? 0 : remaining, endsAt: null });
+    }
+  }
+  return timers;
+}
+
 export { formatClock as formatRemaining } from "@shared/formatClock";

@@ -72,13 +72,13 @@ Não são decoração. São parte da arquitectura.
 
 ## **Uma mesa final**
 
-A cozinha vegetariana é às vezes descrita como um problema de substituição: o que substitui a carne? Essa é a pergunta errada.
+A cozinha de legumes é às vezes descrita como um problema de imitação: o que consegue substituir? Essa é a pergunta errada.
 
 A pergunta mais interessante é: o que acontece quando o legume se torna o protagonista?
 
-Um cogumelo não precisa de fingir ser um bife. Um alho-francês não precisa de se tornar outra coisa. Uma batata pode ser todo o centro emocional do jantar, se for bem assada.
+Um cogumelo não precisa de fingir ser outra coisa. Um alho-francês também não precisa de se tornar outra coisa. Uma batata pode ser todo o centro emocional do jantar, se for bem assada.
 
-O truque não é fazer os legumes comportarem-se como carne. O truque é perceber o que os legumes conseguem fazer e a carne não: o seu amargor, doçura, água, perfume, cor, ternura, crocância, fermentação e frescura.
+O truque não é fazer os legumes comportarem-se como aquilo que não são. O truque é perceber o que os legumes conseguem fazer e mais nada consegue: o seu amargor, doçura, água, perfume, cor, ternura, crocância, fermentação e frescura.
 
 Cozinhe-os em lume forte. Cozinhe-os devagar. Deixe alguns crus. Queime alguns. Reduza alguns a puré. Ponha alguns de conserva. Coloque-os lado a lado e deixe-os discutir.
 

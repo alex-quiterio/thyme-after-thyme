@@ -1,9 +1,11 @@
 /* Recipe sheets: lined paper with a red margin rule */
 .sheet {
+  /* where the red margin rule sits; text starts a comfortable gap after it */
+  --sheet-margin: 2.4rem;
   position: relative;
-  padding: 1.25rem 1.25rem 1.25rem 3.2rem;
+  padding: 1.25rem 1.25rem 1.25rem calc(var(--sheet-margin) + 1.3rem);
   background:
-    linear-gradient(90deg, transparent 2.4rem, rgba(200, 56, 43, 0.55) 2.4rem calc(2.4rem + 2px), transparent calc(2.4rem + 2px)),
+    linear-gradient(90deg, transparent var(--sheet-margin), rgba(200, 56, 43, 0.55) var(--sheet-margin) calc(var(--sheet-margin) + 2px), transparent calc(var(--sheet-margin) + 2px)),
     repeating-linear-gradient(transparent 0 2.4rem, rgba(80, 130, 190, 0.2) 2.4rem calc(2.4rem + 1px)),
     var(--paper);
   border-radius: 0.35rem;
@@ -56,7 +58,6 @@
 .sheet__list strong { color: var(--tomato-dark); font-variant-numeric: tabular-nums; }
 
 @media (max-width: 34rem) {
-  .sheet { padding-left: 2.8rem; }
   .sheet__row { grid-template-columns: 1fr 1fr auto; }
   .sheet__name { grid-column: 1 / -1; }
   .sheet__row .icon-btn { grid-row: 2; grid-column: 3; }

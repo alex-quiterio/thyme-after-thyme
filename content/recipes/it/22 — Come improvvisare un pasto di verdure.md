@@ -72,13 +72,13 @@ Non sono decorazione. Sono parte dell'architettura.
 
 ## Un'ultima tavola
 
-La cucina vegetariana viene a volte descritta come un problema di sostituzione: che cosa sostituisce la carne? È la domanda sbagliata.
+La cucina di verdure viene a volte descritta come un problema di imitazione: che cosa riesce a sostituire? È la domanda sbagliata.
 
 La domanda più interessante è: che cosa succede quando la verdura diventa la protagonista?
 
-Un fungo non deve fingere di essere una bistecca. Un porro non deve diventare qualcos'altro. Una patata può essere l'intero centro emotivo della cena, se è ben arrostita.
+Un fungo non deve fingere di essere qualcos'altro. Nemmeno un porro deve diventare qualcos'altro. Una patata può essere l'intero centro emotivo della cena, se è ben arrostita.
 
-Il trucco non è far comportare le verdure come la carne. Il trucco è capire che cosa le verdure sanno fare e la carne no: la loro amarezza, dolcezza, acqua, profumo, colore, tenerezza, croccantezza, fermentazione e freschezza.
+Il trucco non è far comportare le verdure come ciò che non sono. Il trucco è capire che cosa le verdure sanno fare e nient'altro sa fare: la loro amarezza, dolcezza, acqua, profumo, colore, tenerezza, croccantezza, fermentazione e freschezza.
 
 Cuocile a fuoco vivo. Cuocile lentamente. Lasciane alcune crude. Brucia alcune. Riducine alcune in purea. Metti alcune sottaceto. Mettile una accanto all'altra e lasciale discutere.
 

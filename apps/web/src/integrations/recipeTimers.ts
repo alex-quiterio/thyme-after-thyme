@@ -4,9 +4,27 @@ import type { BoardState, TimerBoard } from "@timer/application/timerBoard";
 import { remainingMs } from "@timer/domain/timer";
 
 const NONE: Readonly<Record<string, StepTimerState>> = {};
+const KEY = "thyme-after-thyme.recipe-timers.v1";
+
+function loadLinks(): Map<string, string> {
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) ?? "{}") as Record<string, unknown>;
+    return new Map(Object.entries(saved).filter((e): e is [string, string] => typeof e[1] === "string"));
+  } catch {
+    return new Map();
+  }
+}
 
 export function createRecipeTimers(board: TimerBoard): StepTimers {
-  const timerIds = new Map<string, string>(); // recipe step key -> timer id on the board
+  // recipe step key -> timer id on the board, kept so a reload doesn't disconnect running step timers
+  const timerIds = loadLinks();
+  const saveLinks = () => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(Object.fromEntries(timerIds)));
+    } catch {
+      // not persisted
+    }
+  };
   let seen: BoardState | null = null;
   let cached = NONE;
 
@@ -16,6 +34,7 @@ export function createRecipeTimers(board: TimerBoard): StepTimers {
       if (previous) board.remove(previous);
       const id = board.add(label, durationMs, "chime");
       timerIds.set(key, id);
+      saveLinks();
       board.start(id);
     },
 
@@ -23,6 +42,7 @@ export function createRecipeTimers(board: TimerBoard): StepTimers {
       const id = timerIds.get(key);
       if (id) board.remove(id);
       timerIds.delete(key);
+      saveLinks();
     },
 
     subscribe: board.subscribe,

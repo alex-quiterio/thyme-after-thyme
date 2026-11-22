@@ -7,21 +7,24 @@ import {
   type AlarmSound,
   type Timer,
 } from "@timer/domain/timer";
-import type { Alarm, Clock } from "./ports";
+import type { Alarm, Clock, TimerStorage } from "./ports";
 
 export type BoardState = { timers: Timer[]; now: number };
 
-export type Ports = { clock: Clock; alarm: Alarm; newId: () => string };
+export type Ports = { clock: Clock; alarm: Alarm; newId: () => string; storage: TimerStorage };
 
 export type TimerBoard = ReturnType<typeof createTimerBoard>;
 
 /** Use cases for a kitchen full of timers. Pure orchestration: time and sound come in as ports. */
-export function createTimerBoard({ clock, alarm, newId }: Ports) {
-  let state: BoardState = { timers: [], now: clock.now() };
+export function createTimerBoard({ clock, alarm, newId, storage }: Ports) {
+  // Timers saved earlier come back as they were; a running one whose time ran out while
+  // the app was closed finishes (and rings) on the first tick.
+  let state: BoardState = { timers: storage.load(), now: clock.now() };
   const listeners = new Set<() => void>();
 
   const commit = (timers: Timer[]) => {
     state = { timers, now: clock.now() };
+    storage.save(timers);
     listeners.forEach((l) => l());
   };
   const update = (id: string, change: (t: Timer) => Timer) =>
@@ -63,12 +66,17 @@ export function createTimerBoard({ clock, alarm, newId }: Ports) {
   /** Call regularly: refreshes `now` and rings any timer that just finished. */
   const tick = () => {
     const now = clock.now();
+    let finished = false;
     const timers = state.timers.map((t) => {
       const next = tickTimer(t, now);
-      if (next !== t) alarm.ring(next.id, next.sound);
+      if (next !== t) {
+        finished = true;
+        alarm.ring(next);
+      }
       return next;
     });
     state = { timers, now };
+    if (finished) storage.save(timers);
     listeners.forEach((l) => l());
   };
 

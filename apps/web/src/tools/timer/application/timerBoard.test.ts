@@ -1,19 +1,22 @@
 import { describe, expect, test } from "bun:test";
 import { createTimerBoard } from "./timerBoard";
-import type { Alarm } from "./ports";
+import type { Alarm, TimerStorage } from "./ports";
+import type { Timer } from "@timer/domain/timer";
 
-function setup() {
-  let now = 0;
+function setup(saved: Timer[] = [], start = 0) {
+  let now = start;
   let n = 0;
   const calls: string[] = [];
   const alarm: Alarm = {
     unlock: () => calls.push("unlock"),
-    ring: (id, s) => calls.push(`ring:${id}:${s}`),
+    ring: (t) => calls.push(`ring:${t.id}:${t.sound}`),
     silence: (id) => calls.push(`silence:${id}`),
     preview: (s) => calls.push(`preview:${s}`),
   };
-  const board = createTimerBoard({ clock: { now: () => now }, alarm, newId: () => `t${++n}` });
-  return { board, calls, advance: (ms: number) => void (now += ms) };
+  const saves: Timer[][] = [];
+  const storage: TimerStorage = { load: () => saved, save: (t) => void saves.push(t) };
+  const board = createTimerBoard({ clock: { now: () => now }, alarm, newId: () => `t${++n}`, storage });
+  return { board, calls, saves, advance: (ms: number) => void (now += ms) };
 }
 
 describe("timer board", () => {
@@ -50,5 +53,39 @@ describe("timer board", () => {
     off();
     board.add("Rice", 1000);
     expect(hits).toBe(1);
+  });
+
+  test("every change is saved", () => {
+    const { board, saves } = setup();
+    const id = board.add("Tea", 60_000);
+    board.start(id);
+    board.pause(id);
+    board.remove(id);
+    expect(saves.map((s) => s.length)).toEqual([1, 1, 1, 0]);
+    expect(saves[1]![0]?.status).toBe("running");
+  });
+
+  test("timers saved earlier are back, still counting", () => {
+    const { board: first, saves } = setup();
+    const id = first.add("Roast", 600_000);
+    first.start(id);
+    const { board, advance } = setup(JSON.parse(JSON.stringify(saves.at(-1))), 100_000);
+    expect(board.getState().timers[0]).toMatchObject({ label: "Roast", status: "running" });
+    advance(0);
+    expect(board.getState().timers).toHaveLength(1);
+  });
+
+  test("a timer that ran out while the app was closed rings on the first tick, once", () => {
+    const first = setup();
+    const id = first.board.add("Eggs", 60_000);
+    first.board.start(id);
+    const saved = JSON.parse(JSON.stringify(first.saves.at(-1)));
+    const { board, calls, saves } = setup(saved, 10 * 60_000);
+    expect(calls).toEqual([]);
+    board.tick();
+    board.tick();
+    expect(calls).toEqual(["ring:t1:ring"]);
+    expect(board.getState().timers[0]?.status).toBe("finished");
+    expect(saves).toHaveLength(1); // saved when it finished, not on every tick
   });
 });

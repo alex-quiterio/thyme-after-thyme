@@ -48,6 +48,10 @@ ESLint enforces the dependency direction per tool, forbids tools importing each 
 
 Chrome's old packaged "Chrome Apps" are discontinued; the modern equivalent is an installable web app. Open the site in Chrome and use the **Install app** button in the header (or the install icon in the address bar). It then runs in its own window, works offline, and has shortcuts for each tool. On Android/iOS use "Add to Home screen".
 
+**Timers and alerts:** timers are saved on the device (running ones keep their absolute end time), so reloading, closing the app, or accepting an update doesn't lose them. A timer that ran out while the app was closed shows as finished and rings as soon as the app is opened. A finished timer alerts in layers: a looping sound, a system notification (only when the app isn't in front, permission asked when you start your first timer; tapping it brings the app forward), vibration, a flashing tab title and an app-icon badge. While a timer runs the screen is kept awake, and the clock runs in a worker so background tabs aren't throttled.
+
+*Limits:* a web app can't wake itself once the phone freezes it (battery saver, app killed): in that case the alarm sounds the moment you open the app, not at the exact second. Notifications, vibration and the badge depend on the browser (on iPhone, notifications need the app added to the Home Screen; vibration isn't supported). Autoplay rules can keep the sound muted until the first tap after a reload.
+
 **Updates:** a new version installs in the background and waits. The app shows a "A fresher batch is ready" message (checked every 30 minutes and whenever you return to the app); **Update now** activates it and reloads, **Later** dismisses it until the next load.
 
 How it's built: `apps/web/public/manifest.webmanifest` + icons, and `public/sw.js` as a service worker template. `scripts/postbuild.ts` copies the icons and generates `dist/sw.js` with the list of built files to precache.

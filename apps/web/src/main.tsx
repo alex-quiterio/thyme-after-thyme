@@ -5,7 +5,10 @@ import { Shell } from "@shell/Shell";
 import { registerServiceWorker } from "@shell/appUpdate";
 
 import { createTimerBoard } from "@timer/application/timerBoard";
-import { createWebAudioAlarm } from "@timer/infrastructure/webAudioAlarm";
+import { createDeviceAlarm } from "@timer/infrastructure/deviceAlarm";
+import { createLocalStorageTimers } from "@timer/infrastructure/localStorageTimers";
+import { startTicker } from "@timer/infrastructure/backgroundTicker";
+import { keepAwakeWhileRunning } from "@timer/infrastructure/wakeLock";
 import { systemClock } from "@timer/infrastructure/systemClock";
 import { TimerTool } from "@timer/ui/TimerTool";
 
@@ -21,7 +24,7 @@ import { createRecipeTimers } from "./integrations/recipeTimers";
 
 const newId = () => crypto.randomUUID();
 
-const timerBoard = createTimerBoard({ clock: systemClock, alarm: createWebAudioAlarm(), newId });
+const timerBoard = createTimerBoard({ clock: systemClock, alarm: createDeviceAlarm(), newId, storage: createLocalStorageTimers() });
 const scalerStore = createScalerStore({ storage: createLocalStorageRecipe(), newId });
 const recipeBook = createRecipeBook({ collections: bundledRecipes, timers: createRecipeTimers(timerBoard) });
 
@@ -32,5 +35,10 @@ const tools: ToolDefinition[] = [
 ];
 
 createRoot(document.getElementById("root")!).render(<Shell tools={tools} />);
+
+// The clock runs for the whole app, on every tab, and catches up the moment the page is shown again.
+startTicker(timerBoard.tick);
+document.addEventListener("visibilitychange", timerBoard.tick);
+keepAwakeWhileRunning(timerBoard);
 
 registerServiceWorker();

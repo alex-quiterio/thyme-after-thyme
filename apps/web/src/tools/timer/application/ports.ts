@@ -1,4 +1,4 @@
-import type { AlarmSound } from "@timer/domain/timer";
+import type { AlarmSound, Timer } from "@timer/domain/timer";
 
 export type Clock = { now(): number };
 
@@ -6,9 +6,15 @@ export type Clock = { now(): number };
 export type Alarm = {
   /** Call from a user gesture; browsers block audio before one. */
   unlock(): void;
-  /** Rings (looping) until `silence(timerId)`. */
-  ring(timerId: string, sound: AlarmSound): void;
+  /** Alerts the user (sound, notification, vibration...) until `silence(timer.id)`. */
+  ring(timer: Pick<Timer, "id" | "label" | "sound">): void;
   silence(timerId: string): void;
   /** One short play, for trying a sound out. */
   preview(sound: AlarmSound): void;
+};
+
+/** Where timers survive reloads and app updates. */
+export type TimerStorage = {
+  load(): Timer[];
+  save(timers: Timer[]): void;
 };
