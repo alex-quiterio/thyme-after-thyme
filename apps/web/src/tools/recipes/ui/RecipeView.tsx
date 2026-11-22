@@ -95,6 +95,17 @@ export function RecipeView({ book, shelf, recipe }: { book: RecipeBook; shelf: R
         ))}
       </article>
 
+      <button
+        className="remove-recipe"
+        onClick={() => {
+          if (!window.confirm(m.confirmRemove(recipe.title))) return;
+          book.remove(recipe.id);
+          window.location.hash = "#/recipes";
+        }}
+      >
+        {m.removeThis}
+      </button>
+
       <nav className="pager" aria-label={m.moreRecipes}>
         {previous ? <a href={`#/recipes/${previous.id}`}>← {previous.title}</a> : <span />}
         {next ? <a href={`#/recipes/${next.id}`}>{next.title} →</a> : <span />}

@@ -17,6 +17,22 @@ const en = {
   cancelTimer: (d: string) => `Cancel ${d} timer`,
   moreRecipes: "More recipes",
   step: (n: number, done: boolean) => `Step ${n}${done ? ", done" : ""}`,
+  importButton: "Import recipes",
+  importHint: "JSON (one recipe or a full export) or Markdown files. They're kept on this device.",
+  importResult: (added: number, unchanged: number) => {
+    const parts = [
+      added > 0 && `${added} recipe${added > 1 ? "s" : ""} added`,
+      unchanged > 0 && `${unchanged} already in your book`,
+    ].filter(Boolean);
+    return parts.length ? parts.join(" · ") : "Nothing new to import.";
+  },
+  importProblems: "Couldn't import:",
+  tooBig: "file too large (max 2 MB)",
+  dismiss: "Dismiss",
+  restore: "Restore default recipes",
+  yours: "yours",
+  removeThis: "Remove from my book",
+  confirmRemove: (title: string) => `Remove “${title}” from your book? You can restore the default recipes any time.`,
 };
 
 export const messages: Localized<typeof en> = {
@@ -38,6 +54,22 @@ export const messages: Localized<typeof en> = {
     cancelTimer: (d) => `Cancelar temporizador de ${d}`,
     moreRecipes: "Mais receitas",
     step: (n, done) => `Passo ${n}${done ? ", feito" : ""}`,
+    importButton: "Importar receitas",
+    importHint: "Ficheiros JSON (uma receita ou uma exportação completa) ou Markdown. Ficam guardados neste dispositivo.",
+    importResult: (added, unchanged) => {
+      const parts = [
+        added > 0 && `${added} receita${added > 1 ? "s" : ""} adicionada${added > 1 ? "s" : ""}`,
+        unchanged > 0 && `${unchanged} já ${unchanged > 1 ? "estavam" : "estava"} no seu caderno`,
+      ].filter(Boolean);
+      return parts.length ? parts.join(" · ") : "Nada de novo para importar.";
+    },
+    importProblems: "Não foi possível importar:",
+    tooBig: "ficheiro demasiado grande (máx. 2 MB)",
+    dismiss: "Fechar",
+    restore: "Repor receitas originais",
+    yours: "sua",
+    removeThis: "Remover do meu caderno",
+    confirmRemove: (title) => `Remover “${title}” do seu caderno? Pode repor as receitas originais quando quiser.`,
   },
   it: {
     back: "← Tutte le ricette",
@@ -56,5 +88,21 @@ export const messages: Localized<typeof en> = {
     cancelTimer: (d) => `Annulla il timer di ${d}`,
     moreRecipes: "Altre ricette",
     step: (n, done) => `Passo ${n}${done ? ", fatto" : ""}`,
+    importButton: "Importa ricette",
+    importHint: "File JSON (una ricetta o un'esportazione completa) o Markdown. Restano su questo dispositivo.",
+    importResult: (added, unchanged) => {
+      const parts = [
+        added > 0 && `${added} ${added > 1 ? "ricette aggiunte" : "ricetta aggiunta"}`,
+        unchanged > 0 && `${unchanged} già ${unchanged > 1 ? "presenti" : "presente"} nel tuo ricettario`,
+      ].filter(Boolean);
+      return parts.length ? parts.join(" · ") : "Niente di nuovo da importare.";
+    },
+    importProblems: "Impossibile importare:",
+    tooBig: "file troppo grande (max 2 MB)",
+    dismiss: "Chiudi",
+    restore: "Ripristina le ricette originali",
+    yours: "tua",
+    removeThis: "Rimuovi dal mio ricettario",
+    confirmRemove: (title) => `Rimuovere “${title}” dal tuo ricettario? Puoi ripristinare le ricette originali quando vuoi.`,
   },
 };

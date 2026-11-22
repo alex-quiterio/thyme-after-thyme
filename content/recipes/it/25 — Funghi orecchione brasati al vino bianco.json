@@ -1,0 +1,64 @@
+{
+  "$schema": "../../recipe.schema.json",
+  "number": 25,
+  "title": "Funghi orecchione brasati al vino bianco",
+  "sections": [
+    {
+      "text": [
+        "Uno stufato vegetariano in una sola padella, per due persone, circa 20 minuti."
+      ]
+    },
+    {
+      "title": "Occorrente",
+      "ingredients": [
+        "Un paio di patate",
+        "1 porro",
+        "1 cipolla",
+        "250 g di funghi orecchione",
+        "Fagioli cotti, scolati",
+        "Lenticchie cotte, una manciata",
+        "Coriandolo fresco",
+        "Un bel goccio di vino bianco",
+        "Olio d'oliva, sale, pepe",
+        "Sottaceti e barbabietola, da servire a parte"
+      ]
+    },
+    {
+      "title": "Preparativi",
+      "ingredients": [
+        "Taglia le patate a cubetti piccoli, di circa 1 cm, così friggono in fretta.",
+        "Affetta il porro e la cipolla.",
+        "Strappa i funghi orecchione a strisce con le mani, non tagliarli a dadini.",
+        "Scola i fagioli e le lenticchie. Trita il coriandolo."
+      ]
+    },
+    {
+      "title": "Cottura",
+      "steps": [
+        "Scalda l'olio in una padella larga. Aggiungi per prime le patate a dadini con sale e pepe. Friggi finché i bordi iniziano a dorarsi.",
+        "Aggiungi il porro e la cipolla. Cuoci finché sono morbidi e prendono colore.",
+        {
+          "text": "Aggiungi i funghi orecchione, dando loro spazio così rosolano invece di cuocere al vapore. Fai due tornate se la padella è affollata. Cuoci qualche minuto finché sono dorati.",
+          "timers": [
+            {
+              "minutes": 3,
+              "label": "~3 min"
+            }
+          ]
+        },
+        {
+          "text": "Versa un bel goccio di vino bianco. Lascia sfumare per un minuto o due.",
+          "timers": [
+            {
+              "minutes": 1,
+              "label": "1–2 min"
+            }
+          ]
+        },
+        "Aggiungi i fagioli e le lenticchie, solo per scaldarli.",
+        "Spegni il fuoco. Cospargi il coriandolo tritato.",
+        "Servi con sottaceti e barbabietola cruda a parte, per un contrasto acido."
+      ]
+    }
+  ]
+}

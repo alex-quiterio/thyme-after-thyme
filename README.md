@@ -42,6 +42,8 @@ ESLint enforces the dependency direction per tool, forbids tools importing each 
 
 **Recipes as JSON:** a recipe can also be a `.json` file in the same language folder (`26 — Tomato toast.json`): sections of `ingredients`, `steps` and `text`, in the order you write them, with optional explicit `timers` on a step. See `content/recipe.example.json` and `content/recipe.schema.json` (add `"$schema": "./recipe.schema.json"` for editor validation). Markdown and JSON can be mixed. Files are validated at build time with the exact place of any mistake. Set `RECIPES_DIR=/path/to/folder` (containing `pt/`, `en/`, `it/`) to read recipes from anywhere instead of `content/recipes`.
 
+**Your own recipes (import and remove):** the recipes above ship as the default book. On the recipe list, **Import recipes** adds files from your device: a single recipe JSON, a list, a full export (as produced by `bun run recipes:export`), or Markdown. Files are validated first, valid recipes are kept even if others in the file fail, and the problems are listed. Imports are saved on the device. A recipe whose number matches a default replaces it (your version wins, only in the language you're reading in); a file with no language shows in every language without overwriting an existing translation; a full export goes to the languages it names. **Remove from my book** (on each recipe) hides it in every language, and **Restore default recipes** brings the defaults back. Importing an unchanged default is a no-op.
+
 **Add a tool:** create `tools/<name>/{domain,application,infrastructure,ui}`, add an alias in `tsconfig.json`, add the name to `TOOLS` in `eslint.config.js`, and register it in `main.tsx`.
 
 ## Install as an app (PWA)

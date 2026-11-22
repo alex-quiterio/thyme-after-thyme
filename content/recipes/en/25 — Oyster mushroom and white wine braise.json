@@ -1,0 +1,64 @@
+{
+  "$schema": "../../recipe.schema.json",
+  "number": 25,
+  "title": "Oyster mushroom and white wine braise",
+  "sections": [
+    {
+      "text": [
+        "A one-pan vegetarian braise for two, about 20 minutes."
+      ]
+    },
+    {
+      "title": "Gather",
+      "ingredients": [
+        "A couple of potatoes",
+        "1 leek",
+        "1 onion",
+        "250 g oyster mushrooms",
+        "Cooked beans, drained",
+        "Cooked lentils, a handful",
+        "Fresh coriander",
+        "A good splash of white wine",
+        "Olive oil, salt, pepper",
+        "Pickles and beetroot, to serve on the side"
+      ]
+    },
+    {
+      "title": "Prep",
+      "ingredients": [
+        "Dice the potatoes small, roughly 1 cm cubes, so they fry through fast.",
+        "Slice the leek and onion.",
+        "Tear the oyster mushrooms into strips by hand, don't dice them.",
+        "Drain the beans and lentils. Chop the coriander."
+      ]
+    },
+    {
+      "title": "Cook",
+      "steps": [
+        "Heat oil in a wide pan. Add the diced potato first with salt and pepper. Fry until the edges start to go golden.",
+        "Add the leek and onion. Cook until soft and colouring.",
+        {
+          "text": "Add the oyster mushrooms, giving them space so they sear rather than steam. Do two batches if the pan is crowded. Cook a few minutes until golden.",
+          "timers": [
+            {
+              "minutes": 3,
+              "label": "~3 min"
+            }
+          ]
+        },
+        {
+          "text": "Pour in a good splash of white wine. Let it bubble away for a minute or two.",
+          "timers": [
+            {
+              "minutes": 1,
+              "label": "1–2 min"
+            }
+          ]
+        },
+        "Tip in the beans and lentils, just to warm through.",
+        "Kill the heat. Throw the chopped coriander over the top.",
+        "Serve with pickles and raw beetroot on the side for sharp contrast."
+      ]
+    }
+  ]
+}

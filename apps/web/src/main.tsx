@@ -18,6 +18,7 @@ import { ScalerTool } from "@scaler/ui/ScalerTool";
 
 import { createRecipeBook } from "@recipes/application/recipeBook";
 import { bundledRecipes } from "@recipes/infrastructure/bundledRecipes";
+import { createLocalStorageLibrary } from "@recipes/infrastructure/localStorageLibrary";
 import { RecipesTool } from "@recipes/ui/RecipesTool";
 
 import { createRecipeTimers } from "./integrations/recipeTimers";
@@ -26,7 +27,11 @@ const newId = () => crypto.randomUUID();
 
 const timerBoard = createTimerBoard({ clock: systemClock, alarm: createDeviceAlarm(), newId, storage: createLocalStorageTimers() });
 const scalerStore = createScalerStore({ storage: createLocalStorageRecipe(), newId });
-const recipeBook = createRecipeBook({ collections: bundledRecipes, timers: createRecipeTimers(timerBoard) });
+const recipeBook = createRecipeBook({
+  collections: bundledRecipes,
+  timers: createRecipeTimers(timerBoard),
+  library: createLocalStorageLibrary(),
+});
 
 const tools: ToolDefinition[] = [
   { id: "recipes", title: { en: "Recipe book", pt: "Receitas", it: "Ricettario" }, emoji: "📖", render: () => <RecipesTool book={recipeBook} /> },
