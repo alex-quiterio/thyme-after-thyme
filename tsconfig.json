@@ -21,17 +21,17 @@
       "@kitchen/sounds": [
         "packages/sounds/src/index.ts"
       ],
-      "@domain/*": [
-        "apps/timer/src/domain/*"
+      "@shared/*": [
+        "apps/web/src/shared/*"
       ],
-      "@ui/*": [
-        "apps/timer/src/ui/*"
+      "@shell/*": [
+        "apps/web/src/shell/*"
       ],
-      "@application/*": [
-        "apps/timer/src/application/*"
+      "@timer/*": [
+        "apps/web/src/tools/timer/*"
       ],
-      "@infrastructure/*": [
-        "apps/timer/src/infrastructure/*"
+      "@scaler/*": [
+        "apps/web/src/tools/scaler/*"
       ]
     }
   },
@@ -40,7 +40,6 @@
     "apps"
   ],
   "exclude": [
-    "**/dist",
-    "apps/recipe-scaler"
+    "**/dist"
   ]
 }

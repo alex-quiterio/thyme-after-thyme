@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { alarmSounds, type AlarmSound } from "@domain/timer";
+import { alarmSounds, type AlarmSound } from "@timer/domain/timer";
 import { soundLabels } from "./soundLabels";
 
 const presets = [

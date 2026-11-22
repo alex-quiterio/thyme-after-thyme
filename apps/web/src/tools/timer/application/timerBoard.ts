@@ -6,7 +6,7 @@ import {
   tick as tickTimer,
   type AlarmSound,
   type Timer,
-} from "@domain/timer";
+} from "@timer/domain/timer";
 import type { Alarm, Clock } from "./ports";
 
 export type BoardState = { timers: Timer[]; now: number };

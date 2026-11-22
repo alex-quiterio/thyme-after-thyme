@@ -7,29 +7,39 @@ Kitchen apps, with proper kitchen sounds.
 | Part | What it is |
 | --- | --- |
 | `packages/sounds` | `@kitchen/sounds`: synthesized kitchen clock sounds (ding, chime, oven alarm, egg-timer ring, tick) on the Web Audio API |
-| `apps/timer` | Multi-timer web app that rings with those sounds |
-| `apps/recipe-scaler` | Recipe scaler component (standalone, no build yet) |
-| *future* | step-by-step recipe follower, recipe book |
+| `apps/web` | The single web app: a shell with tabs, one tool per tab |
+| tool: timer | Multi-timer that rings with those sounds |
+| tool: scaler | Recipe scaler (fractions OK, recipe saved in the browser) |
+| *future tools* | step-by-step recipe follower, recipe book |
 
-## Timer architecture (DDD layers)
+## Architecture
+
+One web app, many tools. Each tool has its own DDD layers; the shell only knows a tool as `{ id, title, render }`.
 
 ```
-apps/timer/src/
-  domain/          pure timer rules (no libraries)
-  application/     use cases (timer board) + ports (Clock, Alarm)
-  infrastructure/  adapters: system clock, Web Audio alarm (uses @kitchen/sounds)
-  ui/              React components
-  main.tsx         composition root, the only place wiring adapters in
+apps/web/src/
+  shell/           header, tab navigation, hash routing (#/timer, #/scaler)
+  shared/          ToolDefinition contract
+  styles/          shared kitchen theme (gingham, wood plank, chalkboard, buttons)
+  tools/<tool>/
+    domain/          pure rules (no libraries)
+    application/     use cases + ports
+    infrastructure/  adapters (Web Audio, localStorage, clock)
+    ui/              React components
+    styles/          tool-specific CSS
+  main.tsx         composition root: the only place wiring adapters in
 ```
 
-ESLint (`no-restricted-imports`) enforces the dependency direction and bans `../` imports across folders.
+ESLint enforces the dependency direction per tool, forbids tools importing each other, and bans `../` imports across folders.
+
+**Add a tool:** create `tools/<name>/{domain,application,infrastructure,ui}`, add an alias in `tsconfig.json`, add the name to `TOOLS` in `eslint.config.js`, and register it in `main.tsx`.
 
 ## Scripts
 
 ```
 bun install
-bun run timer:dev     # dev server
-bun run timer:build   # production build to apps/timer/dist
+bun run web:dev       # dev server
+bun run web:build     # production build to apps/web/dist
 bun run check         # lint + typecheck + tests
 ```
 

@@ -1,5 +1,5 @@
 import { createKitchenSounds, type SoundHandle } from "@kitchen/sounds";
-import type { Alarm } from "@application/ports";
+import type { Alarm } from "@timer/application/ports";
 
 export function createWebAudioAlarm(): Alarm {
   const sounds = createKitchenSounds();

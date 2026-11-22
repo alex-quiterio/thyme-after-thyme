@@ -7,14 +7,14 @@
     "apps/*"
   ],
   "scripts": {
-    "timer:dev": "bun ./apps/timer/index.html",
-    "timer:build": "bun build ./apps/timer/index.html --outdir ./apps/timer/dist --minify --public-path ${PUBLIC_PATH:-/}",
-    "sounds:test": "bun test packages/sounds",
-    "timer:test": "bun test apps/timer",
     "typecheck": "tsc --noEmit",
     "test": "bun test",
-    "lint": "eslint apps/timer packages",
-    "check": "bun run lint && bun run typecheck && bun test"
+    "lint": "eslint apps packages",
+    "check": "bun run lint && bun run typecheck && bun test",
+    "web:dev": "bun ./apps/web/index.html",
+    "web:build": "bun build ./apps/web/index.html --outdir ./apps/web/dist --minify --public-path ${PUBLIC_PATH:-/}",
+    "sounds:test": "bun test packages/sounds",
+    "web:test": "bun test apps/web"
   },
   "devDependencies": {
     "@types/bun": "latest",

@@ -22,12 +22,12 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
       - run: bun run check
-      - run: bun run timer:build
+      - run: bun run web:build
         env:
           PUBLIC_PATH: /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/timer/dist
+          path: apps/web/dist
 
   deploy:
     needs: build

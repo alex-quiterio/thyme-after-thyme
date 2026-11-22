@@ -1,4 +1,4 @@
-import type { AlarmSound } from "@domain/timer";
+import type { AlarmSound } from "@timer/domain/timer";
 
 export type Clock = { now(): number };
 

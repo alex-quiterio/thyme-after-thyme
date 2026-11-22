@@ -1,4 +1,4 @@
-import type { AlarmSound } from "@domain/timer";
+import type { AlarmSound } from "@timer/domain/timer";
 
 export const soundLabels: Record<AlarmSound, string> = {
   ring: "Egg-timer ring",

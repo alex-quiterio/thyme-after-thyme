@@ -1,4 +1,4 @@
-import { alarmSounds, formatRemaining, remainingMs, type AlarmSound, type Timer } from "@domain/timer";
+import { alarmSounds, formatRemaining, remainingMs, type AlarmSound, type Timer } from "@timer/domain/timer";
 import { soundLabels } from "./soundLabels";
 
 type Props = {

@@ -1,0 +1,63 @@
+/* Recipe sheets: lined paper with a red margin rule */
+.sheet {
+  position: relative;
+  padding: 1.25rem 1.25rem 1.25rem 3.2rem;
+  background:
+    linear-gradient(90deg, transparent 2.4rem, rgba(200, 56, 43, 0.55) 2.4rem calc(2.4rem + 2px), transparent calc(2.4rem + 2px)),
+    repeating-linear-gradient(transparent 0 2.4rem, rgba(80, 130, 190, 0.2) 2.4rem calc(2.4rem + 1px)),
+    var(--paper);
+  border-radius: 0.35rem;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08), 0 12px 18px rgba(60, 30, 10, 0.28);
+}
+
+.sheet__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-hand);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.sheet__row {
+  display: grid;
+  grid-template-columns: 1fr 6.5rem 5rem auto;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.sheet input,
+.sheet select {
+  font: inherit;
+  min-width: 0;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(58, 42, 32, 0.3);
+  border-radius: 0.3rem;
+  padding: 0.4rem 0.5rem;
+}
+
+.sheet__add { margin-top: 0.5rem; }
+
+.sheet--result { border-top: 0.7rem solid var(--tomato); }
+
+.sheet__factor {
+  margin: -2.6rem 0 0.5rem;
+  text-align: right;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--tomato);
+  transform: rotate(-4deg);
+}
+
+.sheet__list { list-style: none; margin: 0; padding: 0; font-size: 1.2rem; }
+.sheet__list li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.3rem 0; }
+.sheet__dots { flex: 1; border-bottom: 2px dotted rgba(58, 42, 32, 0.35); transform: translateY(-0.25rem); }
+.sheet__list strong { color: var(--tomato-dark); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 34rem) {
+  .sheet { padding-left: 2.8rem; }
+  .sheet__row { grid-template-columns: 1fr 1fr auto; }
+  .sheet__name { grid-column: 1 / -1; }
+  .sheet__row .icon-btn { grid-row: 2; grid-column: 3; }
+}

@@ -1,0 +1,29 @@
+/* Jar-label tabs on the wooden shelf */
+.nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.nav__tab {
+  padding: 0.35rem 1.1rem;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--paper);
+  border-radius: 0.3rem;
+  border: 2px dashed rgba(58, 42, 32, 0.35);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+  transform: rotate(-1.5deg);
+}
+.nav__tab:nth-child(even) { transform: rotate(1.2deg); }
+.nav__tab:hover { background: #fff; }
+.nav__tab--active {
+  background: var(--butter);
+  border-style: solid;
+  border-color: var(--wood-dark);
+}
