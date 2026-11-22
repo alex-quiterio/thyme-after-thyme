@@ -32,8 +32,12 @@
       ],
       "@scaler/*": [
         "apps/web/src/tools/scaler/*"
+      ],
+      "@recipes/*": [
+        "apps/web/src/tools/recipes/*"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
   "include": [
     "packages",

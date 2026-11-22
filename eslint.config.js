@@ -2,7 +2,7 @@ import tseslint from "typescript-eslint";
 
 // Per tool: ui -> application -> domain, infrastructure -> application -> domain.
 // Tools never import each other. main.tsx (composition root) may import everything.
-const TOOLS = ["timer", "scaler"];
+const TOOLS = ["timer", "scaler", "recipes"];
 const layers = ["domain", "application", "infrastructure", "ui"];
 
 const noRelativeUp = { group: ["../*"], message: "Use an alias import (@timer/domain/..., @shared/...) across folders." };

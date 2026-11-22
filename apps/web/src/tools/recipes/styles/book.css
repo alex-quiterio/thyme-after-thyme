@@ -1,0 +1,158 @@
+/* Cookbook: linen cover, index cards, lined recipe pages */
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.cover {
+  padding: 1.5rem 1rem;
+  border-radius: 0.5rem;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 4px),
+    linear-gradient(160deg, #6f8a62, var(--sage-dark));
+  border: 3px solid #4a5f40;
+  box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.08), 0 12px 20px rgba(40, 30, 10, 0.3);
+}
+.cover__label {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 1.1rem 1rem 1.2rem;
+  text-align: center;
+  background: var(--paper);
+  border: 2px solid var(--wood-dark);
+  outline: 2px dashed rgba(58, 42, 32, 0.35);
+  outline-offset: -8px;
+  border-radius: 0.25rem;
+  transform: rotate(-0.6deg);
+}
+.cover__title { margin: 0; font-weight: 900; font-size: clamp(1.8rem, 7vw, 2.6rem); line-height: 1.05; color: var(--tomato-dark); }
+.cover__tagline { margin: 0.4rem 0 0; font-family: var(--font-hand); font-size: 1.6rem; }
+
+.finder input {
+  width: 100%;
+  font: inherit;
+  font-size: 1.05rem;
+  padding: 0.75rem 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--wood);
+  border-radius: 999px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.18);
+}
+
+.index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.25rem 1rem;
+}
+
+.index-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 1.35rem 1rem 0.9rem;
+  color: inherit;
+  text-decoration: none;
+  background:
+    linear-gradient(var(--tomato), var(--tomato)) top / 100% 0.55rem no-repeat,
+    repeating-linear-gradient(transparent 0 1.6rem, rgba(80, 130, 190, 0.2) 1.6rem calc(1.6rem + 1px)),
+    var(--paper);
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08), 0 8px 14px rgba(60, 30, 10, 0.25);
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.15s;
+}
+@media (hover: hover) {
+  .index-card:hover { transform: rotate(0deg) translateY(-3px); }
+}
+.index-card__no { font-family: var(--font-hand); font-weight: 700; font-size: 1.7rem; line-height: 1; color: var(--tomato); }
+.index-card__title { font-weight: 800; font-size: 1.15rem; line-height: 1.2; }
+.index-card__sub { font-size: 0.9rem; opacity: 0.75; }
+.index-card__meta { margin-top: auto; padding-top: 0.5rem; font-family: var(--font-hand); font-size: 1.15rem; color: var(--sage-dark); }
+
+.back, .pager a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 800;
+  color: var(--tomato-dark);
+  text-decoration: none;
+  background: var(--paper);
+  padding: 0 1rem;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  justify-self: start;
+}
+.pager { display: flex; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+.pager a { justify-self: auto; }
+
+/* The recipe page reuses .sheet (lined paper + margin rule) */
+.page__number { margin: 0; font-family: var(--font-hand); font-size: 1.5rem; color: var(--tomato); }
+.page__title { margin: 0; font-weight: 900; font-size: clamp(1.6rem, 6vw, 2.3rem); line-height: 1.1; }
+.page__subtitle { margin: 0.35rem 0 0; font-style: italic; font-size: 1.05rem; }
+.page__hint { margin: 0.6rem 0 0; font-family: var(--font-hand); font-size: 1.25rem; color: var(--sage-dark); }
+
+.part { margin-top: 1.4rem; }
+.part__title { margin: 0 0 0.5rem; font-family: var(--font-hand); font-weight: 700; font-size: 1.8rem; color: var(--wood-dark); }
+.part p { margin: 0 0 0.7rem; line-height: 1.5; }
+
+.ingredients { list-style: none; margin: 0 0 0.5rem; padding: 0; }
+.ingredients label { display: flex; align-items: center; gap: 0.7rem; min-height: 40px; padding: 0.15rem 0; cursor: pointer; }
+.ingredients input { width: 1.3rem; height: 1.3rem; flex: none; accent-color: var(--tomato); }
+.ingredients .is-ticked span { text-decoration: line-through; opacity: 0.5; }
+
+.step { display: flex; gap: 0.8rem; margin-bottom: 1rem; align-items: flex-start; }
+.step__num {
+  flex: none;
+  width: 2.4rem; height: 2.4rem;
+  font: inherit; font-weight: 900; font-size: 1.1rem;
+  color: #fff; background: var(--tomato);
+  border: 0; border-radius: 50%;
+  box-shadow: 0 3px 0 var(--tomato-dark);
+  cursor: pointer;
+}
+.step__body { flex: 1; min-width: 0; }
+.step__body p { margin: 0.35rem 0 0.4rem; }
+.step--done .step__num { background: var(--sage); box-shadow: 0 3px 0 var(--sage-dark); }
+.step--done .step__body p { text-decoration: line-through; opacity: 0.5; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  min-height: 40px; padding: 0 0.9rem;
+  font: inherit; font-weight: 800;
+  color: var(--ink); background: var(--butter);
+  border: 0; border-radius: 999px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.chip:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+.chip--running, .chip--done { cursor: default; padding-right: 0.3rem; color: #fff; background: var(--tomato); }
+.chip--done { background: var(--sage-dark); animation: pulse-chip 0.8s ease-in-out infinite alternate; }
+.chip__time { font-variant-numeric: tabular-nums; font-size: 1.1rem; }
+.chip__stop {
+  min-height: 32px; padding: 0 0.7rem;
+  font: inherit; font-size: 0.85rem; font-weight: 800;
+  color: var(--ink); background: rgba(255, 255, 255, 0.85);
+  border: 0; border-radius: 999px; cursor: pointer;
+}
+@keyframes pulse-chip { from { transform: scale(1); } to { transform: scale(1.05); } }
+
+@media (pointer: coarse), (max-width: 40rem) {
+  .chip { min-height: 44px; }
+  .chip__stop { min-height: 36px; }
+  .step__num { width: 2.75rem; height: 2.75rem; }
+  .ingredients label { min-height: 44px; }
+  .ingredients input { width: 1.5rem; height: 1.5rem; }
+}
+@media (max-width: 40rem) {
+  .index { grid-template-columns: 1fr; }
+  .page { padding-left: 2.6rem; }
+}

@@ -8,9 +8,11 @@ Kitchen apps, with proper kitchen sounds.
 | --- | --- |
 | `packages/sounds` | `@kitchen/sounds`: synthesized kitchen clock sounds (ding, chime, oven alarm, egg-timer ring, tick) on the Web Audio API |
 | `apps/web` | The single web app: a shell with tabs, one tool per tab |
+| `content/recipes` | The recipe book: *A Pequena Mesa Verde*, one markdown file per recipe |
+| tool: recipes | Recipe book: search, tick off ingredients and steps, and start a timer for any time mentioned in a step |
 | tool: timer | Multi-timer that rings with those sounds |
 | tool: scaler | Recipe scaler (fractions OK, recipe saved in the browser) |
-| *future tools* | step-by-step recipe follower, recipe book |
+| *future tools* | guided cook mode, shopping list |
 
 ## Architecture
 
@@ -32,6 +34,10 @@ apps/web/src/
 
 ESLint enforces the dependency direction per tool, forbids tools importing each other, and bans `../` imports across folders.
 
+**Recipes → timers:** the recipe parser (`tools/recipes/domain`) finds durations in step text ("5–7 minutos", "2–3 horas") and the book starts them on the Timers board through a `StepTimers` port, implemented in `integrations/recipeTimers.ts`, so the tools never import each other.
+
+**Add or edit a recipe:** drop a markdown file in `content/recipes/` named like `25 — Title.md` (`## Ingredientes` bullets, `## Método` paragraphs). `bun run recipes:bundle` (run automatically by dev, build and check) bundles them.
+
 **Add a tool:** create `tools/<name>/{domain,application,infrastructure,ui}`, add an alias in `tsconfig.json`, add the name to `TOOLS` in `eslint.config.js`, and register it in `main.tsx`.
 
 ## Install as an app (PWA)
@@ -44,7 +50,7 @@ How it's built: `apps/web/public/manifest.webmanifest` + icons, and `public/sw.j
 
 ```
 bun install
-bun run web:dev       # dev server
+bun run web:dev       # bundles recipes, then dev server
 bun run web:build     # production build (+ PWA files) to apps/web/dist
 bun run check         # lint + typecheck + tests
 ```

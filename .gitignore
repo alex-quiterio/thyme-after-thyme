@@ -2,3 +2,6 @@ node_modules/
 dist/
 .DS_Store
 dist/
+
+# generated from content/recipes by scripts/recipe-data.ts
+apps/web/src/tools/recipes/infrastructure/recipes.generated.json

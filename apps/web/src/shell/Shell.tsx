@@ -5,7 +5,7 @@ import { useInstallPrompt } from "./useInstallPrompt";
 export function Shell({ tools }: { tools: ToolDefinition[] }) {
   const [route, go] = useHashRoute();
   const install = useInstallPrompt();
-  const active = tools.find((t) => t.id === route) ?? tools[0];
+  const active = tools.find((t) => route === t.id || route.startsWith(`${t.id}/`)) ?? tools[0];
 
   return (
     <>
