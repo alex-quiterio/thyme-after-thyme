@@ -1,4 +1,5 @@
 import type { ToolDefinition } from "@shared/tool";
+import { UpdateToast } from "./UpdateToast";
 import { useHashRoute } from "./useHashRoute";
 import { useInstallPrompt } from "./useInstallPrompt";
 
@@ -36,6 +37,8 @@ export function Shell({ tools }: { tools: ToolDefinition[] }) {
       </header>
 
       <main className="counter">{active?.render()}</main>
+
+      <UpdateToast />
     </>
   );
 }

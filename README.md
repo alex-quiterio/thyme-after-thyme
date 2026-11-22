@@ -44,6 +44,8 @@ ESLint enforces the dependency direction per tool, forbids tools importing each 
 
 Chrome's old packaged "Chrome Apps" are discontinued; the modern equivalent is an installable web app. Open the site in Chrome and use the **Install app** button in the header (or the install icon in the address bar). It then runs in its own window, works offline, and has shortcuts for each tool. On Android/iOS use "Add to Home screen".
 
+**Updates:** a new version installs in the background and waits. The app shows a "A fresher batch is ready" message (checked every 30 minutes and whenever you return to the app); **Update now** activates it and reloads, **Later** dismisses it until the next load.
+
 How it's built: `apps/web/public/manifest.webmanifest` + icons, and `public/sw.js` as a service worker template. `scripts/postbuild.ts` copies the icons and generates `dist/sw.js` with the list of built files to precache.
 
 ## Scripts

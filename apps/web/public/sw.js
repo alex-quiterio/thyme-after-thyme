@@ -5,7 +5,12 @@ const APP_CACHE = `thyme-app-${VERSION}`;
 const FONT_CACHE = "thyme-fonts";
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(APP_CACHE).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting()));
+  // No skipWaiting here: the new version waits until the page asks for it (see SKIP_WAITING below).
+  event.waitUntil(caches.open(APP_CACHE).then((c) => c.addAll(PRECACHE)));
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {

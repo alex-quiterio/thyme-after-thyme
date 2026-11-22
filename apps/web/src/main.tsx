@@ -2,7 +2,7 @@
 import { createRoot } from "react-dom/client";
 import type { ToolDefinition } from "@shared/tool";
 import { Shell } from "@shell/Shell";
-import { registerServiceWorker } from "@shell/registerServiceWorker";
+import { registerServiceWorker } from "@shell/appUpdate";
 
 import { createTimerBoard } from "@timer/application/timerBoard";
 import { createWebAudioAlarm } from "@timer/infrastructure/webAudioAlarm";
