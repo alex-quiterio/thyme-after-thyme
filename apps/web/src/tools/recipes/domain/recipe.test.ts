@@ -17,6 +17,13 @@ describe("findDurations", () => {
     expect(findDurations("2 c. de sopa de azeite, 3 hortelã, 200 g")).toEqual([]);
   });
 
+  test("Italian units", () => {
+    expect(findDurations("cuoci 5–7 minuti").map((d) => d.label)).toEqual(["5–7 min"]);
+    expect(findDurations("cuoci 1 minuto e 30 secondi").map((d) => d.ms)).toEqual([60_000, 30_000]);
+    expect(findDurations("in frigorifero per 2–3 ore")).toEqual([{ ms: 7_200_000, label: "2–3 h" }]);
+    expect(findDurations("ci vuole ora")).toEqual([]);
+  });
+
   test("several spans in one step", () => {
     expect(findDurations("2–3 minutos de cada lado, depois 1 minuto").map((d) => d.label)).toEqual(["2–3 min", "1 min"]);
   });
@@ -44,7 +51,7 @@ describe("parseRecipe", () => {
   const r = parseRecipe("07 — Tarte de amêndoa", doc);
 
   test("title and number come from the document name", () => {
-    expect(r).toMatchObject({ id: "07-tarte-de-amendoa", number: 7, title: "Tarte de amêndoa", subtitle: "Serve 4", kind: "recipe" });
+    expect(r).toMatchObject({ id: "07", number: 7, title: "Tarte de amêndoa", subtitle: "Serve 4", kind: "recipe" });
   });
 
   test("bullets, numbered steps, tips and timers", () => {

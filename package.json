@@ -10,12 +10,13 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test",
     "lint": "eslint apps packages",
-    "check": "bun run recipes:bundle && bun run lint && bun run typecheck && bun test",
+    "check": "bun run recipes:bundle && bun run recipes:check && bun run lint && bun run typecheck && bun test",
     "web:dev": "bun run recipes:bundle && bun ./apps/web/index.html",
     "web:build": "bun run recipes:bundle && bun build ./apps/web/index.html --outdir ./apps/web/dist --minify --public-path ${PUBLIC_PATH:-/} && bun scripts/postbuild.ts",
     "sounds:test": "bun test packages/sounds",
     "web:test": "bun test apps/web",
-    "recipes:bundle": "bun scripts/recipe-data.ts"
+    "recipes:bundle": "bun scripts/recipe-data.ts",
+    "recipes:check": "bun scripts/check-translations.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

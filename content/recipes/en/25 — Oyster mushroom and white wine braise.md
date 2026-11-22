@@ -1,4 +1,4 @@
-# Oyster Mushroom and White Wine Braise
+# Oyster mushroom and white wine braise
 
 A one-pan vegetarian braise for two, about 20 minutes.
 

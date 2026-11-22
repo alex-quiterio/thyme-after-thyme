@@ -8,7 +8,7 @@ Kitchen apps, with proper kitchen sounds.
 | --- | --- |
 | `packages/sounds` | `@kitchen/sounds`: synthesized kitchen clock sounds (ding, chime, oven alarm, egg-timer ring, tick) on the Web Audio API |
 | `apps/web` | The single web app: a shell with tabs, one tool per tab |
-| `content/recipes` | The recipe book: *A Pequena Mesa Verde*, one markdown file per recipe |
+| `content/recipes/{pt,en,it}` | The recipe book (*A Pequena Mesa Verde* / *The Little Green Table* / *La Piccola Tavola Verde*), one markdown file per recipe per language |
 | tool: recipes | Recipe book: search, tick off ingredients and steps, and start a timer for any time mentioned in a step |
 | tool: timer | Multi-timer that rings with those sounds |
 | tool: scaler | Recipe scaler (fractions OK, recipe saved in the browser) |
@@ -36,7 +36,9 @@ ESLint enforces the dependency direction per tool, forbids tools importing each 
 
 **Recipes → timers:** the recipe parser (`tools/recipes/domain`) finds durations in step text ("5–7 minutos", "2–3 horas") and the book starts them on the Timers board through a `StepTimers` port, implemented in `integrations/recipeTimers.ts`, so the tools never import each other.
 
-**Add or edit a recipe:** drop a markdown file in `content/recipes/` named like `25 — Title.md` (`## Ingredientes` bullets, `## Método` paragraphs). `bun run recipes:bundle` (run automatically by dev, build and check) bundles them.
+**Languages:** English, Portuguese and Italian, switchable in the header (saved on the device, defaulting to the browser language). The interface text lives in `ui/messages.ts` next to each tool, typed `Localized<…>` so a missing translation fails the build. Recipes are translated by hand; the Portuguese set is the original.
+
+**Add or edit a recipe:** add a markdown file to *each* of `content/recipes/pt`, `en` and `it`, named `NN — Title.md` with the same number (`## Ingredientes` bullets, `## Método` paragraphs). The number is the recipe's id, so the same recipe stays open when you change language. `bun run recipes:check` fails if the languages differ in structure (sections, bullets, steps, timers), since step timers are matched by position. `bun run recipes:bundle` runs automatically in dev, build and check.
 
 **Add a tool:** create `tools/<name>/{domain,application,infrastructure,ui}`, add an alias in `tsconfig.json`, add the name to `TOOLS` in `eslint.config.js`, and register it in `main.tsx`.
 

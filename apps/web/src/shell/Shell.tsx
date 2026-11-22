@@ -1,4 +1,7 @@
 import type { ToolDefinition } from "@shared/tool";
+import { useLocale, useMessages } from "@shared/useLocale";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { messages } from "./messages";
 import { UpdateToast } from "./UpdateToast";
 import { useHashRoute } from "./useHashRoute";
 import { useInstallPrompt } from "./useInstallPrompt";
@@ -6,14 +9,17 @@ import { useInstallPrompt } from "./useInstallPrompt";
 export function Shell({ tools }: { tools: ToolDefinition[] }) {
   const [route, go] = useHashRoute();
   const install = useInstallPrompt();
+  const m = useMessages(messages);
+  const locale = useLocale();
   const active = tools.find((t) => route === t.id || route.startsWith(`${t.id}/`)) ?? tools[0];
 
   return (
     <>
       <header className="plank">
+        <LanguageSwitcher />
         <h1 className="plank__title">Thyme After Thyme</h1>
-        <p className="plank__tagline">kitchen tools for people who keep burning the garlic</p>
-        <nav className="nav" aria-label="Kitchen tools">
+        <p className="plank__tagline">{m.tagline}</p>
+        <nav className="nav" aria-label={m.navLabel}>
           {tools.map((t) => (
             <a
               key={t.id}
@@ -25,12 +31,12 @@ export function Shell({ tools }: { tools: ToolDefinition[] }) {
                 go(t.id);
               }}
             >
-              <span aria-hidden="true">{t.emoji}</span> {t.title}
+              <span aria-hidden="true">{t.emoji}</span> {t.title[locale]}
             </a>
           ))}
           {install && (
             <button className="nav__tab nav__install" onClick={install}>
-              <span aria-hidden="true">📲</span> Install app
+              <span aria-hidden="true">📲</span> {m.install}
             </button>
           )}
         </nav>

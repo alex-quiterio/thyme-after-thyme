@@ -23,12 +23,12 @@ const newId = () => crypto.randomUUID();
 
 const timerBoard = createTimerBoard({ clock: systemClock, alarm: createWebAudioAlarm(), newId });
 const scalerStore = createScalerStore({ storage: createLocalStorageRecipe(), newId });
-const recipeBook = createRecipeBook({ collection: bundledRecipes, timers: createRecipeTimers(timerBoard) });
+const recipeBook = createRecipeBook({ collections: bundledRecipes, timers: createRecipeTimers(timerBoard) });
 
 const tools: ToolDefinition[] = [
-  { id: "recipes", title: "Recipe book", emoji: "📖", render: () => <RecipesTool book={recipeBook} /> },
-  { id: "timer", title: "Timers", emoji: "⏲️", render: () => <TimerTool board={timerBoard} /> },
-  { id: "scaler", title: "Recipe scaler", emoji: "⚖️", render: () => <ScalerTool store={scalerStore} /> },
+  { id: "recipes", title: { en: "Recipe book", pt: "Receitas", it: "Ricettario" }, emoji: "📖", render: () => <RecipesTool book={recipeBook} /> },
+  { id: "timer", title: { en: "Timers", pt: "Temporizadores", it: "Timer" }, emoji: "⏲️", render: () => <TimerTool board={timerBoard} /> },
+  { id: "scaler", title: { en: "Recipe scaler", pt: "Proporções", it: "Proporzioni" }, emoji: "⚖️", render: () => <ScalerTool store={scalerStore} /> },
 ];
 
 createRoot(document.getElementById("root")!).render(<Shell tools={tools} />);

@@ -1,13 +1,16 @@
 import { useState, useSyncExternalStore } from "react";
-import type { RecipeBook } from "@recipes/application/recipeBook";
+import type { RecipeBook, RecipeShelf } from "@recipes/application/recipeBook";
 import type { Recipe } from "@recipes/domain/recipe";
+import { useMessages } from "@shared/useLocale";
 import { Inline } from "./Inline";
+import { messages } from "./messages";
 import { StepTimerChips } from "./StepTimerChips";
 
-export function RecipeView({ book, recipe }: { book: RecipeBook; recipe: Recipe }) {
+export function RecipeView({ book, shelf, recipe }: { book: RecipeBook; shelf: RecipeShelf; recipe: Recipe }) {
+  const m = useMessages(messages);
   const states = useSyncExternalStore(book.timers.subscribe, book.timers.snapshot);
   const [ticked, setTicked] = useState<ReadonlySet<string>>(new Set());
-  const { previous, next } = book.neighbours(recipe.id);
+  const { previous, next } = shelf.neighbours(recipe.id);
 
   const toggle = (key: string) =>
     setTicked((prev) => {
@@ -18,15 +21,15 @@ export function RecipeView({ book, recipe }: { book: RecipeBook; recipe: Recipe 
 
   return (
     <>
-      <a className="back" href="#/recipes">← All recipes</a>
+      <a className="back" href="#/recipes">{m.back}</a>
 
       <article className="sheet page">
         <header>
-          {recipe.number !== null && <p className="page__number">No. {String(recipe.number).padStart(2, "0")}</p>}
+          {recipe.number !== null && <p className="page__number">{m.number} {String(recipe.number).padStart(2, "0")}</p>}
           <h2 className="page__title">{recipe.title}</h2>
           {recipe.subtitle && <p className="page__subtitle">{recipe.subtitle}</p>}
           {recipe.timerCount > 0 && (
-            <p className="page__hint">Tap a <span aria-hidden="true">⏱</span> time to start a timer. It keeps running in the Timers tab.</p>
+            <p className="page__hint">{m.hint}</p>
           )}
         </header>
 
@@ -63,7 +66,7 @@ export function RecipeView({ book, recipe }: { book: RecipeBook; recipe: Recipe 
                       className="step__num"
                       onClick={() => toggle(id)}
                       aria-pressed={done}
-                      aria-label={`Step ${block.number}${done ? ", done" : ""}`}
+                      aria-label={m.step(block.number, done)}
                     >
                       {done ? "✓" : block.number}
                     </button>
@@ -92,7 +95,7 @@ export function RecipeView({ book, recipe }: { book: RecipeBook; recipe: Recipe 
         ))}
       </article>
 
-      <nav className="pager" aria-label="More recipes">
+      <nav className="pager" aria-label={m.moreRecipes}>
         {previous ? <a href={`#/recipes/${previous.id}`}>← {previous.title}</a> : <span />}
         {next ? <a href={`#/recipes/${next.id}`}>{next.title} →</a> : <span />}
       </nav>

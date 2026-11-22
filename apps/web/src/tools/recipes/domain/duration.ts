@@ -6,9 +6,9 @@ export type Duration = {
 };
 
 const UNITS: Array<[pattern: string, abbr: string, ms: number]> = [
-  ["segundos?|seconds?", "s", 1_000],
-  ["minutos?|minutes?|min", "min", 60_000],
-  ["horas?|hours?|h", "h", 3_600_000],
+  ["segundos?|seconds?|second[oi]", "s", 1_000],
+  ["minutos?|minutes?|minut[oi]|min", "min", 60_000],
+  ["horas?|hours?|or[ae]|h", "h", 3_600_000],
 ];
 
 const NUMBER = "\\d+(?:[.,]\\d+)?";

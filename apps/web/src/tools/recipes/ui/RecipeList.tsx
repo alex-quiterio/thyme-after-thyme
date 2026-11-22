@@ -1,32 +1,35 @@
 import { useState } from "react";
-import type { RecipeBook } from "@recipes/application/recipeBook";
+import type { RecipeShelf } from "@recipes/application/recipeBook";
+import { useMessages } from "@shared/useLocale";
+import { messages } from "./messages";
 
-export function RecipeList({ book }: { book: RecipeBook }) {
+export function RecipeList({ shelf }: { shelf: RecipeShelf }) {
+  const m = useMessages(messages);
   const [query, setQuery] = useState("");
-  const results = book.search(query);
+  const results = shelf.search(query);
 
   return (
     <>
-      <section className="cover" aria-label="Cookbook">
+      <section className="cover" aria-label={m.coverLabel}>
         <div className="cover__label">
-          <h2 className="cover__title">{book.title}</h2>
-          {book.tagline && <p className="cover__tagline">{book.tagline}</p>}
+          <h2 className="cover__title">{shelf.title}</h2>
+          {shelf.tagline && <p className="cover__tagline">{shelf.tagline}</p>}
         </div>
       </section>
 
       <div className="finder">
-        <label className="visually-hidden" htmlFor="recipe-search">Search recipes</label>
+        <label className="visually-hidden" htmlFor="recipe-search">{m.searchLabel}</label>
         <input
           id="recipe-search"
           type="search"
-          placeholder="Search by name or ingredient…"
+          placeholder={m.searchPlaceholder}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
 
       {results.length === 0 ? (
-        <p className="empty">No recipe matches “{query}”. Try an ingredient, like <em>courgette</em>.</p>
+        <p className="empty">{m.noMatch(query)}</p>
       ) : (
         <ul className="index">
           {results.map((r, i) => (
@@ -36,8 +39,8 @@ export function RecipeList({ book }: { book: RecipeBook }) {
                 <span className="index-card__title">{r.title}</span>
                 {r.subtitle && <span className="index-card__sub">{r.subtitle}</span>}
                 <span className="index-card__meta">
-                  {r.kind === "note" ? "notes" : "recipe"}
-                  {r.timerCount > 0 && <> · <span aria-hidden="true">⏱</span> {r.timerCount} timer{r.timerCount > 1 ? "s" : ""}</>}
+                  {r.kind === "note" ? m.notes : m.recipe}
+                  {r.timerCount > 0 && <> · <span aria-hidden="true">⏱</span> {m.timers(r.timerCount)}</>}
                 </span>
               </a>
             </li>

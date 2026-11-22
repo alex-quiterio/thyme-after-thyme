@@ -1,5 +1,6 @@
 import { alarmSounds, formatRemaining, remainingMs, type AlarmSound, type Timer } from "@timer/domain/timer";
-import { soundLabels } from "./soundLabels";
+import { useMessages } from "@shared/useLocale";
+import { messages } from "./messages";
 
 type Props = {
   timer: Timer;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export function TimerCard({ timer, now, tilt, onStart, onPause, onReset, onRemove, onSound }: Props) {
+  const m = useMessages(messages);
   const left = remainingMs(timer, now);
   const done = timer.status === "finished";
   const progress = 1 - left / timer.durationMs;
@@ -21,12 +23,12 @@ export function TimerCard({ timer, now, tilt, onStart, onPause, onReset, onRemov
     <article
       className={`card card--${timer.status}`}
       style={{ ["--tilt" as string]: `${tilt}deg` }}
-      aria-label={`${timer.label} timer`}
+      aria-label={m.timerOf(timer.label)}
     >
       <div className="card__magnet" aria-hidden="true" />
       <header className="card__head">
         <h2 className="card__title">{timer.label}</h2>
-        <button className="icon-btn" onClick={onRemove} aria-label={`Remove ${timer.label}`}>
+        <button className="icon-btn" onClick={onRemove} aria-label={m.remove(timer.label)}>
           ✕
         </button>
       </header>
@@ -34,7 +36,7 @@ export function TimerCard({ timer, now, tilt, onStart, onPause, onReset, onRemov
       <p className="card__time" role="timer" aria-live={done ? "assertive" : "off"}>
         {formatRemaining(left)}
       </p>
-      {done && <p className="card__stamp">Dinner's ready!</p>}
+      {done && <p className="card__stamp">{m.ready}</p>}
 
       <div className="bar" aria-hidden="true">
         <div className="bar__fill" style={{ width: `${Math.min(100, progress * 100)}%` }} />
@@ -42,20 +44,20 @@ export function TimerCard({ timer, now, tilt, onStart, onPause, onReset, onRemov
 
       <div className="card__actions">
         {timer.status === "running" ? (
-          <button className="btn btn--butter" onClick={onPause}>Pause</button>
+          <button className="btn btn--butter" onClick={onPause}>{m.pause}</button>
         ) : (
           <button className="btn btn--tomato" onClick={onStart}>
-            {done ? "Again" : timer.status === "paused" ? "Resume" : "Start"}
+            {done ? m.again : timer.status === "paused" ? m.resume : m.start}
           </button>
         )}
-        <button className="btn btn--sage" onClick={onReset}>{done ? "Silence" : "Reset"}</button>
+        <button className="btn btn--sage" onClick={onReset}>{done ? m.silence : m.reset}</button>
       </div>
 
       <label className="card__sound">
-        <span>Rings with</span>
+        <span>{m.ringsWith}</span>
         <select value={timer.sound} onChange={(e) => onSound(e.target.value as AlarmSound)}>
           {alarmSounds.map((s) => (
-            <option key={s} value={s}>{soundLabels[s]}</option>
+            <option key={s} value={s}>{m.sounds[s]}</option>
           ))}
         </select>
       </label>

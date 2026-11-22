@@ -33,7 +33,7 @@ const unescape = (s: string) => s.replace(/\\([\\[\]\-*_])/g, "$1");
 export const plain = (s: string) => unescape(s).replace(/\*+/g, "");
 const heading = (s: string) => plain(s).replace(/^[-\s]+/, "").trim();
 
-const METHOD = /^(metodo|preparacao|cook|method|preparation)/;
+const METHOD = /^(metodo|preparacao|preparazione|procedimento|cozinhar|cottura|cook|method|preparation)/;
 const isMethodTitle = (title: string) => METHOD.test(fold(title.split(" · ").pop() ?? ""));
 
 const nextIsBullet = (lines: string[], from: number) => {
@@ -123,7 +123,8 @@ export function parseRecipe(name: string, markdown: string): Recipe {
   const blocks = sections.flatMap((s) => s.blocks);
   const bulletText = blocks.flatMap((b) => (b.kind === "bullets" ? b.items : []));
   return {
-    id: slugify(name),
+    // numbered documents share an id across languages, so switching language keeps you on the same recipe
+    id: number !== null ? String(number).padStart(2, "0") : slugify(name),
     number,
     title,
     subtitle,

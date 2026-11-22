@@ -1,10 +1,13 @@
 import type { TimerBoard } from "@timer/application/timerBoard";
 import { AddTimerForm } from "./AddTimerForm";
 import { TimerCard } from "./TimerCard";
+import { useMessages } from "@shared/useLocale";
+import { messages } from "./messages";
 import { useBoard } from "./useBoard";
 
 export function TimerTool({ board }: { board: TimerBoard }) {
   const { timers, now } = useBoard(board);
+  const m = useMessages(messages);
 
   return (
     <>
@@ -16,7 +19,7 @@ export function TimerTool({ board }: { board: TimerBoard }) {
       />
 
       {timers.length === 0 ? (
-        <p className="empty">Nothing on the stove. Pick a special or set your own.</p>
+        <p className="empty">{m.empty}</p>
       ) : (
         <div className="shelf">
           {timers.map((t, i) => (
