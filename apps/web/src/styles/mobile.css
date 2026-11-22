@@ -1,0 +1,68 @@
+/* Phone and touch refinements. Loaded last so it can override tool styles. */
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+button, a, select, input { touch-action: manipulation; }
+
+/* Don't leave cards "lifted" after a tap */
+@media (hover: none) {
+  .card:hover { transform: rotate(var(--tilt, 0deg)); }
+  .nav__tab:hover { background: var(--paper); }
+  .nav__tab--active:hover { background: var(--butter); }
+}
+
+/* Comfortable thumb targets (44px) on touch screens and narrow windows */
+@media (pointer: coarse), (max-width: 40rem) {
+  .btn,
+  .chalk-btn,
+  .nav__tab { min-height: 44px; }
+
+  .nav__tab { display: inline-flex; align-items: center; }
+
+  .icon-btn { width: 44px; height: 44px; font-size: 1.1rem; }
+
+  .chalkboard__form input,
+  .chalkboard__form select,
+  .sheet input,
+  .sheet select,
+  .card__sound select { min-height: 44px; }
+
+  .chalk-btn { display: inline-flex; align-items: center; gap: 0.35rem; }
+}
+
+@media (max-width: 40rem) {
+  .plank { padding: 1rem 0.75rem 0.9rem; border-bottom-width: 5px; }
+  .plank__tagline { font-size: 1.2rem; line-height: 1.15; }
+  .nav { gap: 0.5rem; margin-top: 0.7rem; }
+  .nav__tab { font-size: 1.3rem; padding: 0.1rem 0.85rem; }
+
+  .counter { padding: 1.25rem 0.75rem 3rem; gap: 1.5rem; }
+  .shelf { gap: 1.5rem 1rem; }
+
+  .chalkboard { border-width: 7px; padding: 0.9rem 0.8rem 1.2rem; }
+  .chalkboard__title { font-size: 1.9rem; }
+  .chalkboard__presets { gap: 0.5rem; }
+
+  /* name on its own row, then minutes + a sound dropdown wide enough to read */
+  .chalkboard__form { grid-template-columns: 5.5rem 1fr; }
+  .chalkboard__form.chalkboard__form--pair { grid-template-columns: 1fr; }
+
+  .card { padding: 1.5rem 1rem 1rem; }
+  .card__time { font-size: 3rem; }
+  .card__actions .btn { min-height: 48px; }
+
+  .sheet { padding: 1rem 0.9rem 1rem 2.6rem; }
+  .sheet__title { font-size: 1.7rem; }
+  .sheet__factor { font-size: 2rem; margin-top: -2.3rem; }
+  .sheet__list { font-size: 1.1rem; }
+}
+
+@media (max-width: 22rem) {
+  .plank__title { font-size: 1.8rem; }
+  .card__time { font-size: 2.6rem; }
+  .chalkboard__form { grid-template-columns: 1fr; }
+}
