@@ -1,19 +1,16 @@
 // Every recipe must have the same shape in every language: same files, sections, bullets,
 // steps and timers. Step timers are keyed by position, so a drifting translation breaks them.
-import { readdir, readFile } from "node:fs/promises";
-import { join } from "node:path";
-import { parseRecipe, type Recipe } from "../apps/web/src/tools/recipes/domain/recipe";
+import { parseDocument } from "../apps/web/src/tools/recipes/domain/recipeDocument";
+import type { Recipe } from "../apps/web/src/tools/recipes/domain/recipe";
+import { languages, readLanguage } from "./recipe-files";
 
-const content = join(import.meta.dir, "..", "content", "recipes");
 const REFERENCE = "pt";
 
 async function load(lang: string): Promise<Map<number, Recipe>> {
-  const dir = join(content, lang);
   const out = new Map<number, Recipe>();
-  for (const f of (await readdir(dir)).filter((x) => x.endsWith(".md"))) {
-    const name = f.normalize("NFC").replace(/\.md$/, "");
-    const recipe = parseRecipe(name, await readFile(join(dir, f), "utf8"));
-    if (recipe.number === null) throw new Error(`${lang}/${f}: file names must start with a number ("07 — Title")`);
+  for (const doc of (await readLanguage(lang)).docs) {
+    const recipe = parseDocument(doc);
+    if (recipe.number === null) throw new Error(`${lang}/${doc.name}: recipes need a number (file name "07 — Title" or "number" in JSON)`);
     out.set(recipe.number, recipe);
   }
   return out;
@@ -27,11 +24,11 @@ const shape = (r: Recipe) =>
       .join(" "),
   );
 
-const languages = (await readdir(content, { withFileTypes: true })).filter((e) => e.isDirectory()).map((e) => e.name);
+const all = await languages();
 const reference = await load(REFERENCE);
 const problems: string[] = [];
 
-for (const lang of languages.filter((l) => l !== REFERENCE)) {
+for (const lang of all.filter((l) => l !== REFERENCE)) {
   const recipes = await load(lang);
   for (const n of reference.keys()) if (!recipes.has(n)) problems.push(`${lang}: missing recipe ${String(n).padStart(2, "0")}`);
   for (const n of recipes.keys()) if (!reference.has(n)) problems.push(`${lang}: recipe ${String(n).padStart(2, "0")} has no ${REFERENCE} original`);
@@ -56,4 +53,4 @@ if (problems.length) {
   console.error(`Translation check failed:\n  - ${problems.join("\n  - ")}`);
   process.exit(1);
 }
-console.log(`translations: ${languages.join(", ")} are consistent (${reference.size} recipes each)`);
+console.log(`translations: ${all.join(", ")} are consistent (${reference.size} recipes each)`);

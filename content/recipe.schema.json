@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Thyme After Thyme recipe",
+  "type": "object",
+  "required": ["title", "sections"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "number": { "type": "integer", "minimum": 0, "description": "Recipe id, shared by all languages. Defaults to the number in the file name (\"07 — Title.json\")." },
+    "title": { "type": "string", "minLength": 1 },
+    "subtitle": { "type": "string" },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Parts are shown in the order you write the keys.",
+        "properties": {
+          "title": { "type": "string" },
+          "ingredients": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Times written in a step (\"5–7 minutes\", \"30 minuti\") become timer buttons automatically.",
+            "items": {
+              "oneOf": [
+                { "type": "string", "minLength": 1 },
+                {
+                  "type": "object",
+                  "required": ["text"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "text": { "type": "string", "minLength": 1 },
+                    "timers": {
+                      "type": "array",
+                      "description": "Replaces automatic detection for this step.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "hours": { "type": "number", "minimum": 0 },
+                          "minutes": { "type": "number", "minimum": 0 },
+                          "seconds": { "type": "number", "minimum": 0 },
+                          "label": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "text": { "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }] }
+        }
+      }
+    }
+  }
+}

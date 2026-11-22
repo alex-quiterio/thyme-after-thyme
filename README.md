@@ -40,6 +40,8 @@ ESLint enforces the dependency direction per tool, forbids tools importing each 
 
 **Add or edit a recipe:** add a markdown file to *each* of `content/recipes/pt`, `en` and `it`, named `NN — Title.md` with the same number (`## Ingredientes` bullets, `## Método` paragraphs). The number is the recipe's id, so the same recipe stays open when you change language. `bun run recipes:check` fails if the languages differ in structure (sections, bullets, steps, timers), since step timers are matched by position. `bun run recipes:bundle` runs automatically in dev, build and check.
 
+**Recipes as JSON:** a recipe can also be a `.json` file in the same language folder (`26 — Tomato toast.json`): sections of `ingredients`, `steps` and `text`, in the order you write them, with optional explicit `timers` on a step. See `content/recipe.example.json` and `content/recipe.schema.json` (add `"$schema": "./recipe.schema.json"` for editor validation). Markdown and JSON can be mixed. Files are validated at build time with the exact place of any mistake. Set `RECIPES_DIR=/path/to/folder` (containing `pt/`, `en/`, `it/`) to read recipes from anywhere instead of `content/recipes`.
+
 **Add a tool:** create `tools/<name>/{domain,application,infrastructure,ui}`, add an alias in `tsconfig.json`, add the name to `TOOLS` in `eslint.config.js`, and register it in `main.tsx`.
 
 ## Install as an app (PWA)

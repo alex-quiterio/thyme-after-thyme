@@ -1,4 +1,6 @@
-export type RawRecipe = { name: string; markdown: string };
+import type { RawDocument } from "@recipes/domain/recipeDocument";
+
+export type RawRecipe = RawDocument;
 
 export type RecipeCollection = { title: string; tagline: string | null; docs: RawRecipe[] };
 

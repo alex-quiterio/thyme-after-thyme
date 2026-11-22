@@ -120,6 +120,18 @@ export function parseRecipe(name: string, markdown: string): Recipe {
     }
   });
 
+  return assemble({ name, number, title, subtitle, sections });
+}
+
+/** Builds the final recipe from parsed parts. Shared by the markdown and JSON readers. */
+export function assemble(parts: {
+  name: string;
+  number: number | null;
+  title: string;
+  subtitle: string | null;
+  sections: Section[];
+}): Recipe {
+  const { name, number, title, subtitle, sections } = parts;
   const blocks = sections.flatMap((s) => s.blocks);
   const bulletText = blocks.flatMap((b) => (b.kind === "bullets" ? b.items : []));
   return {

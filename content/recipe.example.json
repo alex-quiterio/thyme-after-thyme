@@ -1,0 +1,18 @@
+{
+  "$schema": "./recipe.schema.json",
+  "number": 26,
+  "title": "Tomato toast",
+  "subtitle": "Serves 2",
+  "sections": [
+    { "title": "Ingredients", "ingredients": ["2 slices sourdough", "2 ripe tomatoes", "olive oil", "flaky salt"] },
+    {
+      "title": "Method",
+      "steps": [
+        "Toast the bread for 3 minutes, until deeply golden.",
+        "Rub with the cut side of a tomato, then crush the rest on top.",
+        { "text": "Let it sit so the bread soaks up the juices.", "timers": [{ "minutes": 2 }] },
+        "Finish with olive oil and salt."
+      ]
+    }
+  ]
+}

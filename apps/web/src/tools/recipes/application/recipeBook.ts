@@ -1,4 +1,5 @@
-import { matchesQuery, parseRecipe, type Recipe } from "@recipes/domain/recipe";
+import { matchesQuery, type Recipe } from "@recipes/domain/recipe";
+import { parseDocument } from "@recipes/domain/recipeDocument";
 import type { Locale } from "@shared/locales";
 import type { RecipeCollection, StepTimers } from "./ports";
 
@@ -7,7 +8,7 @@ export type RecipeShelf = ReturnType<typeof shelfFor>;
 
 function shelfFor(collection: RecipeCollection) {
   const recipes: Recipe[] = collection.docs
-    .map((d) => parseRecipe(d.name, d.markdown))
+    .map(parseDocument)
     .sort((a, b) => (a.number ?? Infinity) - (b.number ?? Infinity) || a.title.localeCompare(b.title));
 
   return {
