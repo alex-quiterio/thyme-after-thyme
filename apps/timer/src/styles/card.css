@@ -1,0 +1,111 @@
+/* Recipe-index-card timers */
+.card {
+  position: relative;
+  padding: 1.6rem 1.25rem 1.1rem;
+  background:
+    linear-gradient(var(--tomato), var(--tomato)) top / 100% 0.7rem no-repeat,
+    repeating-linear-gradient(transparent 0 1.7rem, rgba(80, 130, 190, 0.22) 1.7rem calc(1.7rem + 1px)),
+    var(--paper);
+  border-radius: 0.35rem;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08), 0 12px 18px rgba(60, 30, 10, 0.28);
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.2s;
+}
+.card:hover { transform: rotate(0deg) translateY(-3px); }
+
+.card__magnet {
+  position: absolute;
+  top: -0.55rem;
+  left: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: -0.75rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e3685a, var(--tomato-dark));
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
+}
+
+.card__head { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+
+.card__title {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.card__time {
+  margin: 0.4rem 0 0.2rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: 3.4rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.card__stamp {
+  margin: 0 0 0.4rem;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--tomato);
+  border: 3px solid var(--tomato);
+  border-radius: 0.4rem;
+  transform: rotate(-3deg);
+  animation: pulse 0.8s ease-in-out infinite alternate;
+}
+
+/* Gingham progress ribbon */
+.bar {
+  height: 0.9rem;
+  margin: 0.6rem 0 0.9rem;
+  border-radius: 999px;
+  background: rgba(58, 42, 32, 0.12);
+  overflow: hidden;
+}
+.bar__fill {
+  height: 100%;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.28) 0 6px, transparent 6px 12px),
+    var(--tomato);
+  transition: width 0.25s linear;
+}
+
+.card__actions { display: flex; gap: 0.6rem; }
+.card__actions .btn { flex: 1; }
+
+.card__sound {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+}
+.card__sound select {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(58, 42, 32, 0.3);
+  border-radius: 0.3rem;
+  padding: 0.15rem 0.3rem;
+}
+
+.card--finished { animation: wiggle 0.5s ease-in-out infinite; border: 2px solid var(--tomato); }
+.card--finished .card__time { color: var(--tomato); }
+.card--paused .card__time { opacity: 0.55; }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.6deg); }
+}
+@keyframes pulse {
+  from { transform: rotate(-3deg) scale(1); }
+  to { transform: rotate(-3deg) scale(1.06); }
+}

@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": [
+      "bun"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@kitchen/sounds": [
+        "packages/sounds/src/index.ts"
+      ],
+      "@domain/*": [
+        "apps/timer/src/domain/*"
+      ],
+      "@ui/*": [
+        "apps/timer/src/ui/*"
+      ],
+      "@application/*": [
+        "apps/timer/src/application/*"
+      ],
+      "@infrastructure/*": [
+        "apps/timer/src/infrastructure/*"
+      ]
+    }
+  },
+  "include": [
+    "packages",
+    "apps"
+  ],
+  "exclude": [
+    "**/dist",
+    "apps/recipe-scaler"
+  ]
+}

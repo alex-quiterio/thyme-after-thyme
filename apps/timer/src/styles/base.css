@@ -1,0 +1,62 @@
+:root {
+  --cream: #fbf3e4;
+  --paper: #fffaf0;
+  --tomato: #c8382b;
+  --tomato-dark: #9e2a20;
+  --butter: #f3cf62;
+  --sage: #8aa17c;
+  --sage-dark: #5f7753;
+  --wood: #8a5a35;
+  --wood-dark: #5e3b20;
+  --chalkboard: #2a3a33;
+  --chalk: #f2efe6;
+  --ink: #3a2a20;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--font-display);
+  /* gingham tablecloth */
+  background-color: var(--cream);
+  background-image:
+    linear-gradient(90deg, rgba(200, 56, 43, 0.22) 50%, transparent 50%),
+    linear-gradient(rgba(200, 56, 43, 0.22) 50%, transparent 50%);
+  background-size: 56px 56px;
+}
+
+.counter {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.75rem 1.5rem;
+}
+
+.empty {
+  font-family: var(--font-hand);
+  font-size: 1.6rem;
+  text-align: center;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: var(--paper);
+  border-radius: 0.5rem;
+  justify-self: center;
+}
+
+:focus-visible { outline: 3px solid var(--butter); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
