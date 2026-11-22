@@ -10,8 +10,10 @@
   border-radius: 999px;
   cursor: pointer;
 }
-.lang__btn:hover { background: rgba(0, 0, 0, 0.3); }
-.lang__btn--active { color: var(--ink); background: var(--butter); border-color: var(--butter); }
+@media (hover: hover) {
+  .lang__btn:hover { background: rgba(0, 0, 0, 0.3); }
+}
+.lang__btn--active, .lang__btn--active:hover { color: var(--ink); background: var(--butter); border-color: var(--butter); }
 @media (pointer: coarse), (max-width: 40rem) {
   .lang__btn { min-height: 44px; min-width: 44px; }
 }
