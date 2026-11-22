@@ -55,6 +55,23 @@ body {
   justify-self: center;
 }
 
+:root {
+  --arrow-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%233a2a20' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --arrow-chalk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f2efe6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Dropdowns: own the arrow so it gets breathing room from the edge */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: var(--arrow-ink);
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 0.75rem auto;
+  padding-right: 2.5rem !important;
+  text-overflow: ellipsis;
+}
+
 :focus-visible { outline: 3px solid var(--butter); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
