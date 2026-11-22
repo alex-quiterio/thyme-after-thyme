@@ -27,3 +27,6 @@
   border-style: solid;
   border-color: var(--wood-dark);
 }
+
+.nav__install { cursor: pointer; background: var(--sage); color: #fff; border-style: solid; border-color: var(--sage-dark); }
+.nav__install:hover { background: var(--sage-dark); }

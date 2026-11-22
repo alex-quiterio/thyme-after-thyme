@@ -2,6 +2,7 @@
 import { createRoot } from "react-dom/client";
 import type { ToolDefinition } from "@shared/tool";
 import { Shell } from "@shell/Shell";
+import { registerServiceWorker } from "@shell/registerServiceWorker";
 
 import { createTimerBoard } from "@timer/application/timerBoard";
 import { createWebAudioAlarm } from "@timer/infrastructure/webAudioAlarm";
@@ -23,3 +24,5 @@ const tools: ToolDefinition[] = [
 ];
 
 createRoot(document.getElementById("root")!).render(<Shell tools={tools} />);
+
+registerServiceWorker();

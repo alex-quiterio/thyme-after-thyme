@@ -1,0 +1,23 @@
+{
+  "id": "./",
+  "name": "Thyme After Thyme",
+  "short_name": "Thyme",
+  "description": "Kitchen tools: timers with proper kitchen sounds, a recipe scaler, and more to come.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbf3e4",
+  "theme_color": "#8a5a35",
+  "categories": ["food", "utilities", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Timers", "url": "./#/timer", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Recipe scaler", "url": "./#/scaler", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

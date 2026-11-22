@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <pattern id="g" width="64" height="64" patternUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="#fbf3e4"/>
+      <rect width="32" height="64" fill="#c8382b" fill-opacity=".22"/>
+      <rect width="64" height="32" fill="#c8382b" fill-opacity=".22"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#g)"/>
+  <!-- egg timer: everything sits inside the central 80% so it survives maskable cropping -->
+  <circle cx="256" cy="282" r="132" fill="#8a5a35"/>
+  <circle cx="256" cy="282" r="112" fill="#fffaf0"/>
+  <g stroke="#3a2a20" stroke-width="8" stroke-linecap="round">
+    <path d="M256 190v18M256 356v18M164 282h18M330 282h18"/>
+  </g>
+  <path d="M256 282V214" stroke="#c8382b" stroke-width="14" stroke-linecap="round"/>
+  <path d="M256 282l44 26" stroke="#3a2a20" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="256" cy="282" r="12" fill="#3a2a20"/>
+  <!-- bell cap and knob -->
+  <rect x="236" y="128" width="40" height="22" rx="8" fill="#5e3b20"/>
+  <circle cx="256" cy="122" r="14" fill="#c8382b"/>
+</svg>

@@ -1,8 +1,10 @@
 import type { ToolDefinition } from "@shared/tool";
 import { useHashRoute } from "./useHashRoute";
+import { useInstallPrompt } from "./useInstallPrompt";
 
 export function Shell({ tools }: { tools: ToolDefinition[] }) {
   const [route, go] = useHashRoute();
+  const install = useInstallPrompt();
   const active = tools.find((t) => t.id === route) ?? tools[0];
 
   return (
@@ -25,6 +27,11 @@ export function Shell({ tools }: { tools: ToolDefinition[] }) {
               <span aria-hidden="true">{t.emoji}</span> {t.title}
             </a>
           ))}
+          {install && (
+            <button className="nav__tab nav__install" onClick={install}>
+              <span aria-hidden="true">📲</span> Install app
+            </button>
+          )}
         </nav>
       </header>
 
