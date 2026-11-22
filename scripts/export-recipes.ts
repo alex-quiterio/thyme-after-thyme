@@ -11,15 +11,6 @@ import { languages, readLanguage } from "./recipe-files";
 
 const out = resolve(process.cwd(), process.argv[2] ?? "recipes-export.json");
 
-/**
- * Times the text only hints at in words ("a few minutes", "a minute or two"), which automatic
- * detection can't read. Keyed "recipe number:step number" and applied to the method of that recipe.
- */
-const WORDED_TIMERS: Record<string, JsonTimer[]> = {
-  "25:3": [{ minutes: 3, label: "~3 min" }], // "cook a few minutes until golden"
-  "25:4": [{ minutes: 1, label: "1–2 min" }], // "let it bubble for a minute or two"
-};
-
 const toJsonTimer = (d: Duration): JsonTimer => {
   const label = d.label;
   if (d.ms % 3_600_000 === 0) return { hours: d.ms / 3_600_000, label };
@@ -44,7 +35,7 @@ function toJsonRecipe(recipe: Recipe) {
       if (block.kind === "bullets") current.ingredients = block.items;
       else if (block.kind === "text") (current.text = [...((current.text as string[] | undefined) ?? []), block.text]);
       else {
-        const timers = WORDED_TIMERS[`${recipe.number}:${block.number}`]?.filter(() => section.method) ?? block.durations.map(toJsonTimer);
+        const timers = block.durations.map(toJsonTimer);
         const step: JsonStep = timers.length ? { text: block.text, timers } : block.text;
         current.steps = [...((current.steps as JsonStep[] | undefined) ?? []), step];
       }
@@ -68,8 +59,7 @@ for (const lang of await languages()) {
     const back = parseRecipeJson(`${String(json.number).padStart(2, "0")} — ${json.title}`, json);
     const kinds = (r: Recipe) => r.sections.flatMap((s) => s.blocks.map((b) => b.kind)).join();
     if (kinds(back) !== kinds(original)) throw new Error(`${lang}/${original.id}: structure changed in export`);
-    const extra = Object.keys(WORDED_TIMERS).filter((k) => k.startsWith(`${original.number}:`)).length;
-    if (back.timerCount !== original.timerCount + extra) throw new Error(`${lang}/${original.id}: timers differ (${back.timerCount} vs ${original.timerCount}+${extra})`);
+    if (back.timerCount !== original.timerCount) throw new Error(`${lang}/${original.id}: timers differ (${back.timerCount} vs ${original.timerCount})`);
     timers += back.timerCount;
   });
 
