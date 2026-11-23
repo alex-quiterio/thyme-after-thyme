@@ -1,0 +1,95 @@
+/* Halloween (and All Saints' Day): twilight purple, pumpkin orange, cobwebs, bats and a moon */
+:root[data-season="halloween"] {
+  --cream: #f3e6d3;
+  --paper: #fff8ee;
+  --tomato: #c2540a;
+  --tomato-dark: #8f3a06;
+  --butter: #f2a23a;
+  --sage: #6b3fa0;
+  --sage-dark: #4a2a78;
+  --wood: #3a2540;
+  --wood-dark: #1d1226;
+  --chalkboard: #1c1426;
+  --accent-rgb: 194, 84, 10;
+  --gingham-rgb: 80, 50, 110;
+  --plank-top: #4f3560;
+  --cover-top: #7b4db5;
+  --cover-edge: #3a2160;
+  --magnet-hi: #ffb347;
+}
+
+:root[data-season="halloween"] body {
+  background-color: #150c1f;
+  background-image:
+    radial-gradient(circle 170px at 88% 120px, rgba(255, 233, 170, 0.28), transparent),
+    radial-gradient(circle 34px at 88% 120px, #f7ecc6 0 33px, transparent 34px),
+    linear-gradient(0deg, rgba(122, 88, 176, 0.28), transparent 34%),
+    radial-gradient(1.2px 1.2px at 40px 60px, #fff 60%, transparent),
+    radial-gradient(1.4px 1.4px at 150px 130px, #e8dcff 60%, transparent);
+  background-size: auto, auto, auto, 190px 190px, 260px 260px;
+}
+
+:root[data-season="halloween"] .plank {
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg, var(--plank-top), #2b1a38 60%, var(--wood-dark));
+  border-bottom-color: #c2540a;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.3), 0 14px 30px rgba(194, 84, 10, 0.25);
+}
+:root[data-season="halloween"] .plank__title { animation: pumpkin-glow 3.2s ease-in-out infinite alternate; }
+@keyframes pumpkin-glow {
+  from { text-shadow: 0 2px 0 #1d1226, 0 0 12px rgba(255, 140, 40, 0.55); }
+  to { text-shadow: 0 2px 0 #1d1226, 0 0 26px rgba(255, 150, 50, 0.95); }
+}
+:root[data-season="halloween"] .nav__tab { border-color: rgba(242, 162, 58, 0.6); }
+:root[data-season="halloween"] .festive-banner { border-color: #f2a23a; }
+
+/* cobwebs in the corners */
+:root[data-season="halloween"] .plank::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: left top, right top;
+  background-size: 96px 96px, 96px 96px;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='white' stroke-opacity='.5' stroke-width='1' d='M0 0L100 0M0 0L90 45M0 0L45 90M0 0L0 100M0 0L100 20M0 0L20 100M30 0Q26 26 0 30M58 0Q50 50 0 58M86 0Q72 72 0 86'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='white' stroke-opacity='.5' stroke-width='1' d='M100 0L0 0M100 0L10 45M100 0L55 90M100 0L100 100M100 0L0 20M100 0L80 100M70 0Q74 26 100 30M42 0Q50 50 100 58M14 0Q28 72 100 86'/%3E%3C/svg%3E");
+}
+/* bats and a pumpkin, bobbing at the top */
+:root[data-season="halloween"] .plank::after {
+  content: "🦇 🎃 🦇";
+  position: absolute;
+  top: 0.55rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+  letter-spacing: 0.15rem;
+  pointer-events: none;
+  filter: drop-shadow(0 0 5px rgba(255, 190, 110, 0.85));
+  animation: bat-bob 2.6s ease-in-out infinite alternate;
+}
+@keyframes bat-bob { from { margin-top: 0; } to { margin-top: 0.35rem; } }
+
+/* things that sit straight on the dark sky */
+:root[data-season="halloween"] .remove-recipe { color: var(--butter); border-color: rgba(242, 162, 58, 0.7); }
+:root[data-season="halloween"] .remove-recipe:hover { background: rgba(242, 162, 58, 0.12); }
+:root[data-season="halloween"] .chalkboard { border-color: #5b3a73; outline-color: #2b1a38; }
+
+/* glowing embers */
+:root[data-season="halloween"] .festive-fx::before {
+  background-image:
+    radial-gradient(circle at 30px 40px, #ffb347 0 3px, transparent 4px),
+    radial-gradient(circle at 150px 120px, #ff7a1a 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 250px 60px, #c58bff 0 3px, transparent 4px),
+    radial-gradient(circle at 90px 250px, #ffb347 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 280px 280px, #ff7a1a 0 3px, transparent 4px);
+}
+:root[data-season="halloween"] .festive-fx::after {
+  background-image:
+    radial-gradient(circle at 20px 30px, #ffd59a 0 1.8px, transparent 2.8px),
+    radial-gradient(circle at 120px 90px, #ff9a3c 0 2.2px, transparent 3.2px),
+    radial-gradient(circle at 180px 170px, #b07bff 0 1.8px, transparent 2.8px),
+    radial-gradient(circle at 60px 160px, #ffd59a 0 2.2px, transparent 3.2px);
+}

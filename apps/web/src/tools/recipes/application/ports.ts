@@ -27,6 +27,12 @@ export type LibraryState = {
   hidden: string[];
 };
 
+/** Which ingredients and steps are ticked off, per recipe id: survives a sleeping phone or a reload. */
+export type ProgressStorage = {
+  load(): Record<string, string[]>;
+  save(progress: Record<string, string[]>): void;
+};
+
 export type LibraryStorage = {
   load(): LibraryState;
   save(state: LibraryState): void;

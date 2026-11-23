@@ -88,4 +88,20 @@ describe("timer board", () => {
     expect(board.getState().timers[0]?.status).toBe("finished");
     expect(saves).toHaveLength(1); // saved when it finished, not on every tick
   });
+
+  test("one more minute extends a running timer, and silences a ringing one", () => {
+    const { board, calls, advance } = setup();
+    const id = board.add("Eggs", 60_000);
+    board.start(id);
+    board.addTime(id, 60_000);
+    advance(90_000);
+    board.tick();
+    expect(board.getState().timers[0]?.status).toBe("running"); // 2 min total, 1.5 gone
+    advance(40_000);
+    board.tick();
+    expect(calls).toContain("ring:t1:ring");
+    board.addTime(id, 60_000);
+    expect(calls.at(-1)).toBe("silence:t1");
+    expect(board.getState().timers[0]?.status).toBe("running");
+  });
 });

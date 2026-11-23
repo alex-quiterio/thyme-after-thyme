@@ -19,9 +19,11 @@ import { ScalerTool } from "@scaler/ui/ScalerTool";
 import { createRecipeBook } from "@recipes/application/recipeBook";
 import { bundledRecipes } from "@recipes/infrastructure/bundledRecipes";
 import { createLocalStorageLibrary } from "@recipes/infrastructure/localStorageLibrary";
+import { createLocalStorageProgress } from "@recipes/infrastructure/localStorageProgress";
 import { RecipesTool } from "@recipes/ui/RecipesTool";
 
 import { createRecipeTimers } from "./integrations/recipeTimers";
+import { createTimerBadge } from "./integrations/timerBadge";
 
 const newId = () => crypto.randomUUID();
 
@@ -31,11 +33,12 @@ const recipeBook = createRecipeBook({
   collections: bundledRecipes,
   timers: createRecipeTimers(timerBoard),
   library: createLocalStorageLibrary(),
+  progress: createLocalStorageProgress(),
 });
 
 const tools: ToolDefinition[] = [
   { id: "recipes", title: { en: "Recipe book", pt: "Receitas", it: "Ricettario" }, emoji: "📖", render: () => <RecipesTool book={recipeBook} /> },
-  { id: "timer", title: { en: "Timers", pt: "Temporizadores", it: "Timer" }, emoji: "⏲️", render: () => <TimerTool board={timerBoard} /> },
+  { id: "timer", title: { en: "Timers", pt: "Temporizadores", it: "Timer" }, emoji: "⏲️", render: () => <TimerTool board={timerBoard} />, useBadge: createTimerBadge(timerBoard) },
   { id: "scaler", title: { en: "Recipe scaler", pt: "Proporções", it: "Proporzioni" }, emoji: "⚖️", render: () => <ScalerTool store={scalerStore} /> },
 ];
 

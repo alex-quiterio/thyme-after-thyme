@@ -1,0 +1,92 @@
+/* Everyday usability: skip link, filters, search clear, kitchen tools on recipe pages, footer */
+
+.skip-link {
+  position: fixed; z-index: 100; top: 0.5rem; left: 0.5rem;
+  padding: 0.6rem 1rem;
+  font: inherit; font-weight: 800;
+  color: var(--ink); background: var(--butter);
+  border: 2px solid var(--wood-dark); border-radius: 999px;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+.counter:focus { outline: none; }
+
+.topbar__start { display: flex; align-items: center; gap: 0.4rem; min-width: 0; }
+.topbar__install {
+  min-height: 44px;
+  padding: 0.25rem 0.8rem;
+  font: inherit; font-weight: 800; font-size: 0.9rem;
+  color: #fff; background: var(--sage);
+  border: 2px solid var(--sage-dark); border-radius: 999px;
+  cursor: pointer;
+}
+
+.foot { text-align: center; padding: 0 1rem 1rem; }
+.foot a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--ink); text-decoration: none;
+  background: rgba(255, 250, 240, 0.85);
+  border-radius: 999px;
+}
+.foot a:hover { background: #fff; text-decoration: underline; }
+
+/* search */
+.finder { position: relative; }
+.finder input { padding-right: 3.2rem; }
+.finder input::-webkit-search-cancel-button { display: none; }
+.finder__clear {
+  position: absolute; top: 50%; right: 0.35rem; transform: translateY(-50%);
+  width: 44px; height: 44px;
+  font: inherit; font-size: 1.1rem; color: var(--ink); opacity: 0.6;
+  background: transparent; border: 0; border-radius: 50%; cursor: pointer;
+}
+.finder__clear:hover { opacity: 1; }
+
+/* filter chips */
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.filter-chip {
+  min-height: 44px;
+  padding: 0 1rem;
+  font: inherit; font-weight: 800;
+  color: var(--ink);
+  background: rgba(255, 250, 240, 0.92);
+  border: 2px solid transparent; border-radius: 999px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.filter-chip small { font-size: 0.8rem; opacity: 0.7; }
+.filter-chip[aria-pressed="true"] { background: var(--butter); border-color: var(--wood-dark); }
+
+/* recipe page: tools for a cook with messy hands */
+.page__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.8rem; }
+.chip[aria-pressed="false"] { opacity: 0.6; background: rgba(0, 0, 0, 0.12); box-shadow: none; }
+.sizer { display: inline-flex; background: rgba(0, 0, 0, 0.1); border-radius: 999px; padding: 3px; }
+.sizer button {
+  min-width: 44px; min-height: 44px; padding: 0 0.7rem;
+  font: inherit; font-weight: 800; color: var(--ink);
+  background: transparent; border: 0; border-radius: 999px; cursor: pointer;
+}
+.sizer button[aria-pressed="true"] { background: var(--butter); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+.sizer button:nth-child(2) { font-size: 1.1rem; }
+.sizer button:nth-child(3) { font-size: 1.25rem; }
+
+.jump { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.6rem; }
+.link-btn {
+  min-height: 44px; padding: 0 0.4rem;
+  font: inherit; font-size: 0.9rem; font-weight: 700; color: var(--ink);
+  text-decoration: underline; background: transparent; border: 0; cursor: pointer;
+}
+.part { scroll-margin-top: 1rem; }
+
+.page[data-size="l"] { font-size: 1.2rem; }
+.page[data-size="xl"] { font-size: 1.4rem; }
+.step__text { cursor: pointer; }
+
+/* +1 min sits between start/pause and reset */
+.card__actions { gap: 0.5rem; }
+.card__actions .btn { padding-left: 0.6rem; padding-right: 0.6rem; }
+.btn--plus { flex: 0 0 auto; }

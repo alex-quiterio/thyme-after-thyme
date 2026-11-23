@@ -1,0 +1,60 @@
+/* Autumn equinox: the harvest. Wine and russet, amber, grapes (vindima / vendemmia), falling leaves */
+:root[data-season="autumn"] {
+  --cream: #f8efe0;
+  --paper: #fffaf0;
+  --tomato: #8c2f4a;
+  --tomato-dark: #5f1c30;
+  --butter: #e8a838;
+  --sage: #6b7a2a;
+  --sage-dark: #4b5719;
+  --wood: #7a4a2b;
+  --wood-dark: #4d2c18;
+  --chalkboard: #3a2a22;
+  --accent-rgb: 140, 47, 74;
+  --gingham-rgb: 190, 110, 40;
+  --plank-top: #96603a;
+  --cover-top: #b8742e;
+  --cover-edge: #6b3f16;
+  --cover-bottom: #8a4f1c;
+  --magnet-hi: #f0b45a;
+}
+:root[data-season="autumn"] .plank__title { text-shadow: 0 2px 0 var(--wood-dark), 0 0 14px rgba(232, 168, 56, 0.5); }
+:root[data-season="autumn"] .festive-banner { border-color: #e8a838; }
+
+/* clusters of grapes hanging from the shelf, each with a leaf */
+:root[data-season="autumn"] .plank::after {
+  background-image:
+    radial-gradient(ellipse 5px 3px at 36px 4px, #5a8a2a 0 95%, transparent 100%),
+    radial-gradient(circle 4.2px at 22px 9px, #8a3fb5 0 78%, #5b2587 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 30px 9px, #8a3fb5 0 78%, #5b2587 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 38px 9px, #8a3fb5 0 78%, #5b2587 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 26px 16px, #9a4fc5 0 78%, #5b2587 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 34px 16px, #9a4fc5 0 78%, #5b2587 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 30px 23px, #8a3fb5 0 78%, #5b2587 84%, transparent 100%),
+    radial-gradient(ellipse 5px 3px at 100px 4px, #6f9a32 0 95%, transparent 100%),
+    radial-gradient(circle 4.2px at 86px 9px, #7a2f4f 0 78%, #4d1a33 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 94px 9px, #7a2f4f 0 78%, #4d1a33 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 102px 9px, #7a2f4f 0 78%, #4d1a33 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 90px 16px, #8c3b5e 0 78%, #4d1a33 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 98px 16px, #8c3b5e 0 78%, #4d1a33 84%, transparent 100%),
+    radial-gradient(circle 4.2px at 94px 23px, #7a2f4f 0 78%, #4d1a33 84%, transparent 100%);
+  background-size: 128px 100%;
+  filter: drop-shadow(0 2px 2px rgba(40, 20, 10, 0.35));
+}
+
+/* falling leaves */
+:root[data-season="autumn"] .festive-fx::before {
+  background-image:
+    radial-gradient(ellipse 7px 4px at 30px 40px, #e07a1f 0 95%, transparent 100%),
+    radial-gradient(ellipse 6px 3.5px at 150px 120px, #b5362b 0 95%, transparent 100%),
+    radial-gradient(ellipse 7px 4px at 250px 60px, #e8a838 0 95%, transparent 100%),
+    radial-gradient(ellipse 6px 3.5px at 90px 250px, #c2541a 0 95%, transparent 100%),
+    radial-gradient(ellipse 7px 4px at 280px 280px, #e07a1f 0 95%, transparent 100%);
+}
+:root[data-season="autumn"] .festive-fx::after {
+  background-image:
+    radial-gradient(ellipse 5px 3px at 20px 30px, #e8a838 0 95%, transparent 100%),
+    radial-gradient(ellipse 5px 3px at 120px 90px, #b5362b 0 95%, transparent 100%),
+    radial-gradient(ellipse 5px 3px at 180px 170px, #c2541a 0 95%, transparent 100%),
+    radial-gradient(ellipse 5px 3px at 60px 160px, #8c6a1f 0 95%, transparent 100%);
+}

@@ -35,12 +35,7 @@ button, a, select, input { touch-action: manipulation; }
 }
 
 @media (max-width: 40rem) {
-  .plank { padding: 1rem 0.75rem 0.9rem; border-bottom-width: 5px; }
-  .plank__tagline { font-size: 1.2rem; line-height: 1.15; }
-  .nav { gap: 0.5rem; margin-top: 0.7rem; }
-  .nav__tab { font-size: 1.3rem; padding: 0.1rem 0.85rem; }
-
-  .counter { padding: 1.25rem 0.75rem 3rem; gap: 1.5rem; }
+  .counter { padding: 1.1rem 0.75rem 1.5rem; gap: 1.5rem; }
   .shelf { gap: 1.5rem 1rem; }
 
   .chalkboard { border-width: 7px; padding: 0.9rem 0.8rem 1.2rem; }
@@ -70,4 +65,13 @@ button, a, select, input { touch-action: manipulation; }
 /* Installed app window: keep content clear of notches and status bars */
 @media (display-mode: standalone) {
   .plank { padding-top: calc(1rem + env(safe-area-inset-top)); }
+}
+
+/* Docked layout (see nav.css): a compact header, and room for the fixed bottom tab bar */
+@media (max-width: 40rem), (pointer: coarse) and (max-width: 70rem), (pointer: coarse) and (max-height: 32rem) {
+  .plank { padding: 0.6rem 0.75rem 0.7rem; border-bottom-width: 5px; }
+  .plank__title { font-size: 1.9rem; }
+  .plank__tagline { font-size: 1.1rem; line-height: 1.1; margin-top: 0.1rem; }
+  body { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
+  .toast { bottom: calc(5.4rem + env(safe-area-inset-bottom)); }
 }

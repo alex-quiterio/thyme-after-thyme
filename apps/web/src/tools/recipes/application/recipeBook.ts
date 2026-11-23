@@ -2,7 +2,7 @@ import { matchesQuery, type Recipe } from "@recipes/domain/recipe";
 import { parseDocument } from "@recipes/domain/recipeDocument";
 import { readImportFile } from "@recipes/domain/recipeImport";
 import { locales, type Locale } from "@shared/locales";
-import type { LibraryState, LibraryStorage, RawRecipe, RecipeCollection, StepTimers } from "./ports";
+import type { LibraryState, LibraryStorage, ProgressStorage, RawRecipe, RecipeCollection, StepTimers } from "./ports";
 
 export type RecipeBook = ReturnType<typeof createRecipeBook>;
 export type RecipeShelf = ReturnType<typeof makeShelf>;
@@ -45,22 +45,43 @@ export function createRecipeBook({
   collections,
   timers,
   library,
+  progress,
 }: {
   collections: Record<Locale, RecipeCollection>;
   timers: StepTimers;
   library: LibraryStorage;
+  progress: ProgressStorage;
 }) {
   let state = library.load();
   let version = 0;
   const listeners = new Set<() => void>();
   const shelves = new Map<Locale, RecipeShelf>();
 
+  let ticks = progress.load();
+  const tickSets = new Map<string, ReadonlySet<string>>();
+  const notify = () => {
+    version++;
+    listeners.forEach((l) => l());
+  };
+  const ticked = (id: string): ReadonlySet<string> => {
+    let set = tickSets.get(id);
+    if (!set) tickSets.set(id, (set = new Set(ticks[id] ?? [])));
+    return set;
+  };
+  const setTicks = (id: string, next: Set<string>) => {
+    ticks = { ...ticks };
+    if (next.size > 0) ticks[id] = [...next];
+    else delete ticks[id];
+    tickSets.set(id, next);
+    progress.save(ticks);
+    notify();
+  };
+
   const commit = (next: LibraryState) => {
     state = next;
     library.save(state);
-    version++;
     shelves.clear();
-    listeners.forEach((l) => l());
+    notify();
   };
 
   const safeParse = (doc: RawRecipe): Recipe | null => {
@@ -149,7 +170,22 @@ export function createRecipeBook({
     },
 
     /** Removes a recipe from the book, in every language. Defaults can be restored later. */
+    /** Ticked ingredient and step keys for a recipe. */
+    ticked,
+    toggleTick(id: string, key: string) {
+      const next = new Set(ticked(id));
+      if (!next.delete(key)) next.add(key);
+      setTicks(id, next);
+    },
+    clearTicks: (id: string) => setTicks(id, new Set()),
+
     remove(id: string) {
+      if (ticks[id]) {
+        ticks = { ...ticks };
+        delete ticks[id];
+        tickSets.delete(id);
+        progress.save(ticks);
+      }
       const imported = Object.fromEntries(
         locales.map((l) => [l, (state.imported[l] ?? []).filter((d) => safeParse(d)?.id !== id)]),
       ) as LibraryState["imported"];

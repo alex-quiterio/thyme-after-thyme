@@ -1,4 +1,5 @@
-/* Christmas: cranberry, pine and gold, with string lights and snow */
+/* Christmas: cranberry, pine and gold, with string lights and snow.
+   Portuguese: cobalt azulejo blue and warm golden sparks. Italian: red gingham and the tricolore. */
 :root[data-season="xmas"] {
   --cream: #f8f1e2;
   --tomato: #b3202f;
@@ -16,16 +17,20 @@
   --cover-edge: #1f4a33;
   --magnet-hi: #f0c14e;
 }
+/* Portugal: Natal in azulejo blue and white */
+:root[lang="pt"][data-season="xmas"] {
+  --sage: #2d5fae;
+  --sage-dark: #1c4488;
+  --chalkboard: #10264f;
+  --gingham-rgb: 29, 78, 158;
+  --cover-top: #3d73c4;
+  --cover-edge: #173b78;
+}
+/* Italy: the classic red-checked tablecloth */
+:root[lang="it"][data-season="xmas"] { --gingham-rgb: 200, 30, 45; }
 
-/* string lights hanging from the shelf */
-:root[data-season="xmas"] .plank { position: relative; margin-bottom: 1.6rem; }
+/* string lights */
 :root[data-season="xmas"] .plank::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  bottom: -1.7rem;
-  height: 1.7rem;
-  pointer-events: none;
   background-image:
     radial-gradient(circle at 16px 20px, #ff5a5a 0 5px, transparent 6px),
     radial-gradient(circle at 48px 24px, #ffd24a 0 5px, transparent 6px),
@@ -43,7 +48,7 @@
 :root[data-season="xmas"] .plank__title { text-shadow: 0 2px 0 var(--wood-dark), 0 0 16px rgba(242, 193, 78, 0.5); }
 :root[data-season="xmas"] .festive-banner { border-color: #ffd24a; }
 
-/* snow */
+/* snow (Italy, and everywhere else) */
 :root[data-season="xmas"] .festive-fx::before {
   background-image:
     radial-gradient(circle at 30px 40px, rgba(255, 255, 255, 0.95) 0 2.5px, transparent 3.5px),
@@ -58,4 +63,20 @@
     radial-gradient(circle at 120px 90px, rgba(255, 255, 255, 0.75) 0 2px, transparent 3px),
     radial-gradient(circle at 180px 170px, rgba(255, 255, 255, 0.65) 0 1.5px, transparent 2.5px),
     radial-gradient(circle at 60px 160px, rgba(255, 255, 255, 0.7) 0 2px, transparent 3px);
+}
+/* Portugal: it rarely snows, so golden sparks drift down instead */
+:root[lang="pt"][data-season="xmas"] .festive-fx::before {
+  background-image:
+    radial-gradient(circle at 30px 40px, rgba(255, 214, 90, 0.95) 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 150px 120px, rgba(255, 255, 255, 0.85) 0 2px, transparent 3px),
+    radial-gradient(circle at 250px 60px, rgba(255, 200, 70, 0.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 90px 250px, rgba(255, 214, 90, 0.85) 0 2px, transparent 3px),
+    radial-gradient(circle at 280px 280px, rgba(255, 255, 255, 0.9) 0 2.5px, transparent 3.5px);
+}
+:root[lang="pt"][data-season="xmas"] .festive-fx::after {
+  background-image:
+    radial-gradient(circle at 20px 30px, rgba(255, 214, 90, 0.75) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 120px 90px, rgba(255, 255, 255, 0.7) 0 2px, transparent 3px),
+    radial-gradient(circle at 180px 170px, rgba(255, 200, 70, 0.7) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 60px 160px, rgba(255, 214, 90, 0.7) 0 2px, transparent 3px);
 }

@@ -9,11 +9,12 @@ type Props = {
   onStart(): void;
   onPause(): void;
   onReset(): void;
+  onAddMinute(): void;
   onRemove(): void;
   onSound(sound: AlarmSound): void;
 };
 
-export function TimerCard({ timer, now, tilt, onStart, onPause, onReset, onRemove, onSound }: Props) {
+export function TimerCard({ timer, now, tilt, onStart, onPause, onReset, onAddMinute, onRemove, onSound }: Props) {
   const m = useMessages(messages);
   const left = remainingMs(timer, now);
   const done = timer.status === "finished";
@@ -50,6 +51,9 @@ export function TimerCard({ timer, now, tilt, onStart, onPause, onReset, onRemov
             {done ? m.again : timer.status === "paused" ? m.resume : m.start}
           </button>
         )}
+        <button className="btn btn--butter btn--plus" onClick={onAddMinute} aria-label={m.plusMinuteLabel(timer.label)}>
+          {m.plusMinute}
+        </button>
         <button className="btn btn--sage" onClick={onReset}>{done ? m.silence : m.reset}</button>
       </div>
 

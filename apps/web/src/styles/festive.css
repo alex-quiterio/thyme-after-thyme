@@ -51,3 +51,20 @@
 @media (max-width: 40rem) {
   .festive-banner { font-size: 1.3rem; }
 }
+
+/* A row of decorations hanging from the shelf (lights, eggs, flowers, grapes). Each theme paints it. */
+:root:is([data-season="xmas"], [data-season="easter"], [data-season="spring"], [data-season="autumn"]) .plank {
+  position: relative;
+  margin-bottom: calc(1.9rem + var(--trim, 0px));
+}
+:root:is([data-season="xmas"], [data-season="easter"], [data-season="spring"], [data-season="autumn"]) .plank::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(-1.9rem - var(--trim, 0px));
+  height: 1.9rem;
+  pointer-events: none;
+  background-repeat: repeat-x;
+}
+:root[data-season="nye"] .plank,
+:root[data-season="halloween"] .plank { position: relative; margin-bottom: var(--trim, 0px); }

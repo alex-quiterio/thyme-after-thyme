@@ -1,0 +1,57 @@
+/* Easter: spring pastels, painted eggs, falling sugared almonds */
+:root[data-season="easter"] {
+  --cream: #fdf6ea;
+  --paper: #fffdf6;
+  --tomato: #c2426d;
+  --tomato-dark: #8f2c4d;
+  --butter: #f7d56a;
+  --sage: #3f8f70;
+  --sage-dark: #2b6c53;
+  --wood: #7f5d3b;
+  --wood-dark: #54391f;
+  --chalkboard: #3b4b63;
+  --accent-rgb: 194, 66, 109;
+  --gingham-rgb: 146, 120, 200;
+  --plank-top: #98744d;
+  --cover-top: #7bbf9f;
+  --cover-edge: #3f8f70;
+  --magnet-hi: #ffd1e0;
+}
+:root[data-season="easter"] .plank__title { text-shadow: 0 2px 0 var(--wood-dark), 0 0 14px rgba(255, 220, 240, 0.5); }
+:root[data-season="easter"] .festive-banner { border-color: #ffd1e0; }
+
+/* painted eggs hanging from the shelf: body, a pale band, a highlight */
+:root[data-season="easter"] .plank::after {
+  background-image:
+    radial-gradient(circle at 17px 11px, rgba(255, 255, 255, 0.85) 0 1.8px, transparent 2.6px),
+    radial-gradient(ellipse 10px 13px at 20px 16px, transparent 0 52%, rgba(255, 255, 255, 0.65) 53% 66%, transparent 67%),
+    radial-gradient(ellipse 10px 13px at 20px 16px, #f58fb0 0 97%, transparent 100%),
+    radial-gradient(circle at 49px 11px, rgba(255, 255, 255, 0.85) 0 1.8px, transparent 2.6px),
+    radial-gradient(ellipse 10px 13px at 52px 16px, transparent 0 52%, rgba(255, 255, 255, 0.65) 53% 66%, transparent 67%),
+    radial-gradient(ellipse 10px 13px at 52px 16px, #f9d65c 0 97%, transparent 100%),
+    radial-gradient(circle at 81px 11px, rgba(255, 255, 255, 0.85) 0 1.8px, transparent 2.6px),
+    radial-gradient(ellipse 10px 13px at 84px 16px, transparent 0 52%, rgba(255, 255, 255, 0.65) 53% 66%, transparent 67%),
+    radial-gradient(ellipse 10px 13px at 84px 16px, #7fd1ae 0 97%, transparent 100%),
+    radial-gradient(circle at 113px 11px, rgba(255, 255, 255, 0.85) 0 1.8px, transparent 2.6px),
+    radial-gradient(ellipse 10px 13px at 116px 16px, transparent 0 52%, rgba(255, 255, 255, 0.65) 53% 66%, transparent 67%),
+    radial-gradient(ellipse 10px 13px at 116px 16px, #b79be8 0 97%, transparent 100%);
+  background-size: 128px 100%;
+  filter: drop-shadow(0 2px 2px rgba(60, 30, 10, 0.3));
+}
+
+/* sugared almonds (confeitos / confetti) drifting down */
+:root[data-season="easter"] .festive-fx::before {
+  background-image:
+    radial-gradient(ellipse 3.5px 5px at 30px 40px, #f58fb0 0 95%, transparent 100%),
+    radial-gradient(ellipse 3px 4.5px at 150px 120px, #f9d65c 0 95%, transparent 100%),
+    radial-gradient(ellipse 3.5px 5px at 250px 60px, #7fd1ae 0 95%, transparent 100%),
+    radial-gradient(ellipse 3px 4.5px at 90px 250px, #b79be8 0 95%, transparent 100%),
+    radial-gradient(ellipse 3.5px 5px at 280px 280px, #ffffff 0 95%, transparent 100%);
+}
+:root[data-season="easter"] .festive-fx::after {
+  background-image:
+    radial-gradient(ellipse 2.5px 3.8px at 20px 30px, #f9d65c 0 95%, transparent 100%),
+    radial-gradient(ellipse 2.5px 3.8px at 120px 90px, #f58fb0 0 95%, transparent 100%),
+    radial-gradient(ellipse 2.5px 3.8px at 180px 170px, #b79be8 0 95%, transparent 100%),
+    radial-gradient(ellipse 2.5px 3.8px at 60px 160px, #7fd1ae 0 95%, transparent 100%);
+}

@@ -17,6 +17,7 @@
   --plank-top: #9a6a40;
   --cover-top: #6f8a62;
   --cover-edge: #4a5f40;
+  --cover-bottom: var(--sage-dark);
   --magnet-hi: #e3685a;
   --font-display: "Nunito", system-ui, sans-serif;
   --font-hand: "Caveat", "Comic Sans MS", cursive;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { seasonFor, themeOverride, type Season } from "./season";
+import { occasionFor, previewOccasion, seasonOf, themeOverride, type Occasion, type Season } from "./season";
 
 const KEY = "thyme-after-thyme.festive";
 
@@ -26,8 +26,11 @@ export function useSeason() {
   }, []);
 
   const override = themeOverride(window.location.search);
-  const today = seasonFor(now);
-  const season: Season | null = override === "none" ? null : override ?? (enabled ? today : null);
+  const todayOccasion = occasionFor(now);
+  // a preview link shows a typical day of that season; otherwise it's whatever today really is
+  const occasion: Occasion | null =
+    override === "none" ? null : override ? previewOccasion(override) : enabled ? todayOccasion : null;
+  const season: Season | null = occasion ? seasonOf(occasion) : null;
 
   useEffect(() => {
     if (season) document.documentElement.dataset.season = season;
@@ -45,10 +48,13 @@ export function useSeason() {
 
   return {
     season,
+    occasion,
     now,
     enabled,
     setEnabled,
+    /** The season to show on the toggle even while it's switched off. */
+    toggleSeason: season ?? (todayOccasion ? seasonOf(todayOccasion) : null),
     /** True when the toggle is worth showing: it's a festive day, or a preview link is in use. */
-    festiveDay: today !== null || override !== null,
+    festiveDay: todayOccasion !== null || override !== null,
   };
 }

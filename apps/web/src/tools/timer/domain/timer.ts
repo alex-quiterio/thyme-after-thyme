@@ -51,6 +51,17 @@ export function reset(timer: Timer): Timer {
   return { ...timer, status: "idle", remainingMs: timer.durationMs, endsAt: null };
 }
 
+/**
+ * "One more minute": extends a timer. A finished timer starts again for just that long, so
+ * the alarm stops and you get exactly the extra time.
+ */
+export function addTime(timer: Timer, ms: number, now: number): Timer {
+  if (!(ms > 0)) return timer;
+  if (timer.status === "finished") return { ...timer, status: "running", durationMs: ms, remainingMs: ms, endsAt: now + ms };
+  if (timer.status === "running") return { ...timer, durationMs: timer.durationMs + ms, endsAt: (timer.endsAt ?? now) + ms };
+  return { ...timer, durationMs: timer.durationMs + ms, remainingMs: timer.remainingMs + ms };
+}
+
 /** Moves a running timer to "finished" once its time is up. */
 export function tick(timer: Timer, now: number): Timer {
   if (timer.status === "running" && remainingMs(timer, now) === 0) {

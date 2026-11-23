@@ -1,0 +1,77 @@
+/* Local touches. The themes react to the language you're reading in (<html lang>):
+   Portuguese gets an azulejo tile border, Italian a tricolore ribbon. */
+
+/* ---- Portugal: azulejo (blue and white glazed tiles) */
+:root[lang="pt"]:is([data-season="xmas"], [data-season="nye"]),
+:root[lang="pt"]:not([data-season]) {
+  --trim: 26px;
+  --tile-blue: #2a5db0;
+}
+:root[lang="pt"]:is([data-season="xmas"], [data-season="nye"]) .plank::before,
+:root[lang="pt"]:not([data-season]) .plank::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(-1 * var(--trim));
+  height: var(--trim);
+  box-sizing: border-box;
+  pointer-events: none;
+  background-color: #fbfbf4;
+  background-image:
+    radial-gradient(circle at 0 0, var(--tile-blue) 0 5px, transparent 5.5px),
+    radial-gradient(circle at 100% 0, var(--tile-blue) 0 5px, transparent 5.5px),
+    radial-gradient(circle at 0 100%, var(--tile-blue) 0 5px, transparent 5.5px),
+    radial-gradient(circle at 100% 100%, var(--tile-blue) 0 5px, transparent 5.5px),
+    radial-gradient(circle at 50% 50%, transparent 0 3px, var(--tile-blue) 3.5px 5.5px, transparent 6px),
+    radial-gradient(circle at 50% 50%, var(--tile-blue) 0 1.6px, transparent 2.2px);
+  background-size: 26px 26px;
+  border-top: 3px solid var(--tile-blue);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* ---- Italy: il tricolore */
+:root[lang="it"]:is([data-season="xmas"], [data-season="nye"]),
+:root[lang="it"]:not([data-season]) { --trim: 10px; }
+:root[lang="it"]:is([data-season="xmas"], [data-season="nye"]) .plank::before,
+:root[lang="it"]:not([data-season]) .plank::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(-1 * var(--trim));
+  height: var(--trim);
+  pointer-events: none;
+  background: linear-gradient(90deg, #1f8a46 0 33.34%, #fbfbf4 33.34% 66.67%, #d0202e 66.67%);
+  background-size: 96px 100%;
+  box-shadow: 0 5px 9px rgba(0, 0, 0, 0.22);
+}
+
+/* ---- Everyday look (no festival): the same inspiration, calmer */
+:root:is([lang="pt"], [lang="it"]):not([data-season]) .plank {
+  position: relative;
+  margin-bottom: var(--trim);
+}
+
+/* Portugal: a kitchen of azulejos, terracotta and cobalt */
+:root[lang="pt"]:not([data-season]) {
+  --sage: #2d5fae;
+  --sage-dark: #1c4488;
+  --chalkboard: #1f3350;
+  --gingham-rgb: 29, 78, 158;
+  --cover-top: #3d73c4;
+  --cover-edge: #173b78;
+  --tomato: #c4472b;
+  --tomato-dark: #963317;
+  --accent-rgb: 196, 71, 43;
+}
+
+/* Italy: red-checked tablecloth, basil and olive */
+:root[lang="it"]:not([data-season]) {
+  --sage: #4f7a3a;
+  --sage-dark: #35571f;
+  --tomato: #c8202f;
+  --tomato-dark: #961520;
+  --accent-rgb: 200, 32, 47;
+  --gingham-rgb: 200, 32, 47;
+  --cover-top: #6a9a52;
+  --cover-edge: #35571f;
+}

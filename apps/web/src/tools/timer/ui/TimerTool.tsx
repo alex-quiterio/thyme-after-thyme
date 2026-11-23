@@ -31,6 +31,7 @@ export function TimerTool({ board }: { board: TimerBoard }) {
               onStart={() => board.start(t.id)}
               onPause={() => board.pause(t.id)}
               onReset={() => board.reset(t.id)}
+              onAddMinute={() => board.addTime(t.id, 60_000)}
               onRemove={() => board.remove(t.id)}
               onSound={(s) => board.setSound(t.id, s)}
             />

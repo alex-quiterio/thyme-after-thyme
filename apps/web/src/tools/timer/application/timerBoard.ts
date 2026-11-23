@@ -1,4 +1,5 @@
 import {
+  addTime as addTimeTo,
   createTimer,
   pause as pauseTimer,
   reset as resetTimer,
@@ -48,6 +49,11 @@ export function createTimerBoard({ clock, alarm, newId, storage }: Ports) {
     alarm.silence(id);
     update(id, (t) => startTimer(t, clock.now()));
   };
+  const addTime = (id: string, ms: number) => {
+    alarm.unlock();
+    alarm.silence(id); // "one more minute" also stops the ringing
+    update(id, (t) => addTimeTo(t, ms, clock.now()));
+  };
   const pause = (id: string) => update(id, (t) => pauseTimer(t, clock.now()));
   const reset = (id: string) => {
     alarm.silence(id);
@@ -80,5 +86,5 @@ export function createTimerBoard({ clock, alarm, newId, storage }: Ports) {
     listeners.forEach((l) => l());
   };
 
-  return { getState, subscribe, add, start, pause, reset, remove, setSound, tick };
+  return { getState, subscribe, add, start, pause, addTime, reset, remove, setSound, tick };
 }

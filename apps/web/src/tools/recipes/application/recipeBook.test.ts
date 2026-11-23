@@ -22,10 +22,16 @@ const it = {
   ],
 };
 
-function setup(saved: LibraryState = emptyLibrary()) {
+function setup(saved: LibraryState = emptyLibrary(), savedProgress: Record<string, string[]> = {}) {
   const saves: LibraryState[] = [];
-  const book = createRecipeBook({ timers, collections: { pt, it, en: pt }, library: { load: () => saved, save: (s) => void saves.push(JSON.parse(JSON.stringify(s))) } });
-  return { book, saves };
+  const progressSaves: Record<string, string[]>[] = [];
+  const book = createRecipeBook({
+    timers,
+    collections: { pt, it, en: pt },
+    library: { load: () => saved, save: (s) => void saves.push(JSON.parse(JSON.stringify(s))) },
+    progress: { load: () => savedProgress, save: (p) => void progressSaves.push(JSON.parse(JSON.stringify(p))) },
+  });
+  return { book, saves, progressSaves };
 }
 
 describe("default recipes", () => {
@@ -136,5 +142,41 @@ describe("removing and restoring", () => {
   test("damaged saved recipes are skipped, not fatal", () => {
     const saved = { ...emptyLibrary(), imported: { ...emptyLibrary().imported, pt: [{ name: "bad", json: { nope: true } }] } };
     expect(setup(saved).book.in("pt").recipes).toHaveLength(3);
+  });
+});
+
+describe("cooking progress", () => {
+  test("ticks are saved per recipe and come back", () => {
+    const { book, progressSaves } = setup();
+    book.toggleTick("02", "1-0");
+    book.toggleTick("02", "1-3");
+    book.toggleTick("01", "0-1");
+    expect([...book.ticked("02")]).toEqual(["1-0", "1-3"]);
+    expect(progressSaves.at(-1)).toEqual({ "02": ["1-0", "1-3"], "01": ["0-1"] });
+    book.toggleTick("02", "1-0"); // tapping again un-ticks
+    expect([...book.ticked("02")]).toEqual(["1-3"]);
+    expect([...setup(undefined, { "02": ["1-3"] }).book.ticked("02")]).toEqual(["1-3"]);
+  });
+
+  test("clearing one recipe leaves the others; changes notify", () => {
+    const { book, progressSaves } = setup(undefined, { "02": ["a"], "01": ["b"] });
+    let notified = 0;
+    book.subscribe(() => notified++);
+    book.clearTicks("02");
+    expect(book.ticked("02").size).toBe(0);
+    expect([...book.ticked("01")]).toEqual(["b"]);
+    expect(progressSaves.at(-1)).toEqual({ "01": ["b"] });
+    expect(notified).toBe(1);
+  });
+
+  test("the same set comes back until something changes (needed by React)", () => {
+    const { book } = setup();
+    expect(book.ticked("02")).toBe(book.ticked("02"));
+  });
+
+  test("removing a recipe forgets its progress", () => {
+    const { book } = setup(undefined, { "02": ["a"] });
+    book.remove("02");
+    expect(book.ticked("02").size).toBe(0);
   });
 });
