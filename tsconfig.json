@@ -16,25 +16,24 @@
     "types": [
       "bun"
     ],
-    "baseUrl": ".",
     "paths": {
       "@kitchen/sounds": [
-        "packages/sounds/src/index.ts"
+        "./packages/sounds/src/index.ts"
       ],
       "@shared/*": [
-        "apps/web/src/shared/*"
+        "./apps/web/src/shared/*"
       ],
       "@shell/*": [
-        "apps/web/src/shell/*"
+        "./apps/web/src/shell/*"
       ],
       "@timer/*": [
-        "apps/web/src/tools/timer/*"
+        "./apps/web/src/tools/timer/*"
       ],
       "@scaler/*": [
-        "apps/web/src/tools/scaler/*"
+        "./apps/web/src/tools/scaler/*"
       ],
       "@recipes/*": [
-        "apps/web/src/tools/recipes/*"
+        "./apps/web/src/tools/recipes/*"
       ]
     },
     "resolveJsonModule": true
