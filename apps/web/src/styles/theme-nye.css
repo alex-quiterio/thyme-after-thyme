@@ -1,0 +1,60 @@
+/* New Year's Eve: midnight navy, champagne gold, confetti */
+:root[data-season="nye"] {
+  --cream: #f6f1e3;
+  --paper: #fffcf3;
+  --tomato: #25306b;
+  --tomato-dark: #161d45;
+  --butter: #e9c46a;
+  --sage: #55639a;
+  --sage-dark: #3a4677;
+  --wood: #232a52;
+  --wood-dark: #12162f;
+  --chalkboard: #0f1634;
+  --accent-rgb: 37, 48, 107;
+  --gingham-rgb: 37, 48, 107;
+  --plank-top: #343e7a;
+  --cover-top: #6a79b4;
+  --cover-edge: #2a3466;
+  --magnet-hi: #f1d98a;
+}
+
+:root[data-season="nye"] body {
+  background-color: #0d1230;
+  background-image:
+    radial-gradient(circle 360px at 12% 6%, rgba(233, 196, 106, 0.14), transparent),
+    radial-gradient(circle 520px at 92% 55%, rgba(106, 121, 180, 0.3), transparent),
+    radial-gradient(1.2px 1.2px at 30px 40px, #fff 60%, transparent),
+    radial-gradient(1.6px 1.6px at 130px 90px, #f3e3b0 60%, transparent),
+    radial-gradient(1.1px 1.1px at 80px 150px, #fff 60%, transparent),
+    radial-gradient(1.4px 1.4px at 190px 20px, #cfd8ff 60%, transparent);
+  background-size: auto, auto, 180px 180px, 260px 260px, 220px 220px, 300px 300px;
+}
+
+:root[data-season="nye"] .plank {
+  border-bottom-color: #c9a24a;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.25), 0 14px 30px rgba(233, 196, 106, 0.25);
+}
+:root[data-season="nye"] .plank__title { text-shadow: 0 2px 0 #0b0f26, 0 0 22px rgba(233, 196, 106, 0.65); }
+:root[data-season="nye"] .nav__tab { border-color: rgba(233, 196, 106, 0.55); }
+
+/* things that sit straight on the dark sky */
+:root[data-season="nye"] .remove-recipe { color: var(--butter); border-color: rgba(233, 196, 106, 0.7); }
+:root[data-season="nye"] .remove-recipe:hover { background: rgba(233, 196, 106, 0.12); }
+:root[data-season="nye"] .chalkboard { border-color: #c9a24a; outline-color: #7a6226; }
+
+/* confetti */
+:root[data-season="nye"] .festive-fx::before {
+  background-image:
+    radial-gradient(circle at 30px 40px, #e9c46a 0 3px, transparent 4px),
+    radial-gradient(circle at 150px 120px, #f6f1e3 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 250px 60px, #ff7eb6 0 3px, transparent 4px),
+    radial-gradient(circle at 90px 250px, #7fd8ff 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 280px 280px, #e9c46a 0 3px, transparent 4px);
+}
+:root[data-season="nye"] .festive-fx::after {
+  background-image:
+    radial-gradient(circle at 20px 30px, #ffffff 0 1.8px, transparent 2.8px),
+    radial-gradient(circle at 120px 90px, #e9c46a 0 2.2px, transparent 3.2px),
+    radial-gradient(circle at 180px 170px, #ff7eb6 0 1.8px, transparent 2.8px),
+    radial-gradient(circle at 60px 160px, #7fd8ff 0 2.2px, transparent 3.2px);
+}

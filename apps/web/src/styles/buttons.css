@@ -44,4 +44,4 @@
   border-radius: 50%;
   opacity: 0.55;
 }
-.icon-btn:hover { opacity: 1; background: rgba(200, 56, 43, 0.15); }
+.icon-btn:hover { opacity: 1; background: rgba(var(--accent-rgb), 0.15); }

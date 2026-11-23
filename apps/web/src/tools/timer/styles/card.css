@@ -21,7 +21,7 @@
   height: 1.5rem;
   margin-left: -0.75rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #e3685a, var(--tomato-dark));
+  background: radial-gradient(circle at 35% 30%, var(--magnet-hi), var(--tomato-dark));
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
 }
 

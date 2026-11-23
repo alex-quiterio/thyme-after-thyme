@@ -54,6 +54,8 @@ Chrome's old packaged "Chrome Apps" are discontinued; the modern equivalent is a
 
 *Limits:* a web app can't wake itself once the phone freezes it (battery saver, app killed): in that case the alarm sounds the moment you open the app, not at the exact second. Notifications, vibration and the badge depend on the browser (on iPhone, notifications need the app added to the Home Screen; vibration isn't supported). Autoplay rules can keep the sound muted until the first tap after a reload.
 
+**Seasonal themes:** a Christmas theme (24–26 Dec: cranberry, pine and gold, string lights, snow, "Merry Christmas") and a New Year's Eve theme (31 Dec and 1 Jan: midnight navy and gold, confetti, a countdown to midnight, then "Happy New Year") switch on by themselves on those days and off again afterwards, in all three languages. A small button in the header turns the festive look off (remembered). The days live in one table in `shared/season.ts`. To preview a theme any day, add `?theme=xmas` or `?theme=nye` to the address (`?theme=none` forces the plain look). Themes work by swapping CSS variables (`styles/theme-*.css`); decorations are CSS only and are still when the device asks for reduced motion.
+
 **Updates:** a new version installs in the background and waits. The app shows a "A fresher batch is ready" message (checked every 30 minutes and whenever you return to the app); **Update now** activates it and reloads, **Later** dismisses it until the next load.
 
 How it's built: `apps/web/public/manifest.webmanifest` + icons, and `public/sw.js` as a service worker template. `scripts/postbuild.ts` copies the icons and generates `dist/sw.js` with the list of built files to precache.

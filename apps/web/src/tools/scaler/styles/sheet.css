@@ -5,7 +5,7 @@
   position: relative;
   padding: 1.25rem 1.25rem 1.25rem calc(var(--sheet-margin) + 1.3rem);
   background:
-    linear-gradient(90deg, transparent var(--sheet-margin), rgba(200, 56, 43, 0.55) var(--sheet-margin) calc(var(--sheet-margin) + 2px), transparent calc(var(--sheet-margin) + 2px)),
+    linear-gradient(90deg, transparent var(--sheet-margin), rgba(var(--accent-rgb), 0.55) var(--sheet-margin) calc(var(--sheet-margin) + 2px), transparent calc(var(--sheet-margin) + 2px)),
     repeating-linear-gradient(transparent 0 2.4rem, rgba(80, 130, 190, 0.2) 2.4rem calc(2.4rem + 1px)),
     var(--paper);
   border-radius: 0.35rem;

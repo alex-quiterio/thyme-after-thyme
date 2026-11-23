@@ -1,5 +1,5 @@
 /* Language switcher: three little labels on the shelf */
-.lang { display: flex; justify-content: flex-end; gap: 0.35rem; margin: -0.5rem 0 0.4rem; }
+.lang { display: flex; justify-content: flex-end; gap: 0.35rem; }
 .lang__btn {
   min-width: 2.6rem;
   padding: 0.25rem 0.55rem;

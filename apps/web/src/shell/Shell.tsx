@@ -1,5 +1,9 @@
 import type { ToolDefinition } from "@shared/tool";
 import { useLocale, useMessages } from "@shared/useLocale";
+import { seasonFor } from "@shared/season";
+import { useSeason } from "@shared/useSeason";
+import { FestiveBanner } from "./FestiveBanner";
+import { FestiveToggle } from "./FestiveToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { messages } from "./messages";
 import { UpdateToast } from "./UpdateToast";
@@ -11,14 +15,23 @@ export function Shell({ tools }: { tools: ToolDefinition[] }) {
   const install = useInstallPrompt();
   const m = useMessages(messages);
   const locale = useLocale();
+  const { season, now, enabled, setEnabled, festiveDay } = useSeason();
   const active = tools.find((t) => route === t.id || route.startsWith(`${t.id}/`)) ?? tools[0];
 
   return (
     <>
       <header className="plank">
-        <LanguageSwitcher />
+        <div className="topbar">
+          {festiveDay ? (
+            <FestiveToggle emoji={(season ?? seasonFor(now)) === "nye" ? "🎆" : "🎄"} enabled={enabled} onChange={setEnabled} />
+          ) : (
+            <span />
+          )}
+          <LanguageSwitcher />
+        </div>
         <h1 className="plank__title">Thyme After Thyme</h1>
         <p className="plank__tagline">{m.tagline}</p>
+        {season && <FestiveBanner season={season} />}
         <nav className="nav" aria-label={m.navLabel}>
           {tools.map((t) => (
             <a
@@ -45,6 +58,7 @@ export function Shell({ tools }: { tools: ToolDefinition[] }) {
       <main className="counter">{active?.render()}</main>
 
       <UpdateToast />
+      {season && <div className={`festive-fx festive-fx--${season}`} aria-hidden="true" />}
     </>
   );
 }
