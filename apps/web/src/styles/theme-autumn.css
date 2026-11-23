@@ -7,16 +7,16 @@
   --butter: #e8a838;
   --sage: #6b7a2a;
   --sage-dark: #4b5719;
-  --wood: #7a4a2b;
-  --wood-dark: #4d2c18;
-  --chalkboard: #3a2a22;
+  --wood: #6b2438;
+  --wood-dark: #451524;
+  --chalkboard: #2b1a22;
   --accent-rgb: 140, 47, 74;
   --gingham-rgb: 190, 110, 40;
-  --plank-top: #96603a;
-  --cover-top: #b8742e;
-  --cover-edge: #6b3f16;
+  --plank-top: #8a3249;
+  --cover-top: #b5465f;
+  --cover-edge: #6b2438;
   --tagline: #fff1c2;
-  --cover-bottom: #8a4f1c;
+  --cover-bottom: #8c2f4a;
   --magnet-hi: #f0b45a;
 }
 :root[data-season="autumn"] .plank__title { text-shadow: 0 2px 0 var(--wood-dark), 0 0 14px rgba(232, 168, 56, 0.5); }

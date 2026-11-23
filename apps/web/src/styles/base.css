@@ -6,15 +6,16 @@
   --butter: #f3cf62;
   --sage: #5f7753;      /* white text on it: 5.0:1 */
   --sage-dark: #3f5a35; /* as text on cream paper: 7:1 */
-  --wood: #8a5a35;
-  --wood-dark: #5e3b20;
+  --wood: #1f5456;      /* the header and tab bar: deep teal */
+  --wood-dark: #123638;
   --chalkboard: #2a3a33;
   --chalk: #f2efe6;
-  --ink: #3a2a20;
+  --ink: #2a2f36;       /* text: a cool charcoal */
+  --ink-rgb: 42, 47, 54;
   /* colours the seasonal themes swap, as comma-separated rgb for use in rgba() */
   --accent-rgb: 200, 56, 43;
   --gingham-rgb: 200, 56, 43;
-  --plank-top: #9a6a40;
+  --plank-top: #2f7173;
   --cover-top: #6f8a62;
   --cover-edge: #4a5f40;
   --cover-bottom: var(--sage-dark);

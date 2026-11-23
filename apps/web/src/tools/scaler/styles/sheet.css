@@ -33,7 +33,7 @@
   min-width: 0;
   color: var(--ink);
   background-color: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(58, 42, 32, 0.3);
+  border: 1px solid rgba(var(--ink-rgb), 0.3);
   border-radius: 0.3rem;
   padding: 0.4rem 0.5rem;
 }
@@ -54,7 +54,7 @@
 
 .sheet__list { list-style: none; margin: 0; padding: 0; font-size: 1.2rem; }
 .sheet__list li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.3rem 0; }
-.sheet__dots { flex: 1; border-bottom: 2px dotted rgba(58, 42, 32, 0.35); transform: translateY(-0.25rem); }
+.sheet__dots { flex: 1; border-bottom: 2px dotted rgba(var(--ink-rgb), 0.35); transform: translateY(-0.25rem); }
 .sheet__list strong { color: var(--tomato-dark); font-variant-numeric: tabular-nums; }
 
 @media (max-width: 34rem) {

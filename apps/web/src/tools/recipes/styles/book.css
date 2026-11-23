@@ -22,7 +22,7 @@
   text-align: center;
   background: var(--paper);
   border: 2px solid var(--wood-dark);
-  outline: 2px dashed rgba(58, 42, 32, 0.35);
+  outline: 2px dashed rgba(var(--ink-rgb), 0.35);
   outline-offset: -8px;
   border-radius: 0.25rem;
   transform: rotate(-0.6deg);
