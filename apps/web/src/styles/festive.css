@@ -3,19 +3,18 @@
 .topbar .lang { margin: 0; }
 
 .festive-toggle {
-  min-width: 2.6rem; padding: 0.25rem 0.7rem;
-  font: inherit; font-size: 1.1rem; line-height: 1.4;
+  position: relative;
+  min-width: 36px; height: 32px; padding: 0 0.6rem;
+  font: inherit; font-size: 1rem; line-height: 1;
   color: var(--cream);
-  background: rgba(0, 0, 0, 0.18);
-  border: 2px solid rgba(251, 243, 228, 0.45);
+  background: rgba(0, 0, 0, 0.22);
+  border: 0;
   border-radius: 999px;
   cursor: pointer;
 }
-.festive-toggle[aria-pressed="true"] { background: var(--butter); border-color: var(--butter); }
+.festive-toggle[aria-pressed="true"] { background: var(--butter); }
 .festive-toggle[aria-pressed="false"] { opacity: 0.75; filter: grayscale(0.7); }
-@media (pointer: coarse), (max-width: 40rem) {
-  .festive-toggle { min-height: 44px; min-width: 44px; }
-}
+.festive-toggle::after, .topbar__install::after { content: ""; position: absolute; inset: -6px -3px; }
 
 .festive-banner {
   display: inline-block;

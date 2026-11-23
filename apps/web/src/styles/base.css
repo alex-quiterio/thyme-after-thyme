@@ -4,8 +4,8 @@
   --tomato: #c8382b;
   --tomato-dark: #9e2a20;
   --butter: #f3cf62;
-  --sage: #8aa17c;
-  --sage-dark: #5f7753;
+  --sage: #5f7753;      /* white text on it: 5.0:1 */
+  --sage-dark: #3f5a35; /* as text on cream paper: 7:1 */
   --wood: #8a5a35;
   --wood-dark: #5e3b20;
   --chalkboard: #2a3a33;
@@ -33,8 +33,8 @@ body {
   /* gingham tablecloth */
   background-color: var(--cream);
   background-image:
-    linear-gradient(90deg, rgba(var(--gingham-rgb), 0.22) 50%, transparent 50%),
-    linear-gradient(rgba(var(--gingham-rgb), 0.22) 50%, transparent 50%);
+    linear-gradient(90deg, rgba(var(--gingham-rgb), 0.17) 50%, transparent 50%),
+    linear-gradient(rgba(var(--gingham-rgb), 0.17) 50%, transparent 50%);
   background-size: 56px 56px;
 }
 
@@ -79,6 +79,8 @@ select {
   padding-right: 2.5rem !important;
   text-overflow: ellipsis;
 }
+
+input::placeholder { color: #6a645f; } /* 5:1 on cream; the chalkboard has its own */
 
 :focus-visible { outline: 3px solid var(--butter); outline-offset: 2px; }
 

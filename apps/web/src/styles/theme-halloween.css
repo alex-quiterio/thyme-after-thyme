@@ -15,6 +15,7 @@
   --plank-top: #4f3560;
   --cover-top: #7b4db5;
   --cover-edge: #3a2160;
+  --tagline: #fff1c2;
   --magnet-hi: #ffb347;
 }
 
@@ -54,8 +55,8 @@
   background-position: left top, right top;
   background-size: 96px 96px, 96px 96px;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='white' stroke-opacity='.5' stroke-width='1' d='M0 0L100 0M0 0L90 45M0 0L45 90M0 0L0 100M0 0L100 20M0 0L20 100M30 0Q26 26 0 30M58 0Q50 50 0 58M86 0Q72 72 0 86'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='white' stroke-opacity='.5' stroke-width='1' d='M100 0L0 0M100 0L10 45M100 0L55 90M100 0L100 100M100 0L0 20M100 0L80 100M70 0Q74 26 100 30M42 0Q50 50 100 58M14 0Q28 72 100 86'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='white' stroke-opacity='.3' stroke-width='1' d='M0 0L100 0M0 0L90 45M0 0L45 90M0 0L0 100M0 0L100 20M0 0L20 100M30 0Q26 26 0 30M58 0Q50 50 0 58M86 0Q72 72 0 86'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='white' stroke-opacity='.3' stroke-width='1' d='M100 0L0 0M100 0L10 45M100 0L55 90M100 0L100 100M100 0L0 20M100 0L80 100M70 0Q74 26 100 30M42 0Q50 50 100 58M14 0Q28 72 100 86'/%3E%3C/svg%3E");
 }
 /* bats and a pumpkin, bobbing at the top */
 :root[data-season="halloween"] .plank::after {
@@ -73,7 +74,7 @@
 @keyframes bat-bob { from { margin-top: 0; } to { margin-top: 0.35rem; } }
 
 /* things that sit straight on the dark sky */
-:root[data-season="halloween"] .remove-recipe { color: var(--butter); border-color: rgba(242, 162, 58, 0.7); }
+:root[data-season="halloween"] .remove-recipe { color: var(--butter); background: rgba(21, 12, 31, 0.8); border-color: rgba(242, 162, 58, 0.7); }
 :root[data-season="halloween"] .remove-recipe:hover { background: rgba(242, 162, 58, 0.12); }
 :root[data-season="halloween"] .chalkboard { border-color: #5b3a73; outline-color: #2b1a38; }
 

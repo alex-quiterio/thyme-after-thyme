@@ -32,7 +32,7 @@
   font-family: var(--font-hand);
   font-size: 1.3rem;
 }
-.chalk-btn small { opacity: 0.7; font-size: 1.05rem; }
+.chalk-btn small { opacity: 0.92; font-size: 1.05rem; }
 .chalk-btn:hover { background: rgba(242, 239, 230, 0.14); }
 
 .icon-btn {
@@ -42,6 +42,6 @@
   color: var(--ink);
   background: transparent;
   border-radius: 50%;
-  opacity: 0.55;
+  opacity: 0.8;
 }
 .icon-btn:hover { opacity: 1; background: rgba(var(--accent-rgb), 0.15); }

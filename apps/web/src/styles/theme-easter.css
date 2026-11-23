@@ -5,8 +5,8 @@
   --tomato: #c2426d;
   --tomato-dark: #8f2c4d;
   --butter: #f7d56a;
-  --sage: #3f8f70;
-  --sage-dark: #2b6c53;
+  --sage: #357f62;
+  --sage-dark: #25604a;
   --wood: #7f5d3b;
   --wood-dark: #54391f;
   --chalkboard: #3b4b63;
@@ -15,6 +15,7 @@
   --plank-top: #98744d;
   --cover-top: #7bbf9f;
   --cover-edge: #3f8f70;
+  --tagline: #fffbea;
   --magnet-hi: #ffd1e0;
 }
 :root[data-season="easter"] .plank__title { text-shadow: 0 2px 0 var(--wood-dark), 0 0 14px rgba(255, 220, 240, 0.5); }

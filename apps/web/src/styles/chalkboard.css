@@ -56,6 +56,8 @@
   .chalkboard__form .btn { grid-column: 1 / -1; }
 }
 
+.chalkboard input::placeholder { color: rgba(242, 239, 230, 0.78); }
+
 .chalkboard__form--pair { grid-template-columns: 2fr 1fr; }
 @media (max-width: 40rem) {
   .chalkboard__form--pair { grid-template-columns: 1fr; }

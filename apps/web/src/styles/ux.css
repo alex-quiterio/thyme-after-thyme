@@ -13,8 +13,9 @@
 
 .topbar__start { display: flex; align-items: center; gap: 0.4rem; min-width: 0; }
 .topbar__install {
-  min-height: 44px;
-  padding: 0.25rem 0.8rem;
+  position: relative;
+  height: 32px;
+  padding: 0 0.8rem;
   font: inherit; font-weight: 800; font-size: 0.9rem;
   color: #fff; background: var(--sage);
   border: 2px solid var(--sage-dark); border-radius: 999px;
@@ -29,7 +30,7 @@
   padding: 0 1rem;
   font-size: 0.85rem; font-weight: 700;
   color: var(--ink); text-decoration: none;
-  background: rgba(255, 250, 240, 0.85);
+  background: rgba(255, 250, 240, 0.94);
   border-radius: 999px;
 }
 .foot a:hover { background: #fff; text-decoration: underline; }
@@ -41,7 +42,7 @@
 .finder__clear {
   position: absolute; top: 50%; right: 0.35rem; transform: translateY(-50%);
   width: 44px; height: 44px;
-  font: inherit; font-size: 1.1rem; color: var(--ink); opacity: 0.6;
+  font: inherit; font-size: 1.1rem; color: var(--ink); opacity: 0.8;
   background: transparent; border: 0; border-radius: 50%; cursor: pointer;
 }
 .finder__clear:hover { opacity: 1; }
@@ -58,7 +59,7 @@
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
-.filter-chip small { font-size: 0.8rem; opacity: 0.7; }
+.filter-chip small { font-size: 0.8rem; opacity: 0.9; }
 .filter-chip[aria-pressed="true"] { background: var(--butter); border-color: var(--wood-dark); }
 
 /* recipe page: tools for a cook with messy hands */

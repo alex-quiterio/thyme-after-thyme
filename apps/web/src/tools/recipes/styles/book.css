@@ -84,9 +84,9 @@
   padding: 0.35rem 0.9rem;
   font-size: 0.85rem; font-weight: 700;
   color: var(--ink);
-  background: rgba(255, 250, 240, 0.85);
+  background: rgba(255, 250, 240, 0.95);
   border-radius: 999px;
-  opacity: 0.8;
+  opacity: 0.92;
   cursor: pointer;
   list-style: none;
 }
@@ -122,7 +122,7 @@
 .notice__close {
   position: absolute; top: 0.3rem; right: 0.3rem;
   width: 44px; height: 44px;
-  font: inherit; font-size: 1.1rem; color: var(--ink); opacity: 0.6;
+  font: inherit; font-size: 1.1rem; color: var(--ink); opacity: 0.8;
   background: transparent; border: 0; border-radius: 50%; cursor: pointer;
 }
 .notice__close:hover { opacity: 1; }
@@ -131,7 +131,7 @@
   justify-self: start;
   min-height: 44px; padding: 0 1rem;
   font: inherit; font-weight: 800; color: var(--tomato-dark);
-  background: transparent;
+  background: rgba(255, 250, 240, 0.92);
   border: 2px dashed rgba(var(--accent-rgb), 0.55);
   border-radius: 999px;
   cursor: pointer;
