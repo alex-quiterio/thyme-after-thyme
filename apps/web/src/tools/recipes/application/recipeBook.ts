@@ -2,7 +2,7 @@ import { matchesQuery, type Recipe } from "@recipes/domain/recipe";
 import { parseDocument } from "@recipes/domain/recipeDocument";
 import { readImportFile } from "@recipes/domain/recipeImport";
 import { locales, type Locale } from "@shared/locales";
-import type { LibraryState, LibraryStorage, ProgressStorage, RawRecipe, RecipeCollection, StepTimers } from "./ports";
+import type { LibraryState, LibraryStorage, ProgressStorage, RawRecipe, RecipeCollection, ScaleAction, StepTimers } from "./ports";
 
 export type RecipeBook = ReturnType<typeof createRecipeBook>;
 export type RecipeShelf = ReturnType<typeof makeShelf>;
@@ -46,11 +46,13 @@ export function createRecipeBook({
   timers,
   library,
   progress,
+  scaler,
 }: {
   collections: Record<Locale, RecipeCollection>;
   timers: StepTimers;
   library: LibraryStorage;
   progress: ProgressStorage;
+  scaler: ScaleAction;
 }) {
   let state = library.load();
   let version = 0;
@@ -115,6 +117,8 @@ export function createRecipeBook({
       return shelf;
     },
     timers,
+    /** Opens a recipe in the scaler. */
+    scaleRecipe: (id: string) => scaler.open(id),
 
     /** Changes whenever the library does (for useSyncExternalStore). */
     subscribe(listener: () => void) {

@@ -3,10 +3,11 @@ import { formatAmount, scale, units, type Unit } from "@scaler/domain/scaling";
 import type { ScalerStore } from "@scaler/application/scalerStore";
 import { localizeDecimal } from "@shared/locales";
 import { useLocale, useMessages } from "@shared/useLocale";
+import { BookScaler } from "./BookScaler";
 import { messages } from "./messages";
 
 export function ScalerTool({ store }: { store: ScalerStore }) {
-  const { ingredients, anchorId, target } = useSyncExternalStore(store.subscribe, store.getState);
+  const { ingredients, anchorId, target, picked } = useSyncExternalStore(store.subscribe, store.getState);
   const m = useMessages(messages);
   const locale = useLocale();
   const scaling = scale(ingredients, anchorId, target);
@@ -15,6 +16,9 @@ export function ScalerTool({ store }: { store: ScalerStore }) {
 
   return (
     <>
+      <BookScaler store={store} picked={picked} />
+
+      <h2 className="section-title">{m.manualTitle}</h2>
       <section className="sheet" aria-labelledby="orig-title">
         <h2 id="orig-title" className="sheet__title">{m.recipeTitle}</h2>
         {ingredients.map((ing) => (

@@ -1,10 +1,9 @@
-/* Tool tabs. On a desktop they're jar labels on the shelf; on a phone they become a bottom tab bar
-   you can reach with a thumb. */
+/* Tool tabs: quiet small-caps links on the masthead; on a phone, a bottom bar you can reach with a thumb. */
 .nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.25rem 2rem;
   margin-top: 1rem;
 }
 
@@ -12,45 +11,43 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.55rem;
   min-height: 44px;
-  padding: 0.35rem 1.1rem;
-  font-family: var(--font-hand);
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--ink);
+  padding: 0.3rem 0.1rem;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245, 241, 232, 0.92);
   text-decoration: none;
-  background: var(--paper);
-  border-radius: 0.3rem;
-  border: 2px dashed rgba(var(--ink-rgb), 0.35);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
-  transform: rotate(-1.5deg);
+  border-bottom: 2px solid transparent;
 }
-.nav__tab:nth-child(even) { transform: rotate(1.2deg); }
 @media (hover: hover) {
-  .nav__tab:hover { background: #fff; }
+  .nav__tab:hover { color: #fff; }
 }
 .nav__tab--active,
 .nav__tab--active:hover {
-  background: var(--butter);
-  border-style: solid;
-  border-color: var(--wood-dark);
+  color: #fff;
+  border-bottom-color: var(--cream);
 }
+
+/* line icons: sized here (an SVG with no size fills its container) */
+.nav__icon { width: 1.2rem; height: 1.2rem; flex: none; }
 
 /* e.g. how many timers are running */
 .nav__badge {
-  min-width: 1.35rem;
-  height: 1.35rem;
-  padding: 0 0.35rem;
-  font: 800 0.85rem/1.35rem var(--font-display);
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.3rem;
+  font: 600 0.72rem/1.25rem var(--font-ui);
   text-align: center;
   color: #fff;
   background: var(--tomato);
-  border: 2px solid var(--paper);
   border-radius: 999px;
 }
-.nav__badge--urgent { background: var(--tomato-dark); animation: badge-pulse 0.7s ease-in-out infinite alternate; }
-@keyframes badge-pulse { from { transform: scale(1); } to { transform: scale(1.25); } }
+.nav__badge--urgent { animation: badge-pulse 0.7s ease-in-out infinite alternate; }
+@keyframes badge-pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
 
 /* Docked layout: phones, tablets, and phones on their side */
 @media (max-width: 40rem), (pointer: coarse) and (max-width: 70rem), (pointer: coarse) and (max-height: 32rem) {
@@ -59,36 +56,37 @@
     z-index: 30;
     left: 0; right: 0; bottom: 0;
     flex-wrap: nowrap;
-    gap: 0.3rem;
+    gap: 0;
     margin: 0;
-    padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom));
-    background: linear-gradient(180deg, var(--plank-top), var(--wood-dark));
-    border-top: 4px solid var(--wood-dark);
-    box-shadow: 0 -8px 18px rgba(0, 0, 0, 0.3);
+    padding: 0 0.25rem env(safe-area-inset-bottom);
+    background: var(--wood);
+    border-top: 1px solid rgba(245, 241, 232, 0.28);
+    box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.18);
   }
-  .nav .nav__tab,
-  .nav .nav__tab:nth-child(even) {
+  .nav .nav__tab {
     flex: 1;
     min-width: 0;
     flex-direction: column;
     justify-content: center;
-    gap: 0;
-    min-height: 56px;
-    padding: 0.25rem 0.2rem;
-    transform: none;
-    color: var(--cream);
-    background: transparent;
-    border: 0;
-    border-radius: 0.7rem;
-    box-shadow: none;
-    font-size: 1.1rem;
+    gap: 0.18rem;
+    min-height: 58px;
+    padding: 0.4rem 0.2rem 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: none;
     line-height: 1.1;
+    border-bottom: 0;
   }
   .nav .nav__tab--active,
-  .nav .nav__tab--active:hover { color: var(--ink); background: var(--butter); }
-  .nav__icon { font-size: 1.55rem; line-height: 1; }
+  .nav .nav__tab--active:hover {
+    box-shadow: inset 0 2px 0 var(--cream);
+    background: rgba(255, 255, 255, 0.08);
+    font-weight: 600;
+  }
+  .nav__icon { width: 1.45rem; height: 1.45rem; }
   .nav__label { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .nav__badge { position: absolute; top: 0.1rem; left: calc(50% + 0.5rem); }
+  .nav__badge { position: absolute; top: 0.25rem; left: calc(50% + 0.45rem); }
 }
 /* typing: the keyboard has the bottom of the screen, so the tab bar steps aside */
 :root[data-typing] .nav { display: none; }

@@ -1,47 +1,42 @@
-.btn,
-.chalk-btn,
-.icon-btn {
-  font-family: var(--font-display);
-  font-weight: 800;
-  cursor: pointer;
-  border: 0;
-}
+.btn, .chalk-btn, .icon-btn { font-family: var(--font-ui); cursor: pointer; }
 
+/* flat, squared, small capitals: a primary (filled) and quiet variants */
 .btn {
-  padding: 0.6rem 1rem;
-  border-radius: 999px;
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1.15rem;
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: #fff;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28);
-  transition: transform 0.08s, box-shadow 0.08s;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  transition: filter 0.15s, transform 0.05s;
 }
-.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28); }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.btn--tomato { background: var(--tomato); }
-.btn--butter { background: var(--butter); color: var(--ink); }
-.btn--sage { background: var(--sage); }
-.btn--chalk { background: var(--chalk); color: var(--chalkboard); }
-
-.chalk-btn {
-  padding: 0.4rem 0.9rem;
-  color: var(--chalk);
-  background: transparent;
-  border: 2px solid var(--chalk);
-  border-radius: 0.5rem 0.9rem 0.6rem 0.8rem / 0.8rem 0.5rem 0.9rem 0.6rem;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
+@media (hover: hover) {
+  .btn:hover { filter: brightness(1.14); }
 }
-.chalk-btn small { opacity: 0.92; font-size: 1.05rem; }
-.chalk-btn:hover { background: rgba(242, 239, 230, 0.14); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn--tomato { /* the main action */ }
+.btn--butter { color: var(--ink); background: transparent; border-color: var(--rule-strong); }
+.btn--sage { color: var(--primary); background: transparent; border-color: var(--primary); }
+.btn--chalk { color: var(--chalkboard); background: var(--chalk); border-color: var(--chalk); }
 
 .icon-btn {
-  width: 2rem;
-  height: 2rem;
+  width: 44px;
+  height: 44px;
   flex: none;
   color: var(--ink);
   background: transparent;
+  border: 0;
   border-radius: 50%;
+  font-size: 1rem;
   opacity: 0.8;
 }
-.icon-btn:hover { opacity: 1; background: rgba(var(--accent-rgb), 0.15); }
+.icon-btn:hover { opacity: 1; background: rgba(var(--ink-rgb), 0.07); }

@@ -1,11 +1,11 @@
-/* Everyday usability: skip link, filters, search clear, kitchen tools on recipe pages, footer */
+/* Everyday usability: skip link, search, filters, chips and the small controls on recipe pages */
 
 .skip-link {
   position: fixed; z-index: 100; top: 0.5rem; left: 0.5rem;
   padding: 0.6rem 1rem;
-  font: inherit; font-weight: 800;
-  color: var(--ink); background: var(--butter);
-  border: 2px solid var(--wood-dark); border-radius: 999px;
+  font: inherit; font-family: var(--font-ui); font-weight: 600; font-size: 0.8rem;
+  color: var(--ink); background: var(--paper);
+  border: 1px solid var(--ink); border-radius: var(--radius);
   transform: translateY(-200%);
 }
 .skip-link:focus { transform: none; }
@@ -14,80 +14,102 @@
 .topbar__start { display: flex; align-items: center; gap: 0.4rem; min-width: 0; }
 .topbar__install {
   position: relative;
-  height: 32px;
-  padding: 0 0.8rem;
-  font: inherit; font-weight: 800; font-size: 0.9rem;
-  color: #fff; background: var(--sage);
-  border: 2px solid var(--sage-dark); border-radius: 999px;
+  height: 30px;
+  padding: 0 0.85rem;
+  font-family: var(--font-ui); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--cream); background: transparent;
+  border: 1px solid rgba(245, 241, 232, 0.42); border-radius: 999px;
   cursor: pointer;
 }
 
-.foot { text-align: center; padding: 0 1rem 1rem; }
+.foot { text-align: center; padding: 0 1rem 1.25rem; }
 .foot a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
   padding: 0 1rem;
-  font-size: 0.85rem; font-weight: 700;
-  color: var(--ink); text-decoration: none;
-  background: rgba(255, 250, 240, 0.94);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  background: rgba(255, 253, 248, 0.94);
+  border: 1px solid var(--rule);
   border-radius: 999px;
 }
-.foot a:hover { background: #fff; text-decoration: underline; }
+.foot a:hover { text-decoration: underline; }
 
 /* search */
 .finder { position: relative; }
-.finder input { padding-right: 3.2rem; }
+.finder input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 3.2rem 0 1rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+}
 .finder input::-webkit-search-cancel-button { display: none; }
 .finder__clear {
-  position: absolute; top: 50%; right: 0.35rem; transform: translateY(-50%);
+  position: absolute; top: 50%; right: 0.25rem; transform: translateY(-50%);
   width: 44px; height: 44px;
-  font: inherit; font-size: 1.1rem; color: var(--ink); opacity: 0.8;
+  font: inherit; font-size: 1rem; color: var(--ink); opacity: 0.7;
   background: transparent; border: 0; border-radius: 50%; cursor: pointer;
 }
 .finder__clear:hover { opacity: 1; }
 
-/* filter chips */
-.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+/* filters: small-caps tabs with an underline for the current one */
+.filters { display: flex; flex-wrap: wrap; gap: 0 1.6rem; border-bottom: 1px solid rgba(var(--on-page-rgb), 0.22); }
 .filter-chip {
   min-height: 44px;
-  padding: 0 1rem;
-  font: inherit; font-weight: 800;
-  color: var(--ink);
-  background: rgba(255, 250, 240, 0.92);
-  border: 2px solid transparent; border-radius: 999px;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  padding: 0;
+  font-family: var(--font-ui); font-weight: 500; font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(var(--on-page-rgb), 0.9);
+  background: transparent;
+  border: 0; border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
   cursor: pointer;
 }
-.filter-chip small { font-size: 0.8rem; opacity: 0.9; }
-.filter-chip[aria-pressed="true"] { background: var(--butter); border-color: var(--wood-dark); }
+.filter-chip small { margin-left: 0.3rem; font-size: 0.72rem; letter-spacing: 0; }
+.filter-chip[aria-pressed="true"] { color: var(--on-page-active); font-weight: 600; border-bottom-color: var(--on-page-active); }
 
-/* recipe page: tools for a cook with messy hands */
-.page__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.8rem; }
-.chip[aria-pressed="false"] { opacity: 0.6; background: rgba(0, 0, 0, 0.12); box-shadow: none; }
-.sizer { display: inline-flex; background: rgba(0, 0, 0, 0.1); border-radius: 999px; padding: 3px; }
-.sizer button {
-  min-width: 44px; min-height: 44px; padding: 0 0.7rem;
-  font: inherit; font-weight: 800; color: var(--ink);
-  background: transparent; border: 0; border-radius: 999px; cursor: pointer;
+/* small outlined buttons on a recipe page, and the timer buttons inside steps */
+.chip {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  min-height: 40px; padding: 0 0.9rem;
+  font-family: var(--font-ui); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.05em;
+  color: var(--primary); background: transparent;
+  border: 1px solid var(--primary); border-radius: var(--radius);
+  cursor: pointer;
 }
-.sizer button[aria-pressed="true"] { background: var(--butter); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
-.sizer button:nth-child(2) { font-size: 1.1rem; }
-.sizer button:nth-child(3) { font-size: 1.25rem; }
+@media (hover: hover) {
+  .chip:hover { background: rgba(var(--ink-rgb), 0.05); }
+}
+.chip[aria-pressed="false"] { opacity: 0.55; border-style: dashed; }
+.chip__icon { width: 1.05rem; height: 1.05rem; flex: none; }
 
-.jump { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.6rem; }
+.page__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin-top: 1rem; }
+.sizer { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: var(--radius); overflow: hidden; }
+.sizer button {
+  min-width: 44px; min-height: 40px; padding: 0 0.7rem;
+  font-family: var(--font-display); font-weight: 600; color: var(--ink);
+  background: transparent; border: 0; border-right: 1px solid var(--rule); cursor: pointer;
+}
+.sizer button:last-child { border-right: 0; }
+.sizer button[aria-pressed="true"] { color: #fff; background: var(--primary); }
+.sizer button:nth-child(1) { font-size: 1.05rem; }
+.sizer button:nth-child(2) { font-size: 1.25rem; }
+.sizer button:nth-child(3) { font-size: 1.45rem; }
+
+.jump { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.7rem; }
 .link-btn {
-  min-height: 44px; padding: 0 0.4rem;
-  font: inherit; font-size: 0.9rem; font-weight: 700; color: var(--ink);
+  min-height: 44px; padding: 0 0.3rem;
+  font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; color: var(--ink);
   text-decoration: underline; background: transparent; border: 0; cursor: pointer;
 }
-.part { scroll-margin-top: 1rem; }
 
-.page[data-size="l"] { font-size: 1.2rem; }
-.page[data-size="xl"] { font-size: 1.4rem; }
+.page[data-size="l"] { font-size: 1.22rem; }
+.page[data-size="xl"] { font-size: 1.42rem; }
 .step__text { cursor: pointer; }
-
-/* +1 min sits between start/pause and reset */
-.card__actions { gap: 0.5rem; }
-.card__actions .btn { padding-left: 0.6rem; padding-right: 0.6rem; }
-.btn--plus { flex: 0 0 auto; }

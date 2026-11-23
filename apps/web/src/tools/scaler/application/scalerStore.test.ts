@@ -1,12 +1,15 @@
 import { describe, expect, test } from "bun:test";
 import { createScalerStore, type ScalerState } from "./scalerStore";
 
+const catalog = { list: () => [], get: () => null };
+
 function setup(saved: ScalerState | null = null) {
   let n = 0;
   const saves: ScalerState[] = [];
   const store = createScalerStore({
     storage: { load: () => saved, save: (s) => void saves.push(s) },
     newId: () => `i${++n}`,
+    catalog,
   });
   return { store, saves };
 }
@@ -17,7 +20,7 @@ describe("scaler store", () => {
   });
 
   test("loads a saved recipe", () => {
-    const saved: ScalerState = { ingredients: [{ id: "x", name: "Rice", amount: "1", unit: "cup" }], anchorId: "x", target: "2" };
+    const saved: ScalerState = { ingredients: [{ id: "x", name: "Rice", amount: "1", unit: "cup" }], anchorId: "x", target: "2", picked: [] };
     expect(setup(saved).store.getState()).toEqual(saved);
   });
 
@@ -36,5 +39,20 @@ describe("scaler store", () => {
     const added = store.getState().ingredients.at(-1)!;
     store.updateIngredient(added.id, { name: "Salt", unit: "tsp" });
     expect(store.getState().ingredients.at(-1)).toMatchObject({ name: "Salt", unit: "tsp" });
+  });
+
+  test("picking recipes: once each, with a multiplier, and removable", () => {
+    const { store, saves } = setup();
+    store.pickRecipe("07");
+    store.pickRecipe("07");
+    store.pickRecipe("01");
+    expect(store.getState().picked).toEqual([{ id: "07", factor: "" }, { id: "01", factor: "" }]);
+    store.setFactor("07", "2");
+    expect(store.getState().picked[0]).toEqual({ id: "07", factor: "2" });
+    store.unpickRecipe("01");
+    expect(store.getState().picked.map((p) => p.id)).toEqual(["07"]);
+    store.clearPicked();
+    expect(store.getState().picked).toEqual([]);
+    expect(saves.length).toBeGreaterThan(4);
   });
 });

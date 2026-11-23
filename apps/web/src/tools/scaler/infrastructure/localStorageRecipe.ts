@@ -1,14 +1,18 @@
 import type { RecipeStorage } from "@scaler/application/ports";
 import type { ScalerState } from "@scaler/application/scalerStore";
 
-const KEY = "thyme-after-thyme.scaler.v1";
+// "v2": the saved shape changed, and anything saved by an older version is simply left behind.
+const KEY = "thyme-after-thyme.scaler.v2";
+
+const isState = (s: unknown): s is ScalerState =>
+  typeof s === "object" && s !== null && Array.isArray((s as ScalerState).ingredients) && Array.isArray((s as ScalerState).picked);
 
 export function createLocalStorageRecipe(): RecipeStorage {
   return {
     load() {
       try {
-        const parsed = JSON.parse(localStorage.getItem(KEY) ?? "null") as ScalerState | null;
-        return parsed && Array.isArray(parsed.ingredients) ? parsed : null;
+        const parsed: unknown = JSON.parse(localStorage.getItem(KEY) ?? "null");
+        return isState(parsed) ? parsed : null;
       } catch {
         return null;
       }

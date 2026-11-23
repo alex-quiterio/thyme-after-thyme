@@ -1,28 +1,37 @@
-/* The header shelf */
+/* The masthead: deep teal, a double rule, a large italic title */
 .plank {
   text-align: center;
-  padding: 1.75rem 1rem 1.5rem;
+  padding: 1.5rem 1rem 1.3rem;
   color: var(--cream);
-  background:
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 2px, transparent 2px 9px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 6px),
-    linear-gradient(180deg, var(--plank-top), var(--wood) 55%, var(--wood-dark));
-  border-bottom: 6px solid var(--wood-dark);
-  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12), 0 14px 24px rgba(0, 0, 0, 0.25);
+  background: var(--wood);
+  border-bottom: 4px double rgba(245, 241, 232, 0.55);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .plank__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
   margin: 0;
-  font-weight: 800;
-  font-size: clamp(2rem, 7vw, 3.4rem);
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 0 var(--wood-dark), 0 4px 6px rgba(0, 0, 0, 0.35);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(2.2rem, 7vw, 3.3rem);
+  letter-spacing: 0.005em;
 }
 
 .plank__tagline {
-  margin: 0.25rem 0 0;
-  font-family: var(--font-hand);
-  font-size: 1.5rem;
-  color: var(--tagline, var(--butter));
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--tagline, rgba(245, 241, 232, 0.88));
+}
+
+/* the logo sits to the left of the title, sized with it */
+.plank__logo {
+  flex: none;
+  width: 0.9em;
+  height: auto;
 }

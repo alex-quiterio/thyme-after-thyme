@@ -1,23 +1,23 @@
-/* "New version ready" message, pinned to the bottom like a note on the fridge */
+/* "A new version is ready": a small card pinned to the bottom */
 .toast {
   position: fixed;
   z-index: 50;
   left: 50%;
   bottom: calc(1rem + env(safe-area-inset-bottom));
   width: min(26rem, calc(100% - 1.5rem));
-  padding: 1.1rem 1.1rem 1rem;
+  padding: 1.1rem 1.2rem 1rem;
   transform: translateX(-50%);
-  background:
-    linear-gradient(var(--tomato), var(--tomato)) top / 100% 0.5rem no-repeat,
-    var(--paper);
-  border-radius: 0.4rem;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1), 0 16px 30px rgba(40, 20, 5, 0.45);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-top: 3px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(var(--ink-rgb), 0.28);
   animation: toast-in 0.35s ease-out;
 }
-.toast__title { margin: 0.2rem 0 0.2rem; font-family: var(--font-hand); font-weight: 700; font-size: 1.7rem; }
-.toast__text { margin: 0 0 0.8rem; font-size: 0.95rem; line-height: 1.4; }
+.toast__title { margin: 0 0 0.2rem; font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 1.6rem; }
+.toast__text { margin: 0 0 0.9rem; font-size: 0.95rem; line-height: 1.45; }
 .toast__actions { display: flex; gap: 0.6rem; }
-.toast__actions .btn { flex: 1; min-height: 44px; }
+.toast__actions .btn { flex: 1; }
 
 @keyframes toast-in {
   from { opacity: 0; transform: translate(-50%, 1.5rem); }

@@ -11,6 +11,9 @@ export type StepTimerState = { status: "running" | "paused" | "finished"; remain
  * Step timers live outside this tool (the Timers tool owns the clock and the alarm).
  * `key` identifies a button in a recipe, so the same step shows its own countdown.
  */
+/** Sends a recipe to the scaler. The scaler is another tool, so this is wired up outside both. */
+export type ScaleAction = { open(recipeId: string): void };
+
 export type StepTimers = {
   start(key: string, label: string, durationMs: number): void;
   /** Cancels the timer and silences its alarm. */

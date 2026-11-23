@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react";
+import { ScaleIcon } from "@shared/icons";
 import { useStoredState } from "@shared/useStoredState";
 import { useWakeLock } from "@shared/useWakeLock";
 import type { RecipeBook, RecipeShelf } from "@recipes/application/recipeBook";
@@ -43,6 +44,11 @@ export function RecipeView({ book, shelf, recipe }: { book: RecipeBook; shelf: R
             <button className="chip" aria-pressed={awake} onClick={() => setAwake(!awake)}>
               <span aria-hidden="true">☀</span> {m.keepAwake}
             </button>
+            {recipe.scalable && (
+              <button className="chip" onClick={() => book.scaleRecipe(recipe.id)}>
+                <ScaleIcon className="chip__icon" /> {m.scale}
+              </button>
+            )}
             <div className="sizer" role="group" aria-label={m.textSize}>
               {sizes.map((s, i) => (
                 <button key={s} aria-pressed={size === s} aria-label={m.sizeNames[i]} onClick={() => setSize(s)}>

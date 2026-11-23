@@ -1,5 +1,5 @@
-export const units = ["g", "kg", "ml", "L", "cup", "tbsp", "tsp", "pcs"] as const;
-export type Unit = (typeof units)[number];
+export { units, type Unit } from "@shared/units";
+import type { Unit } from "@shared/units";
 
 /** `amount` is the raw text the cook typed, so "1/2" and "1,5" survive editing. */
 export type Ingredient = { id: string; name: string; amount: string; unit: Unit };

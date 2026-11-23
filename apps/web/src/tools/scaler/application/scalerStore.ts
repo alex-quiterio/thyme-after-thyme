@@ -1,15 +1,19 @@
 import type { Ingredient, Unit } from "@scaler/domain/scaling";
-import type { RecipeStorage } from "./ports";
+import type { RecipeCatalog, RecipeStorage } from "./ports";
+
+/** A recipe picked from the book, with the multiplier as typed ("2", "1/2", "" for ×1). */
+export type PickedRecipe = { id: string; factor: string };
 
 export type ScalerState = {
   ingredients: Ingredient[];
   anchorId: string | null;
   target: string;
+  picked: PickedRecipe[];
 };
 
 export type ScalerStore = ReturnType<typeof createScalerStore>;
 
-export type Ports = { storage: RecipeStorage; newId: () => string };
+export type Ports = { storage: RecipeStorage; newId: () => string; catalog: RecipeCatalog };
 
 const starter = (newId: () => string): ScalerState => ({
   ingredients: [
@@ -19,10 +23,11 @@ const starter = (newId: () => string): ScalerState => ({
   ],
   anchorId: null,
   target: "",
+  picked: [],
 });
 
 /** Use cases for editing a recipe and picking what to scale by. */
-export function createScalerStore({ storage, newId }: Ports) {
+export function createScalerStore({ storage, newId, catalog }: Ports) {
   let state: ScalerState = storage.load() ?? starter(newId);
   const listeners = new Set<() => void>();
 
@@ -53,5 +58,16 @@ export function createScalerStore({ storage, newId }: Ports) {
       }),
     setAnchor: (anchorId: string | null) => commit({ ...state, anchorId }),
     setTarget: (target: string) => commit({ ...state, target }),
+
+    /** The book's recipes that can be scaled. */
+    catalog,
+    /** Adds a recipe from the book (once). */
+    pickRecipe: (id: string) => {
+      if (!state.picked.some((p) => p.id === id)) commit({ ...state, picked: [...state.picked, { id, factor: "" }] });
+    },
+    unpickRecipe: (id: string) => commit({ ...state, picked: state.picked.filter((p) => p.id !== id) }),
+    setFactor: (id: string, factor: string) =>
+      commit({ ...state, picked: state.picked.map((p) => (p.id === id ? { ...p, factor } : p)) }),
+    clearPicked: () => commit({ ...state, picked: [] }),
   };
 }

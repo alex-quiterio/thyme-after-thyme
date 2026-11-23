@@ -6,6 +6,7 @@ import { useLocale, useMessages } from "@shared/useLocale";
 import { FestiveBanner } from "./FestiveBanner";
 import { FestiveToggle } from "./FestiveToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Logo } from "./Logo";
 import { messages } from "./messages";
 import { UpdateToast } from "./UpdateToast";
 import { useHashRoute } from "./useHashRoute";
@@ -72,7 +73,10 @@ export function Shell({ tools }: { tools: ToolDefinition[] }) {
           </div>
           <LanguageSwitcher />
         </div>
-        <h1 className="plank__title">Thyme After Thyme</h1>
+        <h1 className="plank__title">
+          <Logo className="plank__logo" />
+          <span>Thyme After Thyme</span>
+        </h1>
         <p className="plank__tagline">{m.tagline}</p>
         {occasion && <FestiveBanner occasion={occasion} />}
         <nav className="nav" aria-label={m.navLabel}>
@@ -87,7 +91,7 @@ export function Shell({ tools }: { tools: ToolDefinition[] }) {
                 go(t.id);
               }}
             >
-              <span className="nav__icon" aria-hidden="true">{t.emoji}</span>
+              <t.icon className="nav__icon" />
               <span className="nav__label">{t.title[locale]}</span>
               {t.useBadge && <TabBadge use={t.useBadge} />}
             </a>

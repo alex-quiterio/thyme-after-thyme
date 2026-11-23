@@ -23,23 +23,32 @@ import { createLocalStorageProgress } from "@recipes/infrastructure/localStorage
 import { RecipesTool } from "@recipes/ui/RecipesTool";
 
 import { createRecipeTimers } from "./integrations/recipeTimers";
+import { createScalerCatalog } from "./integrations/scalerCatalog";
 import { createTimerBadge } from "./integrations/timerBadge";
+import { BookIcon, ScaleIcon, TimerIcon } from "@shared/icons";
 
 const newId = () => crypto.randomUUID();
 
 const timerBoard = createTimerBoard({ clock: systemClock, alarm: createDeviceAlarm(), newId, storage: createLocalStorageTimers() });
-const scalerStore = createScalerStore({ storage: createLocalStorageRecipe(), newId });
 const recipeBook = createRecipeBook({
   collections: bundledRecipes,
   timers: createRecipeTimers(timerBoard),
   library: createLocalStorageLibrary(),
   progress: createLocalStorageProgress(),
+  // "Scale this recipe": the scaler is another tool, so the hand-over happens here
+  scaler: {
+    open(id) {
+      scalerStore.pickRecipe(id);
+      window.location.hash = "#/scaler";
+    },
+  },
 });
+const scalerStore = createScalerStore({ storage: createLocalStorageRecipe(), newId, catalog: createScalerCatalog(recipeBook) });
 
 const tools: ToolDefinition[] = [
-  { id: "recipes", title: { en: "Recipe book", pt: "Receitas", it: "Ricettario" }, emoji: "📖", render: () => <RecipesTool book={recipeBook} /> },
-  { id: "timer", title: { en: "Timers", pt: "Temporizadores", it: "Timer" }, emoji: "⏲️", render: () => <TimerTool board={timerBoard} />, useBadge: createTimerBadge(timerBoard) },
-  { id: "scaler", title: { en: "Recipe scaler", pt: "Proporções", it: "Proporzioni" }, emoji: "⚖️", render: () => <ScalerTool store={scalerStore} /> },
+  { id: "recipes", title: { en: "Recipe book", pt: "Receitas", it: "Ricettario" }, icon: BookIcon, render: () => <RecipesTool book={recipeBook} /> },
+  { id: "timer", title: { en: "Timers", pt: "Temporizadores", it: "Timer" }, icon: TimerIcon, render: () => <TimerTool board={timerBoard} />, useBadge: createTimerBadge(timerBoard) },
+  { id: "scaler", title: { en: "Recipe scaler", pt: "Proporções", it: "Proporzioni" }, icon: ScaleIcon, render: () => <ScalerTool store={scalerStore} /> },
 ];
 
 createRoot(document.getElementById("root")!).render(<Shell tools={tools} />);

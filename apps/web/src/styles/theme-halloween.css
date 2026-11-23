@@ -2,20 +2,24 @@
 :root[data-season="halloween"] {
   --cream: #f3e6d3;
   --paper: #fff8ee;
-  --tomato: #c2540a;
-  --tomato-dark: #8f3a06;
+  --tomato: #b04a08;
+  --tomato-dark: #823506;
   --butter: #f2a23a;
   --sage: #6b3fa0;
   --sage-dark: #4a2a78;
   --wood: #3a2540;
   --wood-dark: #1d1226;
   --chalkboard: #1c1426;
-  --accent-rgb: 194, 84, 10;
+  --accent-rgb: 176, 74, 8;
   --gingham-rgb: 80, 50, 110;
   --plank-top: #4f3560;
   --cover-top: #7b4db5;
   --cover-edge: #3a2160;
   --tagline: #fff1c2;
+  --on-page: var(--cream);
+  --on-page-rgb: 245, 241, 232;
+  --on-page-accent: #fff;
+  --on-page-active: var(--butter);
   --magnet-hi: #ffb347;
 }
 

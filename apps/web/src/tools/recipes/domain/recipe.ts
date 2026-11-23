@@ -1,4 +1,8 @@
+import { isScalable } from "@shared/ingredientLine";
+import { fold } from "@shared/text";
 import { findDurations, type Duration } from "./duration";
+
+export { fold };
 
 export type Block =
   | { kind: "bullets"; items: string[] }
@@ -17,13 +21,13 @@ export type Recipe = {
   /** "recipe" has a method section; everything else is a "note" (intro, sauces, essays). */
   kind: "recipe" | "note";
   timerCount: number;
+  /** The ingredient lines (bullets outside the method and prep sections). */
+  ingredients: string[];
+  /** Enough of them have quantities to scale the recipe. */
+  scalable: boolean;
   /** Folded text used by search: title plus ingredients. */
   searchText: string;
 };
-
-/** Lowercase and strip accents so "cafe" finds "café". */
-export const fold = (s: string): string =>
-  s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
 
 export const slugify = (s: string): string =>
   fold(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -134,6 +138,10 @@ export function assemble(parts: {
   const { name, number, title, subtitle, sections } = parts;
   const blocks = sections.flatMap((s) => s.blocks);
   const bulletText = blocks.flatMap((b) => (b.kind === "bullets" ? b.items : []));
+  // "Prep" sections hold instructions as bullets, not ingredients
+  const ingredients = sections
+    .filter((s) => !s.method && !/^(prep|preparar|preparativi)/.test(fold(s.title ?? "")))
+    .flatMap((s) => s.blocks.flatMap((b) => (b.kind === "bullets" ? b.items : [])));
   return {
     // numbered documents share an id across languages, so switching language keeps you on the same recipe
     id: number !== null ? String(number).padStart(2, "0") : slugify(name),
@@ -142,6 +150,8 @@ export function assemble(parts: {
     subtitle,
     sections,
     kind: sections.some((s) => s.method) ? "recipe" : "note",
+    ingredients,
+    scalable: isScalable(ingredients),
     timerCount: blocks.reduce((n, b) => n + (b.kind === "bullets" ? 0 : b.durations.length), 0),
     searchText: fold([title, subtitle ?? "", ...sections.map((s) => s.title ?? ""), ...bulletText].join(" ")),
   };

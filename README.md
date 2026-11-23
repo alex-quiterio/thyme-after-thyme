@@ -1,10 +1,12 @@
 <div align="center">
 
-# ⏲️ Thyme After Thyme
+<img src="apps/web/public/logo.svg" alt="Thyme After Thyme logo: a stopwatch whose hand is a sprig of thyme" width="92">
+
+# *Thyme After Thyme*
 
 **Kitchen tools for people who keep burning the garlic.**
 
-A recipe book with a timer on every step, proper kitchen clock sounds, a recipe scaler, and a wardrobe of festive themes.
+A recipe book with a timer on every step, proper kitchen clock sounds, a recipe scaler that works on your chosen recipes, and a wardrobe of festive themes. Classic, quiet and elegant.
 In English, Português and Italiano. Built phone-first for people with flour on their hands.
 
 [![Deploy](https://github.com/alex-quiterio/thyme-after-thyme/actions/workflows/pages.yml/badge.svg)](https://github.com/alex-quiterio/thyme-after-thyme/actions/workflows/pages.yml)
@@ -41,8 +43,8 @@ In English, Português and Italiano. Built phone-first for people with flour on 
 | ➕ **+1 min** | "needs one more minute" without starting over |
 | 📴 **Works offline** | install it to your home screen; timers survive reloads and updates |
 
-### 🎨 A wardrobe of themes
-The look follows the calendar, and the **language you're reading in**: Portuguese gets azulejo tiles and cobalt blue, Italian gets the tricolore and red-checked tablecloth.
+### 🎨 A classic look, and a wardrobe of themes
+The everyday page is deliberately quiet: ivory paper, deep teal and a touch of red, serif type (Cormorant Garamond, Lora, Jost), hairline rules and a faint botanical drawing of thyme behind it. The look then follows the calendar, and the **language you're reading in**: Portuguese gets an azulejo tile border, Italian the tricolore ribbon, and the festive themes add their own colours.
 
 <div align="center">
 <img src="docs/screenshots/themes.png" alt="Christmas, New Year's Eve, Halloween, Easter, the spring and autumn equinoxes, and the everyday look, in different languages" width="900">
@@ -70,8 +72,14 @@ They switch on by themselves and off again afterwards. A small button in the hea
 ### ⏲️ Timers, with proper kitchen sounds
 Several timers at once, each with its own name and sound: egg-timer ring, oven beeps, service bell, dinner chime. The sounds are synthesized in the browser (Web Audio), so there are no audio files to ship. They live in their own package, [`@kitchen/sounds`](packages/sounds), if you want them elsewhere.
 
-### ⚖️ A recipe scaler
-"I only have 300 g of flour": say which ingredient you have and how much, and the whole recipe scales to match. It understands `1/2`, `1 1/2` and `1,5`.
+### ⚖️ A recipe scaler that works on your recipes
+Pick the recipes you're cooking (or press **Scale this recipe** on any recipe page) and the scaler reads their ingredient lists in all three languages ("300 g de arroz", "2 c. de sopa", "1 ½ cups", "3–4 tbsp"…).
+
+- **Make ×½ · 1 · 2 · 3 · 4**, a custom number, or **"I have 150 g of rice"** and everything else follows.
+- Ingredients without a quantity ("salt", "to taste") stay as they are, under *as needed*.
+- Pick several recipes and an **All together** list adds up the same ingredient in the same unit.
+- Not every recipe can be scaled, only those with real quantities (26 of the 29 recipes with an ingredient list can). Picks and multipliers are remembered.
+- You can still scale your own typed list; it understands `1/2`, `1 1/2` and `1,5`.
 
 ---
 

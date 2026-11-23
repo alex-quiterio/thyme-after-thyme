@@ -16,6 +16,10 @@
   --cover-top: #6a79b4;
   --cover-edge: #2a3466;
   --tagline: #fff1c2;
+  --on-page: var(--cream);
+  --on-page-rgb: 245, 241, 232;
+  --on-page-accent: #fff;
+  --on-page-active: var(--butter);
   --magnet-hi: #f1d98a;
 }
 

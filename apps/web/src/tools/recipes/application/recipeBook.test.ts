@@ -25,13 +25,15 @@ const it = {
 function setup(saved: LibraryState = emptyLibrary(), savedProgress: Record<string, string[]> = {}) {
   const saves: LibraryState[] = [];
   const progressSaves: Record<string, string[]>[] = [];
+  const opened: string[] = [];
   const book = createRecipeBook({
     timers,
     collections: { pt, it, en: pt },
     library: { load: () => saved, save: (s) => void saves.push(JSON.parse(JSON.stringify(s))) },
     progress: { load: () => savedProgress, save: (p) => void progressSaves.push(JSON.parse(JSON.stringify(p))) },
+    scaler: { open: (id) => void opened.push(id) },
   });
-  return { book, saves, progressSaves };
+  return { book, saves, progressSaves, opened };
 }
 
 describe("default recipes", () => {
@@ -178,5 +180,20 @@ describe("cooking progress", () => {
     const { book } = setup(undefined, { "02": ["a"] });
     book.remove("02");
     expect(book.ticked("02").size).toBe(0);
+  });
+});
+
+describe("scaling", () => {
+  test("recipes know whether they can be scaled, and can be sent to the scaler", () => {
+    const withAmounts = { name: "05 — Bolo", markdown: "# Bolo\n\n## Ingredientes\n\n  - 200 g de farinha\n  - 3 ovos\n  - sal\n\n## Prep\n\n  - Bata os ovos.\n" };
+    const { book, opened } = setup();
+    const recipe = createRecipeBook({
+      timers, collections: { pt: { title: "x", tagline: null, docs: [withAmounts] }, en: pt, it }, library: { load: emptyLibrary, save() {} }, progress: { load: () => ({}), save() {} }, scaler: { open: (id) => void opened.push(id) },
+    }).in("pt").recipes[0]!;
+    expect(recipe.scalable).toBe(true);
+    expect(recipe.ingredients).toEqual(["200 g de farinha", "3 ovos", "sal"]); // the "Prep" instruction is not an ingredient
+    expect(book.in("pt").find("01")?.scalable).toBe(false); // "farinha" has no quantity
+    book.scaleRecipe("01");
+    expect(opened).toEqual(["01"]);
   });
 });

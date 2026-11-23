@@ -1,27 +1,55 @@
+/* A classic, quiet look: ivory paper, deep teal, a little red. Serif type, hairline rules, no ornament for its own sake.
+   Seasonal themes swap the colours below and add their own decoration. */
 :root {
-  --cream: #fbf3e4;
-  --paper: #fffaf0;
-  --tomato: #c8382b;
-  --tomato-dark: #9e2a20;
-  --butter: #f3cf62;
-  --sage: #5f7753;      /* white text on it: 5.0:1 */
-  --sage-dark: #3f5a35; /* as text on cream paper: 7:1 */
-  --wood: #1f5456;      /* the header and tab bar: deep teal */
+  --cream: #f5f1e8;     /* the page */
+  --paper: #fffdf8;     /* cards and sheets */
+  --tomato: #b3382c;    /* the one accent: step numbers, timers, small rules */
+  --tomato-dark: #8e2a21;
+  --butter: #ece7da;    /* soft neutral highlight (the seasonal themes use a real colour here) */
+  --sage: #1f5456;      /* deep teal: header, bars, main buttons */
+  --sage-dark: #123638;
+  --primary: var(--sage);
+  --wood: #1f5456;      /* the header and tab bar */
   --wood-dark: #123638;
-  --chalkboard: #2a3a33;
-  --chalk: #f2efe6;
-  --ink: #2a2f36;       /* text: a cool charcoal */
-  --ink-rgb: 42, 47, 54;
+  --chalkboard: #17302f;
+  --chalk: #f4f0e6;
+  --ink: #26303a;
+  --ink-rgb: 38, 48, 58;
+  /* text that sits straight on the page background (the dark-sky themes flip these to ivory) */
+  --on-page: var(--ink);
+  --on-page-rgb: var(--ink-rgb);
+  --on-page-accent: var(--sage-dark);
+  --on-page-active: var(--sage-dark);
+  --rule: rgba(var(--ink-rgb), 0.14);
+  --rule-strong: rgba(var(--ink-rgb), 0.3);
   /* colours the seasonal themes swap, as comma-separated rgb for use in rgba() */
-  --accent-rgb: 200, 56, 43;
-  --gingham-rgb: 200, 56, 43;
-  --plank-top: #2f7173;
-  --cover-top: #6f8a62;
-  --cover-edge: #4a5f40;
-  --cover-bottom: var(--sage-dark);
+  --accent-rgb: 179, 56, 44;
+  --gingham-rgb: 31, 84, 86;
+  --gingham-alpha: 0.11;
+  --plank-top: #2a6567;
+  --cover-top: #2f7173;
+  --cover-edge: #123638;
+  --cover-bottom: #1f5456;
   --magnet-hi: #e3685a;
-  --font-display: "Nunito", system-ui, sans-serif;
-  --font-hand: "Caveat", "Comic Sans MS", cursive;
+  --font-display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-text: "Lora", Georgia, "Times New Roman", serif;
+  --font-ui: "Jost", "Helvetica Neue", system-ui, sans-serif;
+  --radius: 3px;
+  --lift: 0 1px 2px rgba(var(--ink-rgb), 0.06), 0 10px 28px rgba(var(--ink-rgb), 0.07);
+}
+
+/* the everyday page is plain ivory; festive days keep their tablecloth */
+:root:not([data-season]) { --gingham-alpha: 0; }
+
+/* the everyday page has a quiet botanical drawing behind it: thyme and stopwatches, in one fine teal line */
+:root:not([data-season]) body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("./wallpaper.svg") 0 0 / 440px 440px repeat;
+  opacity: 0.17;
 }
 
 * { box-sizing: border-box; }
@@ -29,61 +57,84 @@
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   color: var(--ink);
-  font-family: var(--font-display);
-  /* gingham tablecloth */
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
   background-color: var(--cream);
   background-image:
-    linear-gradient(90deg, rgba(var(--gingham-rgb), 0.17) 50%, transparent 50%),
-    linear-gradient(rgba(var(--gingham-rgb), 0.17) 50%, transparent 50%);
+    linear-gradient(90deg, rgba(var(--gingham-rgb), var(--gingham-alpha)) 50%, transparent 50%),
+    linear-gradient(rgba(var(--gingham-rgb), var(--gingham-alpha)) 50%, transparent 50%);
   background-size: 56px 56px;
 }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.1; }
 
 .counter {
   max-width: 62rem;
   margin: 0 auto;
-  padding: 1.5rem 1rem 4rem;
+  padding: 2rem 1.25rem 4.5rem;
   display: grid;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr); /* columns may shrink below their content, so nothing pushes the page wider */
+  gap: 1.75rem;
 }
 
 .shelf {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-  gap: 1.75rem 1.5rem;
+  gap: 1.25rem;
 }
 
 .empty {
-  font-family: var(--font-hand);
-  font-size: 1.6rem;
-  text-align: center;
   margin: 1rem 0;
-  padding: 0.5rem 1rem;
-  background: var(--paper);
-  border-radius: 0.5rem;
+  padding: 0.9rem 1.2rem;
   justify-self: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.35rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
 }
 
+/* a quiet section heading with a hairline under it */
+.section-title {
+  margin: 0;
+  padding-bottom: 0.35rem;
+  font-style: italic;
+  font-size: 1.9rem;
+  color: var(--on-page);
+  border-bottom: 1px solid rgba(var(--on-page-rgb), 0.3);
+}
+
+/* dropdowns: our own arrow, with room from the edge */
 :root {
-  --arrow-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%233a2a20' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  --arrow-chalk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f2efe6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --arrow-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2326303a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --arrow-chalk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f4f0e6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
-
-/* Dropdowns: own the arrow so it gets breathing room from the edge */
 select {
   appearance: none;
   -webkit-appearance: none;
   background-image: var(--arrow-ink);
   background-repeat: no-repeat;
-  background-position: right 0.85rem center;
-  background-size: 0.75rem auto;
-  padding-right: 2.5rem !important;
+  background-position: right 0.8rem center;
+  background-size: 0.7rem auto;
+  padding-right: 2.2rem !important;
   text-overflow: ellipsis;
 }
 
-input::placeholder { color: #6a645f; } /* 5:1 on cream; the chalkboard has its own */
+input::placeholder { color: #6a645f; }
 
-:focus-visible { outline: 3px solid var(--butter); outline-offset: 2px; }
+/* a focus ring that shows on ivory, teal and festive backgrounds alike */
+:focus-visible { outline: 3px solid var(--paper); outline-offset: 0; box-shadow: 0 0 0 6px var(--ink); }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
