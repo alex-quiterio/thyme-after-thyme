@@ -124,7 +124,7 @@ ESLint enforces the dependency direction (`ui → application → domain`, `infr
 <details>
 <summary><b>🌍 Languages</b></summary>
 
-English, Portuguese and Italian, switchable in the header (saved on the device, defaulting to the browser language). Interface text lives in `ui/messages.ts` next to each tool, typed `Localized<…>`, so a missing translation fails the build. Recipes are translated by hand; the Portuguese set is the original.
+English, Portuguese and Italian, switchable in the header (saved on the device, defaulting to the browser language). To share a link in a given language, add `?lang=pt` (or `en`, `it`): `https://alex-quiterio.github.io/thyme-after-thyme/?lang=it`. Interface text lives in `ui/messages.ts` next to each tool, typed `Localized<…>`, so a missing translation fails the build. Recipes are translated by hand; the Portuguese set is the original.
 
 To add a language: add it to `shared/locales.ts`, fill in each `messages.ts` (TypeScript lists what's missing), and add a `content/recipes/<lang>/` folder.
 </details>

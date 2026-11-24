@@ -3,7 +3,26 @@ import { isLocale, type Locale, type Localized } from "./locales";
 
 const KEY = "thyme-after-thyme.locale";
 
+/** A language chosen by the link itself, e.g. `?lang=pt`. */
+function fromUrl(): Locale | null {
+  try {
+    const wanted = new URLSearchParams(window.location.search).get("lang")?.slice(0, 2).toLowerCase();
+    return isLocale(wanted) ? wanted : null;
+  } catch {
+    return null;
+  }
+}
+
 function detect(): Locale {
+  const linked = fromUrl();
+  if (linked) {
+    try {
+      localStorage.setItem(KEY, linked);
+    } catch {
+      // not persisted; still applies for this visit
+    }
+    return linked;
+  }
   try {
     const saved = localStorage.getItem(KEY);
     if (isLocale(saved)) return saved;
